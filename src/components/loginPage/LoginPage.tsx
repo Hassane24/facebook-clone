@@ -1,5 +1,5 @@
 import WelcomeMessage from "./WelcomeMessage";
-import Form from "./Form";
+import LoginForm from "./LoginForm";
 import { useState } from "react";
 
 const LoginPage = () => {
@@ -9,7 +9,7 @@ const LoginPage = () => {
   return (
     <>
       <WelcomeMessage></WelcomeMessage>
-      <Form
+      <LoginForm
         emailValue={emailValue}
         passwordValue={passwordValue}
         emailOnChangeHandler={(e) => {
@@ -20,7 +20,7 @@ const LoginPage = () => {
           const element = e.target as HTMLInputElement;
           setPasswordValue(element.value);
         }}
-      ></Form>
+      ></LoginForm>
     </>
   );
 };

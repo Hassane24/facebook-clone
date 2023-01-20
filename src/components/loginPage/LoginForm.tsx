@@ -6,7 +6,7 @@ interface FormProps {
   passwordValue: string;
 }
 
-const Form = (props: FormProps) => {
+const LoginForm = (props: FormProps) => {
   return (
     <form action="">
       <input
@@ -36,4 +36,4 @@ const Form = (props: FormProps) => {
     </form>
   );
 };
-export default Form;
+export default LoginForm;
