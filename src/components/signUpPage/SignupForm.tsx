@@ -3,6 +3,7 @@ import { FormProps } from "../loginPage/LoginForm";
 interface SignupFormProps extends FormProps {
   firstNameOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
   surnameOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
+  signUpOnClickHandler: (e: React.FormEvent<HTMLButtonElement>) => void;
   firstNameValue: string;
   surnameValue: string;
 }
@@ -43,7 +44,7 @@ const SignupForm = (props: SignupFormProps) => (
         onChange={props.passwordOnChangeHandler}
       />
     </div>
-    <button>Sign up</button>
+    <button onClick={props.signUpOnClickHandler}>Sign up</button>
     <button>Sign up with Google</button>
   </form>
 );

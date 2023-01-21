@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./Header";
 import SignupForm from "./SignupForm";
+import { signUp } from "../../firebase/firebase";
 
 const SignupPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
@@ -32,6 +33,10 @@ const SignupPage = () => {
         surnameOnChangeHandler={surnameOnChangeHandler}
         emailOnChangeHandler={emailOnChangeHandler}
         passwordOnChangeHandler={passwordOnChangeHandler}
+        signUpOnClickHandler={(e) => {
+          e.preventDefault();
+          signUp(emailValue, passwordValue);
+        }}
       />
     </div>
   );
