@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-interface FormProps {
+export interface FormProps {
   emailOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
   passwordOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
   emailValue: string;
