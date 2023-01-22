@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "./Header";
 import SignupForm from "./SignupForm";
-import { signUp } from "../../firebase/firebase";
+import { signupUser } from "../../utils/signupUser";
 
 const SignupPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
@@ -21,6 +21,13 @@ const SignupPage = () => {
   const passwordOnChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
     setPasswordValue((e.target as HTMLInputElement).value);
 
+  const signUpOnClickHandler = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!passwordValue || !emailValue || !firstNameValue || !surnameValue)
+      return;
+    signupUser(passwordValue, emailValue, firstNameValue, surnameValue);
+  };
+
   return (
     <div>
       <Header />
@@ -33,10 +40,8 @@ const SignupPage = () => {
         surnameOnChangeHandler={surnameOnChangeHandler}
         emailOnChangeHandler={emailOnChangeHandler}
         passwordOnChangeHandler={passwordOnChangeHandler}
-        signUpOnClickHandler={(e) => {
-          e.preventDefault();
-          signUp(emailValue, passwordValue);
-        }}
+        signUpOnClickHandler={signUpOnClickHandler}
+        profilePicOnChangeHandler={() => {}}
       />
     </div>
   );
