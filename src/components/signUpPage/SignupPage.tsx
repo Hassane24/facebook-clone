@@ -8,6 +8,7 @@ const SignupPage = () => {
   const [emailValue, setEmailValue] = useState("");
   const [firstNameValue, setFirstNameValue] = useState("");
   const [surnameValue, setSurnameValue] = useState("");
+  const [image, setImage] = useState<any>();
 
   const firstNameOnChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
     setFirstNameValue((e.target as HTMLInputElement).value);
@@ -25,7 +26,7 @@ const SignupPage = () => {
     e.preventDefault();
     if (!passwordValue || !emailValue || !firstNameValue || !surnameValue)
       return;
-    signupUser(passwordValue, emailValue, firstNameValue, surnameValue);
+    signupUser(passwordValue, emailValue, firstNameValue, surnameValue, image);
   };
 
   return (
@@ -41,7 +42,10 @@ const SignupPage = () => {
         emailOnChangeHandler={emailOnChangeHandler}
         passwordOnChangeHandler={passwordOnChangeHandler}
         signUpOnClickHandler={signUpOnClickHandler}
-        profilePicOnChangeHandler={() => {}}
+        profilePicOnChangeHandler={(e) => {
+          const element = e.target as HTMLInputElement;
+          if (element.files) setImage(element.files[0]);
+        }}
       />
     </div>
   );
