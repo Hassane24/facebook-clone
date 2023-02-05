@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./Header";
 import SignupForm from "./SignupForm";
 import { signupUser } from "../../utils/signupUser";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
@@ -9,6 +10,7 @@ const SignupPage = () => {
   const [firstNameValue, setFirstNameValue] = useState("");
   const [surnameValue, setSurnameValue] = useState("");
   const [image, setImage] = useState<any>();
+  const navigate = useNavigate();
 
   const firstNameOnChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
     setFirstNameValue((e.target as HTMLInputElement).value);
@@ -22,11 +24,20 @@ const SignupPage = () => {
   const passwordOnChangeHandler = (e: React.FormEvent<HTMLInputElement>) =>
     setPasswordValue((e.target as HTMLInputElement).value);
 
-  const signUpOnClickHandler = (e: React.FormEvent<HTMLButtonElement>) => {
+  const signUpOnClickHandler = async (
+    e: React.FormEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     if (!passwordValue || !emailValue || !firstNameValue || !surnameValue)
       return;
-    signupUser(passwordValue, emailValue, firstNameValue, surnameValue, image);
+    await signupUser(
+      passwordValue,
+      emailValue,
+      firstNameValue,
+      surnameValue,
+      image
+    );
+    navigate("/home");
   };
 
   return (
