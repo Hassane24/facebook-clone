@@ -23,6 +23,7 @@ export const signupUser = async (
     );
 
     await uploadBytes(profileImageRef, image);
+    localStorage.setItem("UserID", createdUser.user.uid);
 
     await setDoc(doc(db, "users", firstName), {
       userID: createdUser.user.uid,
