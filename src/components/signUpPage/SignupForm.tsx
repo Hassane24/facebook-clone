@@ -57,7 +57,6 @@ const SignupForm = (props: SignupFormProps) => (
       />
     </div>
     <button onClick={props.signUpOnClickHandler}>Sign up</button>
-    <button>Sign up with Google</button>
   </form>
 );
 export default SignupForm;
