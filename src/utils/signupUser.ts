@@ -17,23 +17,36 @@ export const signupUser = async (
       password
     );
 
-    const profileImageRef = ref(
-      storage,
-      `profile-pics/${createdUser.user.uid}.png`
-    );
+    if (image) {
+      await setDoc(doc(db, "users", firstName), {
+        userID: createdUser.user.uid,
+        firstName: firstName,
+        surname: surname,
+        email: email,
+        password: password,
+        loggedIn: true,
+        profileImage: `profile-pics/${createdUser.user.uid}.png`,
+      });
 
-    await uploadBytes(profileImageRef, image);
+      const profileImageRef = ref(
+        storage,
+        `profile-pics/${createdUser.user.uid}.png`
+      );
+
+      await uploadBytes(profileImageRef, image);
+    } else {
+      await setDoc(doc(db, "users", firstName), {
+        userID: createdUser.user.uid,
+        firstName: firstName,
+        surname: surname,
+        email: email,
+        password: password,
+        loggedIn: true,
+        profileImage: "",
+      });
+    }
+
     localStorage.setItem("UserID", createdUser.user.uid);
-
-    await setDoc(doc(db, "users", firstName), {
-      userID: createdUser.user.uid,
-      firstName: firstName,
-      surname: surname,
-      email: email,
-      password: password,
-      loggedIn: true,
-      profileImage: `profile-pics/${createdUser.user.uid}.png`,
-    });
   } catch (error) {
     console.log(error);
   }
