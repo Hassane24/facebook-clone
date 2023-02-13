@@ -14,7 +14,7 @@ const LoginForm = (props: FormProps) => {
         type="text"
         name="email"
         id="email"
-        placeholder="Email or Phone Number"
+        placeholder="Email or First name"
         value={props.emailValue}
         onChange={props.emailOnChangeHandler}
         autoComplete="off"
