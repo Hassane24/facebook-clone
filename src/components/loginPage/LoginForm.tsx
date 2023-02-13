@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 export interface FormProps {
   emailOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
   passwordOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
+  loginOnClickHandler?: () => void;
   emailValue: string;
   passwordValue: string;
 }
@@ -27,7 +28,7 @@ const LoginForm = (props: FormProps) => {
         onChange={props.passwordOnChangeHandler}
         autoComplete="off"
       />
-      <button>Log in</button>
+      <button onClick={props.loginOnClickHandler}>Log in</button>
       <a href="www.youtube.com">Forgotten password?</a>
       <div></div>
       <button>
