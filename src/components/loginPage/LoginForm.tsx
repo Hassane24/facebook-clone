@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 export interface FormProps {
   emailOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
   passwordOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
-  loginOnClickHandler?: () => void;
+  loginOnClickHandler?: (e: React.FormEvent<HTMLButtonElement>) => void;
   emailValue: string;
   passwordValue: string;
 }
