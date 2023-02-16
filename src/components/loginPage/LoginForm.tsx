@@ -20,9 +20,9 @@ const LoginForm = (props: FormProps) => {
         autoComplete="off"
       />
       <input
-        type="text"
+        type="password"
         name="password"
-        id="email"
+        id="password"
         placeholder="Password"
         value={props.passwordValue}
         onChange={props.passwordOnChangeHandler}
