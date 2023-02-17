@@ -4,6 +4,7 @@ import { useState } from "react";
 import { db } from "../../firebase/firebase";
 import { collection, DocumentData, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import Styles from "../../styles/loginPage/loginPage.module.css";
 
 const LoginPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
@@ -26,7 +27,7 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <div className={Styles.container}>
       <WelcomeMessage></WelcomeMessage>
       <LoginForm
         emailValue={emailValue}
@@ -41,7 +42,7 @@ const LoginPage = () => {
         }}
         loginOnClickHandler={checkInputValuesAgainstDB}
       ></LoginForm>
-    </>
+    </div>
   );
 };
 
