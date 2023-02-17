@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Styles from "../../styles/loginPage/loginForm.module.css";
 export interface FormProps {
   emailOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
   passwordOnChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -9,8 +10,9 @@ export interface FormProps {
 
 const LoginForm = (props: FormProps) => {
   return (
-    <form action="">
+    <form className={Styles.form}>
       <input
+        className={Styles.inputs}
         type="text"
         name="email"
         id="email"
@@ -20,6 +22,7 @@ const LoginForm = (props: FormProps) => {
         autoComplete="off"
       />
       <input
+        className={Styles.inputs}
         type="password"
         name="password"
         id="password"
@@ -28,10 +31,17 @@ const LoginForm = (props: FormProps) => {
         onChange={props.passwordOnChangeHandler}
         autoComplete="off"
       />
-      <button onClick={props.loginOnClickHandler}>Log in</button>
-      <a href="www.youtube.com">Forgotten password?</a>
-      <div></div>
-      <button>
+      <button
+        className={Styles.loginButton}
+        onClick={props.loginOnClickHandler}
+      >
+        Log in
+      </button>
+      <a className={Styles.forgottenPass} href="www.youtube.com">
+        Forgotten password?
+      </a>
+      <div className={Styles.thinline}></div>
+      <button className={Styles.createAccountButton}>
         <Link to="/sign-up">Create new account</Link>
       </button>
     </form>
