@@ -1,6 +1,7 @@
+import Styles from "../../styles/signupPage/signupPage.module.css";
 const Header = () => {
   return (
-    <div>
+    <div className={Styles.headerContainer}>
       <svg viewBox="0 0 1022.51 360">
         <path
           fill="#1877F2"

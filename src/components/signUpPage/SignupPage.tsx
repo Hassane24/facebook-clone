@@ -3,6 +3,7 @@ import Header from "./Header";
 import SignupForm from "./SignupForm";
 import { signupUser } from "../../utils/signupUser";
 import { useNavigate } from "react-router-dom";
+import styles from "../../styles/signupPage/signupPage.module.css";
 
 const SignupPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
@@ -41,7 +42,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.signupContainer}>
       <Header />
       <SignupForm
         firstNameValue={firstNameValue}
