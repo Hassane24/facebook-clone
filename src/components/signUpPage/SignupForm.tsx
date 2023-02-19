@@ -12,6 +12,10 @@ interface SignupFormProps extends FormProps {
 const SignupForm = (props: SignupFormProps) => (
   <form>
     <div>
+      <h2>Create a new account</h2>
+      <div>It's quick and easy.</div>
+    </div>
+    <div>
       <input
         type="text"
         name="first-name"
