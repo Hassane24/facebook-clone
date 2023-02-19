@@ -1,0 +1,127 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
+  margin: 0 auto 30px auto;
+  padding: 0 20px 0 0;
+  width: 425px;
+  height: 500px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  background-color: #fff;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.firstNameSurnameContainer {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.newAccountMessage {
+  text-align: center;
+  border-bottom: 1px solid #dadde1;
+  width: 100%;
+}
+
+.newAccountMessage > h2 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 32px;
+  margin-bottom: 10px;
+  color: #1c1e21;
+  font-family: SFProDisplay-Bold, Helvetica, Arial, sans-serif;
+}
+
+.newAccountMessage > div {
+  margin-bottom: 12px;
+  font-style: italic;
+  color: #606770;
+}
+
+.inputs {
+  background: white;
+  border-radius: 5px;
+  width: 90%;
+  border: 1px solid #ccd0d5;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 16px;
+  font-size: 17px;
+  padding: 11px 16px;
+}
+
+.inputs:focus {
+  outline: none;
+}
+
+.profilePic::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.profilePic::before {
+  content: "Choose your profile picture";
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-size: 10pt;
+}
+
+.profilePic:hover::before {
+  border-color: black;
+}
+.profilePic:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.tos {
+  font-size: 11px;
+  color: #777;
+  margin: 0;
+}
+
+.tos > a {
+  margin: 0 2px;
+  color: #385898;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.signupButton {
+  background: none;
+  background-color: #00a400;
+  border: none;
+  border-radius: 6px;
+  box-shadow: none;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  min-width: 194px;
+  height: 36px;
+  padding: 0px 32px;
+  text-shadow: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.redirectBtn {
+  color: #1877f2;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 20px;
+}
