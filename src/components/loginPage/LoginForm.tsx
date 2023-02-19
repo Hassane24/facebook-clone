@@ -41,7 +41,7 @@ const LoginForm = (props: FormProps) => {
         Forgotten password?
       </a>
       <div className={Styles.thinline}></div>
-      <button className={Styles.createAccountButton}>
+      <button className={Styles.createAccountButton} type="button">
         <Link to="/sign-up">Create new account</Link>
       </button>
     </form>
