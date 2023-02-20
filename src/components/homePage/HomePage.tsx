@@ -1,4 +1,9 @@
+import Settings from "./Settings";
 const Home = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Settings></Settings>
+    </div>
+  );
 };
 export default Home;
