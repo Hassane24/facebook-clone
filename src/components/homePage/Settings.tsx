@@ -1,8 +1,24 @@
-import { Logo } from "../../utils/svgsFunction";
+import {
+  Menu,
+  Messenger,
+  Notifications,
+  DefaultProfilePicture,
+} from "../../utils/svgsFunction";
 const Settings = () => {
   return (
     <div>
-      <Logo></Logo>
+      <div>
+        <Menu />
+      </div>
+      <div>
+        <Messenger />
+      </div>
+      <div>
+        <Notifications />
+      </div>
+      <div>
+        <DefaultProfilePicture />
+      </div>
     </div>
   );
 };
