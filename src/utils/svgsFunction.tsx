@@ -50,20 +50,20 @@ export const Groups = () => (
 
 export const Gaming = () => (
   <svg fill="#b0b3b8" viewBox="0 0 24 24" width="28px" height="28px">
-    <g fill-rule="evenodd" transform="translate(-444 -204)">
+    <g fillRule="evenodd" transform="translate(-444 -204)">
       <g>
         <path
-          fill-rule="nonzero"
+          fillRule="nonzero"
           d="M98.5 5.75v4a.75.75 0 1 0 1.5 0v-4a.75.75 0 1 0-1.5 0z"
           transform="translate(351.5 208.5)"
         ></path>
         <path
-          fill-rule="nonzero"
+          fillRule="nonzero"
           d="M97.25 8.5h4a.75.75 0 1 0 0-1.5h-4a.75.75 0 1 0 0 1.5z"
           transform="translate(351.5 208.5)"
         ></path>
         <path
-          fill-rule="nonzero"
+          fillRule="nonzero"
           d="M109.5 14.5h-10a7 7 0 0 1 0-14h10a7 7 0 0 1 0 14zm0-1.5a5.5 5.5 0 0 0 0-11h-10a5.5 5.5 0 0 0 0 11h10z"
           transform="translate(351.5 208.5)"
         ></path>
@@ -80,8 +80,8 @@ export const Logo = () => (
   <svg viewBox="0 0 36 36" fill="#0778e9" height="40" width="40">
     <defs>
       <linearGradient x1="50%" x2="50%" y1="97.0782153%" y2="0%" id="jsc_s_2">
-        <stop offset="0%" stop-color="#0062E0"></stop>
-        <stop offset="100%" stop-color="#19AFFF"></stop>
+        <stop offset="0%" stopColor="#0062E0"></stop>
+        <stop offset="100%" stopColor="#19AFFF"></stop>
       </linearGradient>
     </defs>
     <path d="M15 35.8C6.5 34.3 0 26.9 0 18 0 8.1 8.1 0 18 0s18 8.1 18 18c0 8.9-6.5 16.3-15 17.8l-1-.8h-4l-1 .8z"></path>
@@ -94,8 +94,8 @@ export const Logo = () => (
 
 export const SearchIcon = () => (
   <svg fill="#B0B3B8" viewBox="0 0 16 16" width="1em" height="1em">
-    <g fill-rule="evenodd" transform="translate(-448 -544)">
-      <g fill-rule="nonzero">
+    <g fillRule="evenodd" transform="translate(-448 -544)">
+      <g fillRule="nonzero">
         <path
           d="M10.743 2.257a6 6 0 1 1-8.485 8.486 6 6 0 0 1 8.485-8.486zm-1.06 1.06a4.5 4.5 0 1 0-6.365 6.364 4.5 4.5 0 0 0 6.364-6.363z"
           transform="translate(448 544)"
