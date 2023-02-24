@@ -1,8 +1,9 @@
 import { Friends, Groups, Home, Gaming } from "../../../utils/svgsFunction";
+import styles from "../../../styles/homePage/navBar/navigation.module.css";
 
 export const Navigation = () => {
   return (
-    <div>
+    <div className={styles.navigation}>
       <div>
         <Home />
       </div>
