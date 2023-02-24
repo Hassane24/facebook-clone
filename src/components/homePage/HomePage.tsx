@@ -1,12 +1,8 @@
-import { Navigation } from "./Navigation";
-import { SearchBar } from "./SearchBar";
-import Settings from "./Settings";
+import { NavBar } from "./navBar/NavBar";
 const Home = () => {
   return (
     <div>
-      <Settings></Settings>
-      <Navigation />
-      <SearchBar />
+      <NavBar />
     </div>
   );
 };
