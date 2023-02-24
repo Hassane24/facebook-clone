@@ -1,4 +1,4 @@
-import { Friends, Groups, Home, Gaming } from "../../utils/svgsFunction";
+import { Friends, Groups, Home, Gaming } from "../../../utils/svgsFunction";
 
 export const Navigation = () => {
   return (

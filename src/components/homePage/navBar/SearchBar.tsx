@@ -1,4 +1,4 @@
-import { Logo, SearchIcon } from "../../utils/svgsFunction";
+import { Logo, SearchIcon } from "../../../utils/svgsFunction";
 export const SearchBar = () => {
   return (
     <div>

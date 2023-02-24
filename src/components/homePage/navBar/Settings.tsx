@@ -3,7 +3,7 @@ import {
   Messenger,
   Notifications,
   DefaultProfilePicture,
-} from "../../utils/svgsFunction";
+} from "../../../utils/svgsFunction";
 const Settings = () => {
   return (
     <div>
