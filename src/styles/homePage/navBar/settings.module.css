@@ -1,0 +1,20 @@
+.settings {
+  display: flex;
+  align-items: center;
+}
+
+.settings > div {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 40px;
+  width: 40px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.settings > div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
