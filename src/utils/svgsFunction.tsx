@@ -26,8 +26,8 @@ export const Notifications = () => (
   </svg>
 );
 
-export const DefaultProfilePicture = () => (
-  <img src={profilePic} alt="" width="40" height="40" />
+export const DefaultProfilePicture = ({ userImage }: { userImage: string }) => (
+  <img src={userImage || profilePic} alt="" width="40" height="40" />
 );
 
 export const Home = () => (
