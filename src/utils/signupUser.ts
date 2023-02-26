@@ -18,6 +18,13 @@ export const signupUser = async (
     );
 
     if (image) {
+      const profileImageRef = ref(
+        storage,
+        `profile-pics/${createdUser.user.uid}.png`
+      );
+
+      await uploadBytes(profileImageRef, image);
+
       await setDoc(doc(db, "users", firstName), {
         userID: createdUser.user.uid,
         firstName: firstName,
@@ -27,13 +34,6 @@ export const signupUser = async (
         loggedIn: true,
         profileImage: `profile-pics/${createdUser.user.uid}.png`,
       });
-
-      const profileImageRef = ref(
-        storage,
-        `profile-pics/${createdUser.user.uid}.png`
-      );
-
-      await uploadBytes(profileImageRef, image);
     } else {
       await setDoc(doc(db, "users", firstName), {
         userID: createdUser.user.uid,
