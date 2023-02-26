@@ -6,7 +6,7 @@ import {
 } from "../../../utils/svgsFunction";
 import styles from "../../../styles/homePage/navBar/settings.module.css";
 
-const Settings = () => {
+const Settings = ({ userImage }: { userImage: string }) => {
   return (
     <div className={styles.settings}>
       <div>
@@ -19,7 +19,7 @@ const Settings = () => {
         <Notifications />
       </div>
       <div>
-        <DefaultProfilePicture />
+        <DefaultProfilePicture userImage={userImage} />
       </div>
     </div>
   );
