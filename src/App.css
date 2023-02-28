@@ -3,6 +3,7 @@
 *::after {
   box-sizing: border-box;
   font-weight: normal;
+  font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
 }
 
 body {
