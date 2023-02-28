@@ -1,0 +1,70 @@
+.accountPopUp {
+  position: fixed;
+  transform: translate(180px, 0px) translate(-100%, 0px);
+  width: 360px;
+  z-index: 1;
+  top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #242526;
+  border-radius: 4px;
+}
+
+.accountPopUp > div {
+  min-height: 44px;
+  line-height: 17px;
+  text-decoration-style: solid;
+  font-weight: bold;
+  color: #e4e6eb;
+}
+
+.yourAccount {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+  margin: 4px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 8px;
+}
+
+.yourAccount > a {
+  text-decoration: none;
+}
+
+.yourAccount > a > div {
+  display: flex;
+  align-items: center;
+}
+
+.yourAccount > a > div > img,
+.yourAccount > a > div > span {
+  padding: 4px;
+}
+
+.yourAccount > a > div > span {
+  width: 100%;
+  color: #e4e6eb;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.1765;
+}
+
+.thinLine {
+  height: 2px;
+  margin-left: 16px;
+  margin-right: 16px;
+  width: 100%;
+  background-color: #3e4042;
+  align-self: center;
+}
+
+.seeAllProfiles {
+  font-size: 0.9375rem;
+  width: 100%;
+  line-height: 1.3333;
+  font-weight: 500;
+  color: #2e89ff;
+}
