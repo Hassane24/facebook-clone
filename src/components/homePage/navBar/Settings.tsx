@@ -11,12 +11,10 @@ import { AccountPopUp } from "./AccountPopUp";
 const Settings = ({ userImage }: { userImage: string }) => {
   const [showPopUp, setShowPopUp] = useState<Boolean>(false);
   const [popUpXPosition, setPopUpXPosition] = useState<number>(0);
-  const [popUpYPosition, setPopUpYPosition] = useState<number>(0);
 
   const onClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     setShowPopUp(!showPopUp);
-    setPopUpXPosition(e.clientX);
-    setPopUpYPosition(e.clientY + 56);
+    setPopUpXPosition(e.clientX - 180);
   };
   return (
     <div className={styles.settings}>
@@ -31,11 +29,7 @@ const Settings = ({ userImage }: { userImage: string }) => {
       </div>
       <div onClick={onClickHandler}>
         <DefaultProfilePicture userImage={userImage} />
-        <AccountPopUp
-          show={showPopUp}
-          top={popUpYPosition}
-          left={popUpXPosition}
-        />
+        <AccountPopUp show={showPopUp} left={popUpXPosition} />
       </div>
     </div>
   );

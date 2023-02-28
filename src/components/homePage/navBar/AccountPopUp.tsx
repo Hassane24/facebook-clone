@@ -1,48 +1,53 @@
+import styles from "../../../styles/homePage/navBar/accountPopUp.module.css";
+import {
+  Display,
+  Feedback,
+  Help,
+  Logout,
+  Settings,
+} from "../../../utils/svgsFunction";
 interface PopUp {
   show: Boolean;
-  top: number;
   left: number;
 }
 export const AccountPopUp = (props: PopUp) => {
   return (
-    <div
-      style={{
-        position: "fixed",
-        zIndex: "1",
-        top: props.top,
-        left: props.left,
-      }}
-    >
+    <div>
       {props.show && (
-        <div>
-          <div>
+        <div
+          style={{
+            left: props.left,
+          }}
+          className={styles.accountPopUp}
+        >
+          <div className={styles.yourAccount}>
             <a href="">
               <div>
-                <img src="" alt="" />
+                <img src="" alt="" width="40px" height="40px" />
                 <span>Hassane Ben</span>
               </div>
             </a>
-            <div></div>
-            <div>See all profiles</div>
+            <div className={styles.thinLine}></div>
+            <div className={styles.seeAllProfiles}>See all profiles</div>
           </div>
           <div>
-            <img src="" alt="  " />
+            <Settings />
             <span>Settings & privacy</span>
           </div>
           <div>
-            <img src="" alt="  " />
+            <Help />
             <span>Help & support</span>
           </div>
           <div>
-            <img src="" alt="  " />
+            <Display />
             <span>Display & accessibility</span>
           </div>
           <div>
-            <img src="" alt="  " />
+            <Feedback />
             <span>Give feedback</span>
           </div>
           <div>
-            <img src="" alt="  " />
+            <Logout />
             <span>Log Out</span>
           </div>
         </div>
