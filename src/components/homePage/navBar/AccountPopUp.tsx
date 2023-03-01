@@ -1,5 +1,6 @@
 import styles from "../../../styles/homePage/navBar/accountPopUp.module.css";
 import {
+  Arrow,
   Display,
   Feedback,
   Help,
@@ -30,24 +31,43 @@ export const AccountPopUp = (props: PopUp) => {
             <div className={styles.thinLine}></div>
             <div className={styles.seeAllProfiles}>See all profiles</div>
           </div>
-          <div>
-            <Settings />
+          <div className={styles.settingsOptions}>
+            <div>
+              <Settings />
+            </div>
             <span>Settings & privacy</span>
+            <div style={{ backgroundColor: "transparent" }}>
+              <Arrow />
+            </div>
           </div>
-          <div>
-            <Help />
+          <div className={styles.settingsOptions}>
+            <div>
+              <Help />
+            </div>
             <span>Help & support</span>
+            <div style={{ backgroundColor: "transparent" }}>
+              <Arrow />
+            </div>
           </div>
-          <div>
-            <Display />
+          <div className={styles.settingsOptions}>
+            <div>
+              <Display />
+            </div>
             <span>Display & accessibility</span>
+            <div style={{ backgroundColor: "transparent" }}>
+              <Arrow />
+            </div>
           </div>
-          <div>
-            <Feedback />
+          <div className={styles.settingsOptions}>
+            <div>
+              <Feedback />
+            </div>
             <span>Give feedback</span>
           </div>
-          <div>
-            <Logout />
+          <div className={styles.settingsOptions}>
+            <div>
+              <Logout />
+            </div>
             <span>Log Out</span>
           </div>
         </div>

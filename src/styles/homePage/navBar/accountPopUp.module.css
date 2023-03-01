@@ -9,14 +9,47 @@
   gap: 1rem;
   background-color: #242526;
   border-radius: 4px;
+  padding: 1rem;
+  cursor: default;
 }
 
-.accountPopUp > div {
+.accountPopUp > .settingsOptions {
   min-height: 44px;
   line-height: 17px;
   text-decoration-style: solid;
   font-weight: bold;
   color: #e4e6eb;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  height: 52px;
+  row-gap: 8px;
+}
+
+.accountPopUp > .settingsOptions:hover,
+.yourAccount > a:hover,
+.seeAllProfiles:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.accountPopUp > .settingsOptions > div {
+  height: 36px;
+  width: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.accountPopUp > .settingsOptions > span {
+  width: 100%;
+  padding: 12px 0px;
+  font-weight: 700;
 }
 
 .yourAccount {
@@ -31,12 +64,14 @@
 }
 
 .yourAccount > a {
+  margin: -8px;
   text-decoration: none;
 }
 
 .yourAccount > a > div {
   display: flex;
   align-items: center;
+  height: 60px;
 }
 
 .yourAccount > a > div > img,
@@ -63,8 +98,12 @@
 
 .seeAllProfiles {
   font-size: 0.9375rem;
-  width: 100%;
-  line-height: 1.3333;
+  width: calc(100% + 8px);
   font-weight: 500;
   color: #2e89ff;
+  height: 35px;
+  margin: -8px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
 }
