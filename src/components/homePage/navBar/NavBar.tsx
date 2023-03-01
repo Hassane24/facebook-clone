@@ -11,7 +11,6 @@ export const NavBar = () => {
   const [profileImageURL, setProfileImageURL] = useState<string>();
   useEffect(() => {
     const userID = localStorage.getItem("UserID");
-    console.log(userID);
     getDownloadURL(ref(storage, `profile-pics/${userID}.png`))
       .then((url) => {
         setProfileImageURL(url);
