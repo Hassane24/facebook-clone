@@ -24,7 +24,10 @@ export const NavBar = () => {
     <div className={styles.navbar}>
       <SearchBar />
       <Navigation />
-      <Settings userImage={profileImageURL!} />
+      <Settings
+        profilePicture={profileImageURL as string}
+        userImage={profileImageURL!}
+      />
     </div>
   );
 };

@@ -7,9 +7,11 @@ import {
   Logout,
   Settings,
 } from "../../../utils/svgsFunction";
+import DefaultPic from "../../../assets/Default_pfp.png";
 interface PopUp {
   show: Boolean;
   left: number;
+  profilePicture: string;
 }
 export const AccountPopUp = (props: PopUp) => {
   return (
@@ -24,7 +26,12 @@ export const AccountPopUp = (props: PopUp) => {
           <div className={styles.yourAccount}>
             <a href="">
               <div>
-                <img src="" alt="" width="40px" height="40px" />
+                <img
+                  src={props.profilePicture || DefaultPic}
+                  width="40px"
+                  height="40px"
+                  style={{ borderRadius: "50%" }}
+                />
                 <span>Hassane Ben</span>
               </div>
             </a>
