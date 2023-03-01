@@ -27,7 +27,13 @@ export const Notifications = () => (
 );
 
 export const DefaultProfilePicture = ({ userImage }: { userImage: string }) => (
-  <img src={userImage || profilePic} alt="" width="40" height="40" />
+  <img
+    src={userImage || profilePic}
+    alt=""
+    width="40"
+    height="40"
+    style={{ borderRadius: "50%" }}
+  />
 );
 
 export const Home = () => (

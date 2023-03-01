@@ -1,13 +1,13 @@
 import styles from "../../../styles/homePage/navBar/accountPopUp.module.css";
 import {
   Arrow,
+  DefaultProfilePicture,
   Display,
   Feedback,
   Help,
   Logout,
   Settings,
 } from "../../../utils/svgsFunction";
-import DefaultPic from "../../../assets/Default_pfp.png";
 interface PopUp {
   show: Boolean;
   left: number;
@@ -26,12 +26,7 @@ export const AccountPopUp = (props: PopUp) => {
           <div className={styles.yourAccount}>
             <a href="">
               <div>
-                <img
-                  src={props.profilePicture || DefaultPic}
-                  width="40px"
-                  height="40px"
-                  style={{ borderRadius: "50%" }}
-                />
+                <DefaultProfilePicture userImage={props.profilePicture} />
                 <span>Hassane Ben</span>
               </div>
             </a>
