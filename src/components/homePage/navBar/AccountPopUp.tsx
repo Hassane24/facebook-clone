@@ -1,4 +1,7 @@
 import styles from "../../../styles/homePage/navBar/accountPopUp.module.css";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../firebase/firebase";
+import { signOut } from "firebase/auth";
 import {
   Arrow,
   DefaultProfilePicture,
@@ -14,6 +17,16 @@ interface PopUp {
   profilePicture: string;
 }
 export const AccountPopUp = (props: PopUp) => {
+  const navigate = useNavigate();
+
+  const clickHandler = () => {
+    signOut(auth)
+      .then(() => {
+        localStorage.removeItem("UserID");
+        navigate("/login");
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       {props.show && (
@@ -66,7 +79,7 @@ export const AccountPopUp = (props: PopUp) => {
             </div>
             <span>Give feedback</span>
           </div>
-          <div className={styles.settingsOptions}>
+          <div className={styles.settingsOptions} onClick={clickHandler}>
             <div>
               <Logout />
             </div>
