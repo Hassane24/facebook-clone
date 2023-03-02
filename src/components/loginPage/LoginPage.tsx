@@ -1,8 +1,8 @@
 import WelcomeMessage from "./WelcomeMessage";
 import LoginForm from "./LoginForm";
 import { useState } from "react";
-import { db } from "../../firebase/firebase";
-import { collection, DocumentData, getDocs } from "firebase/firestore";
+import { auth } from "../../firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Styles from "../../styles/loginPage/loginPage.module.css";
 
@@ -15,15 +15,15 @@ const LoginPage = () => {
     e: React.FormEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    const usersGottenFromDB: DocumentData[] = [];
-    const users = await getDocs(collection(db, "users"));
-    users.forEach((user) => usersGottenFromDB.push(user.data()));
-    usersGottenFromDB.forEach((user) => {
-      if (emailValue === user.firstName && passwordValue === user.password) {
-        navigate("/home");
-        localStorage.setItem("UserID", user.userID);
-      } else return;
-    });
+    signInWithEmailAndPassword(auth, emailValue, passwordValue)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        localStorage.setItem("UserID", user.uid);
+        navigate("/");
+      })
+      .catch((error) => {
+        alert(error.code);
+      });
   };
 
   return (
