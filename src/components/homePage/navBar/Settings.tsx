@@ -8,13 +8,19 @@ import styles from "../../../styles/homePage/navBar/settings.module.css";
 import { useState } from "react";
 import { AccountPopUp } from "./AccountPopUp";
 
+interface SettingsProps {
+  userImage: string;
+  profilePicture: string;
+  firstName: string | undefined;
+  surname: string | undefined;
+}
+
 const Settings = ({
   userImage,
   profilePicture,
-}: {
-  userImage: string;
-  profilePicture: string;
-}) => {
+  firstName,
+  surname,
+}: SettingsProps) => {
   const [showPopUp, setShowPopUp] = useState<Boolean>(false);
   const [popUpXPosition, setPopUpXPosition] = useState<number>(0);
 
@@ -39,6 +45,8 @@ const Settings = ({
           profilePicture={profilePicture}
           show={showPopUp}
           left={popUpXPosition}
+          firstName={firstName}
+          surname={surname}
         />
       </div>
     </div>

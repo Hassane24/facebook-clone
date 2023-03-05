@@ -15,6 +15,8 @@ interface PopUp {
   show: Boolean;
   left: number;
   profilePicture: string;
+  surname: string | undefined;
+  firstName: string | undefined;
 }
 export const AccountPopUp = (props: PopUp) => {
   const navigate = useNavigate();
@@ -40,7 +42,9 @@ export const AccountPopUp = (props: PopUp) => {
             <a href="">
               <div>
                 <DefaultProfilePicture userImage={props.profilePicture} />
-                <span>Hassane Ben</span>
+                <span>
+                  {props.firstName} {props.surname}
+                </span>
               </div>
             </a>
             <div className={styles.thinLine}></div>
