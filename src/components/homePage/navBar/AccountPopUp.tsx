@@ -51,7 +51,13 @@ export const AccountPopUp = (props: PopUp) => {
               <Settings />
             </div>
             <span>Settings & privacy</span>
-            <div style={{ backgroundColor: "transparent" }}>
+            <div
+              style={{
+                backgroundColor: "transparent",
+                position: "absolute",
+                transform: "translate(620%)",
+              }}
+            >
               <Arrow />
             </div>
           </div>
@@ -60,7 +66,13 @@ export const AccountPopUp = (props: PopUp) => {
               <Help />
             </div>
             <span>Help & support</span>
-            <div style={{ backgroundColor: "transparent" }}>
+            <div
+              style={{
+                backgroundColor: "transparent",
+                position: "absolute",
+                transform: "translate(620%)",
+              }}
+            >
               <Arrow />
             </div>
           </div>
@@ -69,7 +81,13 @@ export const AccountPopUp = (props: PopUp) => {
               <Display />
             </div>
             <span>Display & accessibility</span>
-            <div style={{ backgroundColor: "transparent" }}>
+            <div
+              style={{
+                backgroundColor: "transparent",
+                position: "absolute",
+                transform: "translate(620%)",
+              }}
+            >
               <Arrow />
             </div>
           </div>
