@@ -37,7 +37,6 @@ export const NavBar = () => {
       .then((docs) =>
         docs.forEach((doc) => {
           const userData = doc.data();
-          console.log(userData);
           setSurname(userData.surname);
           setFirstName(userData.firstName);
         })

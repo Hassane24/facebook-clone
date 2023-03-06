@@ -19,7 +19,7 @@ const LoginPage = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         localStorage.setItem("UserID", user.uid);
-        navigate("/");
+        navigate("/home");
       })
       .catch((error) => {
         alert(error.code);
