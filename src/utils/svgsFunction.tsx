@@ -26,10 +26,13 @@ export const Notifications = () => (
   </svg>
 );
 
-export const DefaultProfilePicture = ({ userImage }: { userImage: string }) => (
+export const DefaultProfilePicture = ({
+  userImage,
+}: {
+  userImage: string | undefined;
+}) => (
   <img
     src={userImage || profilePic}
-    alt=""
     width="40"
     height="40"
     style={{ borderRadius: "50%" }}
