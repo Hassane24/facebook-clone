@@ -1,6 +1,5 @@
-import { ref, getDownloadURL } from "firebase/storage";
 import { collection, DocumentData, getDocs } from "firebase/firestore";
-import { db, storage } from "../../../firebase/firebase";
+import { db } from "../../../firebase/firebase";
 import { Contacts } from "./Contacts";
 import { Friend } from "./Friend";
 import { useState, useEffect } from "react";
@@ -13,18 +12,7 @@ export const FriendsList = () => {
       .then((docs) => {
         docs.forEach((doc) => {
           userInfo.push(doc.data());
-        });
-      })
-      .then(() => {
-        userInfo.forEach((friend) => {
-          const imageLink: string = friend.profileImage;
-          if (imageLink)
-            getDownloadURL(ref(storage, imageLink))
-              .then((url) => {
-                friend.imageLink = url;
-                setFriendsInfo(userInfo);
-              })
-              .catch((err) => console.log(err));
+          setFriendsInfo(userInfo);
         });
       })
       .catch((err) => console.log(err));
