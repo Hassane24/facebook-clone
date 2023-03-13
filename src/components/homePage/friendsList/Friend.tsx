@@ -1,6 +1,6 @@
 import { DefaultProfilePicture } from "../../../utils/svgsFunction";
 interface FriendProps {
-  friendImageLink?: string | undefined;
+  friendImageLink: string | undefined;
   friendFirstName: string;
   friendLastName: string;
 }
