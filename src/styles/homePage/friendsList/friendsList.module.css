@@ -1,0 +1,4 @@
+.friendsList {
+  grid-column: 3;
+  overflow: auto;
+}

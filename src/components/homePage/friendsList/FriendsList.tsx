@@ -3,6 +3,7 @@ import { db } from "../../../firebase/firebase";
 import { Contacts } from "./Contacts";
 import { Friend } from "./Friend";
 import { useState, useEffect } from "react";
+import styles from "../../../styles/homePage/friendsList/friendsList.module.css";
 export const FriendsList = () => {
   const [friendsInfo, setFriendsInfo] = useState<DocumentData[]>([]);
 
@@ -19,11 +20,11 @@ export const FriendsList = () => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.friendsList}>
       <Contacts />
       <div>
         {friendsInfo.map((friend) => (
-          <li key={friend.userID}>
+          <li key={friend.userID} style={{ listStyleType: "none" }}>
             <Friend
               friendFirstName={friend.firstName}
               friendLastName={friend.surname}
