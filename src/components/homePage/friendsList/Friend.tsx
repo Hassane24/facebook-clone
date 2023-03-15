@@ -1,9 +1,9 @@
 import { DefaultProfilePicture } from "../../../utils/svgsFunction";
 import styles from "../../../styles/homePage/friendsList/friend.module.css";
-interface FriendProps {
-  friendImageLink: string | undefined;
+export interface FriendProps {
+  friendImageLink?: string | undefined;
   friendFirstName: string;
-  friendLastName: string;
+  friendLastName?: string;
 }
 export const Friend = ({
   friendImageLink,
