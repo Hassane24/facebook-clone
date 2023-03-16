@@ -35,7 +35,7 @@ export const DefaultProfilePicture = ({
     src={userImage || profilePic}
     width="40"
     height="40"
-    alt="profile-picture"
+    alt="ssd"
     style={{ borderRadius: "50%" }}
   />
 );
