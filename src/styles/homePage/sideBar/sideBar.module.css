@@ -1,0 +1,49 @@
+.sideBar {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+  border-bottom: 1px solid #3e4042;
+  padding-bottom: 8px;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.sideBarItem {
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+  column-gap: 12px;
+  width: 100%;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+  border-radius: 8px;
+}
+
+.sideBarItem:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sideBarItem > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.sideBarItem > div > svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sideBarItem > span {
+  color: #e4e6eb;
+  font-size: 15px;
+  font-weight: 600;
+}

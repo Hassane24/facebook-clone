@@ -9,6 +9,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
 import { storage } from "../../../firebase/firebase";
 import { ref, getDownloadURL } from "firebase/storage";
+import styles from "../../../styles/homePage/sideBar/sideBar.module.css";
 
 export const SideBar = () => {
   const [profileImageURL, setProfileImageURL] = useState<string>();
@@ -56,8 +57,8 @@ export const SideBar = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className={styles.sideBar}>
+      <div className={styles.sideBarItem}>
         <div>
           <DefaultProfilePicture userImage={profileImageURL} />
         </div>
@@ -67,7 +68,7 @@ export const SideBar = () => {
       </div>
       <SideBarItem sideBarItemName="Most recent" />
       {sideBarItemsInfo.map((item, index) => (
-        <li key={index}>
+        <li key={index} style={{ listStyleType: "none" }}>
           <SideBarItem
             sideBarItemName={item.name}
             imagePosition={item.imagePosition}
@@ -75,7 +76,7 @@ export const SideBar = () => {
           />
         </li>
       ))}
-      <div>
+      <div className={styles.sideBarItem}>
         <div>
           <SeeMoreArrow />
         </div>
