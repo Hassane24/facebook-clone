@@ -1,0 +1,35 @@
+.storyreel {
+  padding: 0 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  border-bottom: 0.8px solid #ffffff0d;
+  cursor: pointer;
+}
+.onhover {
+  inset: 4px;
+  border-radius: 8px;
+}
+.onhover:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.storyreel > div {
+  width: 100%;
+  display: flex;
+  column-gap: 8px;
+  justify-content: center;
+  height: 60px;
+  align-items: center;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+}
+
+.storyreel > div > span {
+  font-weight: 600;
+  color: #b0b3b8;
+}
+
+.storyreel > div > svg {
+  height: 20px;
+  width: 20px;
+}

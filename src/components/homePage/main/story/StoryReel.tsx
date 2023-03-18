@@ -1,12 +1,13 @@
 import { Reels, Stories } from "../../../../utils/svgsFunction";
+import styles from "../../../../styles/homePage/main/storyReel.module.css";
 export const StoryReel = () => {
   return (
-    <div style={{ gridColumn: 2, gridRow: 1, display: "flex" }}>
-      <div>
+    <div className={styles.storyreel}>
+      <div style={{ borderBottom: "3px solid #2e89ff" }}>
         <Stories />
-        <span>Stories</span>
+        <span style={{ color: "#2e89ff" }}>Stories</span>
       </div>
-      <div>
+      <div className={styles.onhover}>
         <Reels />
         <span>Reels</span>
       </div>
