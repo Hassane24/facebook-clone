@@ -1,0 +1,49 @@
+.createStoryCard {
+  height: 200px;
+  width: 113px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.imageHolder {
+  height: 151px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.imageHolder > img {
+  width: 100%;
+}
+
+.addStoryIcon {
+  border-radius: 50%;
+  background-color: #2e89ff;
+  height: 40px;
+  width: 40px;
+  top: 131px;
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createStoryCard > div:nth-child(3) {
+  position: relative;
+  background-color: #242526;
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  justify-content: center;
+}
+
+.createStoryCard > div:nth-child(3) > span {
+  color: white;
+  font-size: 13px;
+}
