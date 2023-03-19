@@ -1,4 +1,4 @@
-import profilePic from "../assets/Default_pfp.png";
+import profilePic from "../assets/default-pfp.png";
 
 export const Menu = () => (
   <svg fill="#e4e6eb" viewBox="0 0 44 44" width="20px" height="20px">
