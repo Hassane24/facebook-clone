@@ -1,0 +1,10 @@
+.story {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 744px;
+  border-radius: 8px;
+  background-color: #242526;
+}
