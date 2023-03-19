@@ -5,11 +5,9 @@ import {
 import Icons from "../../../assets/side-bar-icons.png";
 import { SideBarItem } from "./SideBarItem";
 import { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../../../firebase/firebase";
-import { storage } from "../../../firebase/firebase";
-import { ref, getDownloadURL } from "firebase/storage";
 import styles from "../../../styles/homePage/sideBar/sideBar.module.css";
+import { fetchUserImage } from "../../../utils/fetchUserImage";
+import { fetchUserName } from "../../../utils/fetchUserName";
 
 export const SideBar = () => {
   const [profileImageURL, setProfileImageURL] = useState<string>();
@@ -26,35 +24,14 @@ export const SideBar = () => {
 
   useEffect(() => {
     const userID = localStorage.getItem("UserID");
-    getUserName(userID);
-    getUserImage(userID);
+    const getUserName = async () => await fetchUserName(userID);
+    getUserName().then((userName) => {
+      setFirstName(userName[0].firstName);
+      setSurname(userName[0].surname);
+    });
+    const getUserImage = async () => await fetchUserImage(userID);
+    getUserImage().then((imageLink) => setProfileImageURL(imageLink));
   }, []);
-
-  const getUserImage = (userID: string | null) => {
-    getDownloadURL(ref(storage, `profile-pics/${userID}.png`))
-      .then((url) => {
-        setProfileImageURL(url);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getUserName = (userID: string | null) => {
-    const querySnapshot = query(
-      collection(db, "users"),
-      where("userID", "==", userID)
-    );
-    getDocs(querySnapshot)
-      .then((docs) =>
-        docs.forEach((doc) => {
-          const userData = doc.data();
-          setSurname(userData.surname);
-          setFirstName(userData.firstName);
-        })
-      )
-      .catch((err) => console.log(err));
-  };
 
   return (
     <div className={styles.sideBar}>
