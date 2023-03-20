@@ -2,7 +2,7 @@ import { CreateStroyCard } from "./CreateStoryCard";
 import { StoryReel } from "./StoryReel";
 import { fetchUserImage } from "../../../../utils/fetchUserImage";
 import { useEffect, useState } from "react";
-import styles from "../../../../styles/homePage/main/story.module.css";
+import styles from "../../../../styles/homePage/main/story/story.module.css";
 export const Story = () => {
   const [profileImageURL, setProfileImageURL] = useState<string>("");
 

@@ -1,5 +1,5 @@
 import { Reels, Stories } from "../../../../utils/svgsFunction";
-import styles from "../../../../styles/homePage/main/storyReel.module.css";
+import styles from "../../../../styles/homePage/main/story/storyReel.module.css";
 export const StoryReel = () => {
   return (
     <div className={styles.storyreel}>

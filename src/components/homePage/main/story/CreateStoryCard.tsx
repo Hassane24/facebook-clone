@@ -1,5 +1,5 @@
 import { AddStoryIcon } from "../../../../utils/svgsFunction";
-import styles from "../../../../styles/homePage/main/createStoryCard.module.css";
+import styles from "../../../../styles/homePage/main/story/createStoryCard.module.css";
 import profilePic from "../../../../assets/default-pfp.png";
 export const CreateStroyCard = ({ userImageUrl }: { userImageUrl: string }) => {
   return (
