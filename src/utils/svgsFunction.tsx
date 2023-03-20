@@ -29,7 +29,7 @@ export const Notifications = () => (
 export const DefaultProfilePicture = ({
   userImage,
 }: {
-  userImage: string | undefined;
+  userImage?: string | undefined;
 }) => (
   <img
     src={userImage || profilePic}
