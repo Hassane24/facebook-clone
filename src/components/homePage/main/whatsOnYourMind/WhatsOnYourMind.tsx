@@ -6,6 +6,7 @@ import styles from "../../../../styles/homePage/main/whatsOnYourMind/whatsOnYour
 import { fetchUserImage } from "../../../../utils/fetchUserImage";
 import { fetchUserName } from "../../../../utils/fetchUserName";
 import { useEffect, useState } from "react";
+import { CreatePost } from "./CreatePost";
 export const WhatsOnYourMind = () => {
   const [profileImageURL, setProfileImageURL] = useState<string>("");
   const [firstName, setFirstName] = useState<string>();
@@ -48,6 +49,7 @@ export const WhatsOnYourMind = () => {
           <span>Feeling/activity</span>
         </div>
       </div>
+      <CreatePost />
     </div>
   );
 };
