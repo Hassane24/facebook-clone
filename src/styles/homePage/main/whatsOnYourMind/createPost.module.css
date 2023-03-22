@@ -1,0 +1,172 @@
+/* First container styling  */
+
+.createPost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createPostText {
+  font-weight: 700;
+  font-size: 20px;
+  color: #e4e6eb;
+  margin-left: auto;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.closeFormButton {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  background-color: rgba(255, 225, 225, 0.1);
+  height: 36px;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+  border-radius: 50%;
+}
+
+.options > div,
+i {
+  -webkit-filter: invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg)
+    brightness(90%) contrast(96%);
+  font-size: 13px;
+}
+
+.closeFormButton:hover {
+  background-color: rgba(255, 225, 225, 0.2);
+}
+
+.privacy {
+  display: flex;
+  column-gap: 11px;
+  padding: 16px 0;
+  margin: 0 16px;
+  color: #e4e6eb;
+  align-items: center;
+}
+
+.privacy > div:nth-child(1) {
+  position: relative;
+  display: flex;
+}
+
+.privacy > div:nth-child(1) > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.privacy > div:nth-child(2) > span {
+  font-weight: 600;
+  font-size: 15px;
+  width: 100%;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 225, 225, 0.1);
+  border-radius: 8px;
+  justify-content: center;
+  padding: 4px 8px;
+  width: min-content;
+  height: min-content;
+  column-gap: 4px;
+}
+
+.options > div {
+  display: flex;
+}
+
+.options > span {
+  font-size: 13px;
+  font-weight: 600px;
+  display: flex;
+}
+
+/* Second container styling */
+
+.textArea {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.textArea > textarea {
+  resize: none;
+  background-color: transparent;
+  border: none;
+  font-weight: 400;
+  color: #e4e6eb;
+  font-size: 15px;
+  width: 100%;
+}
+
+.textArea > textarea::placeholder {
+  font-size: 15px;
+  font-weight: 400;
+  color: #b0b3b8;
+}
+
+.textArea > textarea:focus {
+  border: none;
+  outline: none;
+}
+
+.textArea > div {
+  display: flex;
+  align-self: flex-start;
+}
+
+.textArea > div > svg {
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+  border-radius: 50%;
+  opacity: 0.7;
+  fill: #eeeeee;
+  cursor: pointer;
+}
+
+.textArea > div > svg:hover {
+  opacity: 1;
+}
+
+.pictureAddingArea {
+  position: relative;
+  border: 1px solid #3e4042;
+  margin: 2rem 8px 0 8px;
+  border-radius: 8px;
+}
+
+.pictureAddingArea > div > input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.pictureAddingArea > div {
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 25vh;
+  max-height: 221px;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+  justify-content: center;
+  background-color: #323436;
+}
+
+.pictureAddingArea > div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
