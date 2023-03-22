@@ -29,8 +29,7 @@
   border-radius: 50%;
 }
 
-.options > div,
-i {
+.icon {
   -webkit-filter: invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg)
     brightness(90%) contrast(96%);
   font-size: 13px;
@@ -141,6 +140,7 @@ i {
   border: 1px solid #3e4042;
   margin: 2rem 8px 0 8px;
   border-radius: 8px;
+  color: #e4e6eb;
 }
 
 .pictureAddingArea > div > input {
@@ -149,14 +149,29 @@ i {
   cursor: pointer;
   top: 0;
   bottom: 0;
+  margin: 8px;
   right: 0;
   left: 0;
 }
 
-.pictureAddingArea > div {
+.closeDragDrop {
+  position: absolute;
+  top: 12px;
+  cursor: pointer;
+  right: 10px;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pictureAddingArea > div:first-child {
   border-radius: 8px;
   cursor: pointer;
-  margin: 8px;
+  margin: 8px 8px 0 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,6 +182,58 @@ i {
   background-color: #323436;
 }
 
-.pictureAddingArea > div:hover {
+.pictureAddingArea > div:first-child:hover,
+.closeDragDrop:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.photosFromHome {
+  display: flex;
+  border-radius: 8px;
+  justify-content: space-between;
+  margin: 8px;
+  padding: 12px 8px 8px 12px;
+  background-color: #323436;
+  align-items: center;
+  position: relative;
+}
+
+.photosFromHome > div:first-child {
+  height: 40px;
+  min-width: 40px;
+  background-color: #47494a;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.photosFromHome > div:first-child > svg {
+  width: 30px;
+  height: 30px;
+}
+
+.photosFromHome > div:nth-child(2) {
+  margin-left: 8px;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.photosFromHome > div:nth-child(3) {
+  padding: 4px 12px;
+  background-color: #47494a;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  height: 36px;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+  display: flex;
+  align-items: center;
+}
+
+.photosFromHome > div:nth-child(3):hover {
   background-color: rgba(255, 255, 255, 0.2);
 }

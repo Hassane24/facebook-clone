@@ -23,6 +23,7 @@ export const CreatePost = () => {
           <div className={styles.createPostText}>Create post</div>
           <div className={styles.closeFormButton}>
             <i
+              className={styles.icon}
               style={{
                 backgroundImage: `url(${utilityIcons})`,
                 backgroundPosition: "-66px -110px",
@@ -45,10 +46,17 @@ export const CreatePost = () => {
             <span>Hassane Ben</span>
             <div className={styles.options}>
               <div>
-                <img src={Public} alt="" height="12px" width="12px" />
+                <img
+                  src={Public}
+                  alt=""
+                  height="12px"
+                  width="12px"
+                  className={styles.icon}
+                />
               </div>
               <span>Public</span>
               <i
+                className={styles.icon}
                 style={{
                   backgroundImage: `url(${utilityIcons})`,
                   backgroundPosition: "-166px -172px",
@@ -77,6 +85,7 @@ export const CreatePost = () => {
             <input type="file" name="" id=" " title="" />
             <div>
               <i
+                className={styles.icon}
                 style={{
                   backgroundImage: `url(${secondUtilityIcons})`,
                   backgroundPosition: "0px -86px",
@@ -91,14 +100,27 @@ export const CreatePost = () => {
             <div>Add photos/videos</div>
             <div>or drag and drop</div>
           </div>
-        </div>
-
-        <div>
-          <div>
-            <Phone />
+          <div className={styles.photosFromHome}>
+            <div>
+              <Phone />
+            </div>
+            <div>Add photos and videos from your mobile device.</div>
+            <div>Add</div>
           </div>
-          <div>Add photos and videos from your mobile device.</div>
-          <div>Add</div>
+          <div className={styles.closeDragDrop}>
+            <i
+              className={styles.icon}
+              style={{
+                backgroundImage: `url(${utilityIcons})`,
+                backgroundPosition: "-66px -110px",
+                backgroundSize: "190px 204px",
+                width: "20px",
+                height: "20px",
+                backgroundRepeat: "no-repeat",
+                display: "inline-block",
+              }}
+            ></i>
+          </div>
         </div>
       </div>
 
