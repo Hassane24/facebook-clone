@@ -1,4 +1,4 @@
-/* First container styling  */
+/* --------------------------------------------First container styling-------------------------------------------- */
 
 .createPost {
   display: flex;
@@ -20,6 +20,7 @@
 .closeFormButton {
   display: flex;
   cursor: pointer;
+  margin-right: 16px;
   align-items: center;
   justify-content: center;
   width: 36px;
@@ -76,6 +77,7 @@
   padding: 4px 8px;
   width: min-content;
   height: min-content;
+  cursor: pointer;
   column-gap: 4px;
 }
 
@@ -89,7 +91,7 @@
   display: flex;
 }
 
-/* Second container styling */
+/* --------------------------------------------Second container styling-------------------------------------------- */
 
 .textArea {
   display: flex;
@@ -236,4 +238,67 @@
 
 .photosFromHome > div:nth-child(3):hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --------------------------------------------Third container styling-------------------------------------------- */
+
+.thirdContainer {
+  padding: 16px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.thirdContainer > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #3e4042;
+  border-radius: 8px;
+  margin: 0px 8px;
+}
+
+.thirdContainer > div > div:nth-child(1) {
+  font-weight: 600;
+  font-size: 15px;
+  color: #e4e6eb;
+  padding: 0 8px;
+}
+
+.thirdContainer > div > div:nth-child(2) {
+  display: flex;
+}
+
+.thirdContainer > div > div:nth-child(2) > div {
+  margin: 2px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 36px;
+}
+
+.thirdContainer > div > div:nth-child(2) > div:first-of-type {
+  background-color: black;
+}
+
+.thirdContainer > div > div:nth-child(2) > div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.thirdContainer > button {
+  align-self: stretch;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.2);
+  font-size: 15px;
+  padding: 0 12px;
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600px;
+  margin: 16px 8px 0px 8px;
 }
