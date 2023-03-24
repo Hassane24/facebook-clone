@@ -8,8 +8,9 @@ import { fetchUserName } from "../../../../utils/fetchUserName";
 import { useEffect, useState } from "react";
 import { CreatePost } from "./CreatePost";
 export const WhatsOnYourMind = () => {
-  const [profileImageURL, setProfileImageURL] = useState<string>("");
+  const [profileImageURL, setProfileImageURL] = useState<string>();
   const [firstName, setFirstName] = useState<string>();
+  const [showCreatePost, setShowCreatePost] = useState(false);
   useEffect(() => {
     const userID = localStorage.getItem("UserID");
     const getUserName = async () => await fetchUserName(userID);
@@ -18,6 +19,8 @@ export const WhatsOnYourMind = () => {
     getUserImage().then((imageLink) => setProfileImageURL(imageLink));
   }, []);
 
+  const popUpCreatePost = () => setShowCreatePost(!showCreatePost);
+
   return (
     <div className={styles.container}>
       <div className={styles.whatsOnYourMind}>
@@ -25,7 +28,7 @@ export const WhatsOnYourMind = () => {
           <DefaultProfilePicture userImage={profileImageURL} />
           <div className={styles.overlayDiv}></div>
         </div>
-        <div className={styles.onYourMindText}>
+        <div className={styles.onYourMindText} onClick={popUpCreatePost}>
           <span>What's on your mind, {firstName}?</span>
         </div>
       </div>
@@ -36,7 +39,7 @@ export const WhatsOnYourMind = () => {
           </div>
           <span>Live video</span>
         </div>
-        <div>
+        <div onClick={popUpCreatePost}>
           <div>
             <img src={Photos} alt="" width="24px" height="24px" />
           </div>
@@ -49,7 +52,7 @@ export const WhatsOnYourMind = () => {
           <span>Feeling/activity</span>
         </div>
       </div>
-      <CreatePost />
+      <CreatePost popUp={showCreatePost} closeCreatePost={popUpCreatePost} />
     </div>
   );
 };
