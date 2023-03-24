@@ -14,13 +14,21 @@ import {
   Options,
 } from "../../../../utils/svgsFunction";
 
+interface CreatePostProps {
+  popUp: boolean;
+  closeCreatePost: () => void;
+  firstName: string;
+  surname: string;
+  userProfilePicture: string;
+}
+
 export const CreatePost = ({
   popUp,
   closeCreatePost,
-}: {
-  popUp: boolean;
-  closeCreatePost: () => void;
-}) => {
+  firstName,
+  userProfilePicture,
+  surname,
+}: CreatePostProps) => {
   return (
     <div className={`${styles.formContainer} ${popUp && styles.active}`}>
       <form className={`${styles.form} ${popUp && styles.active}`}>
@@ -45,11 +53,13 @@ export const CreatePost = ({
 
           <div className={styles.privacy}>
             <div>
-              <DefaultProfilePicture />
+              <DefaultProfilePicture userImage={userProfilePicture} />
               <div></div>
             </div>
             <div>
-              <span>Hassane Ben</span>
+              <span>
+                {firstName} {surname}
+              </span>
               <div className={styles.options}>
                 <div>
                   <img
@@ -82,7 +92,7 @@ export const CreatePost = ({
           <div className={styles.textArea}>
             <textarea
               wrap="soft"
-              placeholder={"What's on your mind, Hassane"}
+              placeholder={`What's on your mind, ${firstName}?`}
             />
             <div>
               <SmileyFace />
