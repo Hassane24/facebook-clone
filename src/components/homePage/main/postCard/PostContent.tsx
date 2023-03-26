@@ -1,11 +1,7 @@
-import { Angry } from "../../../../utils/svgsFunction";
-
 export const PostContent = () => {
   return (
     <div>
-      <div>
-        <Angry />
-      </div>
+      <div></div>
       <div>
         <img src="" alt="" />
       </div>
