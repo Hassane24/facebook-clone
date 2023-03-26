@@ -40,7 +40,7 @@ export const SideBar = () => {
           <DefaultProfilePicture userImage={profileImageURL} />
         </div>
         <span>
-          {surname} {firstName}
+          {firstName} {surname}
         </span>
       </div>
       <SideBarItem sideBarItemName="Most recent" />
