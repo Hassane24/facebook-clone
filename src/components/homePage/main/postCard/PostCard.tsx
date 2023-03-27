@@ -1,3 +1,4 @@
+import { InteractWithPost } from "./InteractWithPost";
 import { PostContent } from "./PostContent";
 import { PostInfo } from "./PostInfo";
 
@@ -6,6 +7,7 @@ export const PostCard = () => {
     <div>
       <PostInfo />
       <PostContent />
+      <InteractWithPost />
     </div>
   );
 };
