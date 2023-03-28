@@ -1,0 +1,97 @@
+.postInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px 0px;
+  margin-bottom: 12px;
+}
+
+.postInfoContainer > div:nth-child(1) {
+  width: 100%;
+}
+
+.postInfoContainer > div:nth-child(1),
+.postInfoContainer > div:nth-child(2) {
+  display: flex;
+  column-gap: 6px;
+}
+
+.imageHolder {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  position: relative;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+}
+
+.username {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.username:hover {
+  text-decoration: underline;
+}
+
+.date {
+  display: inline-block;
+  column-gap: 2px;
+  align-items: center;
+  color: #a6a8ad;
+  font-size: 13px;
+  width: 100%;
+}
+
+.date > div:nth-child(1),
+.date > div:nth-child(2),
+.date > div:nth-child(3) {
+  display: inline-block;
+  margin-right: 2px;
+}
+
+.date > div:nth-child(1) {
+  margin-bottom: 2px;
+}
+
+.date > div:nth-child(1):hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.date > div:nth-child(2) {
+  font-weight: bold;
+  vertical-align: baseline;
+  line-height: 24px;
+}
+
+.date > div:nth-child(3) {
+  display: inline-block;
+  height: 12px;
+}
+
+.icons {
+  -webkit-filter: invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg)
+    brightness(90%) contrast(96%);
+}
+
+.options {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  transition: cubic-bezier(0, 0, 1, 1) 100ms;
+  height: 36px;
+  width: 36px;
+  justify-content: center;
+}
+
+.options:hover,
+.imageOverlay:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
