@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 8px;
+  height: min-content;
   border-bottom: 1px solid #3e4042;
   padding-bottom: 8px;
   padding-top: 1rem;
