@@ -78,10 +78,6 @@
   font-size: 13px;
 }
 
-.closeFormButton:hover {
-  background-color: rgba(255, 225, 225, 0.2);
-}
-
 .privacy {
   display: flex;
   column-gap: 11px;
@@ -107,10 +103,6 @@
   left: 0;
 }
 
-.privacy > div:nth-child(1) > div:hover {
-  background-color: rgba(255, 225, 225, 0.2);
-}
-
 .privacy > div:nth-child(2) {
   display: flex;
   flex-direction: column;
@@ -126,7 +118,7 @@
 .options {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 225, 225, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   justify-content: center;
   padding: 4px 8px;
@@ -261,11 +253,6 @@
   color: #b0b3b8;
 }
 
-.pictureAddingArea > div:first-child:hover,
-.closeDragDrop:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 .photosFromHome {
   display: flex;
   border-radius: 8px;
@@ -313,10 +300,6 @@
   align-items: center;
 }
 
-.photosFromHome > div:nth-child(3):hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 /* --------------------------------------------Third container styling-------------------------------------------- */
 
 .thirdContainer {
@@ -362,10 +345,6 @@
   background-color: black;
 }
 
-.thirdContainer > div > div:nth-child(2) > div:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 .thirdContainer > button {
   align-self: stretch;
   height: 36px;
@@ -378,4 +357,13 @@
   border-radius: 6px;
   font-weight: 600px;
   margin: 16px 12px 0px 12px;
+}
+
+.thirdContainer > div > div:nth-child(2) > div:hover,
+.photosFromHome > div:nth-child(3):hover,
+.pictureAddingArea > div:first-child:hover,
+.closeDragDrop:hover,
+.privacy > div:nth-child(1) > div:hover,
+.closeFormButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
