@@ -1,0 +1,80 @@
+.interactionsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  row-gap: 9px;
+}
+
+.firstContainer {
+  justify-content: space-between;
+  display: flex;
+  margin: 0 16px;
+}
+
+.interactions {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.interactions > div:nth-child(1),
+.interactions > div:nth-child(1) > div {
+  display: flex;
+}
+
+.interactions > div:nth-child(1) > div {
+  margin-left: -3px;
+}
+
+.numberOfInteractions {
+  color: #b0b3aa;
+  font-size: 15px;
+}
+
+.numberOfInteractions:hover,
+.commentsAndShares > div:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.commentsAndShares {
+  display: flex;
+  color: #b0b3aa;
+  font-size: 15px;
+  column-gap: 5px;
+}
+
+.secondContainer {
+  display: flex;
+  align-items: center;
+  margin: 0 16px;
+  border-top: 1px solid #3e4042;
+}
+
+.interaction {
+  align-items: center;
+  display: flex;
+  color: #b0b3aa;
+  font-size: 15px;
+  font-weight: 600;
+  width: 100%;
+  justify-content: center;
+  column-gap: 6px;
+  height: 36px;
+  cursor: pointer;
+  margin-top: 4px;
+  border-radius: 4px;
+}
+
+.interaction:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.interaction > div {
+  display: flex;
+}
+
+.icons {
+  -webkit-filter: invert(62%) sepia(98%) saturate(12%) hue-rotate(175deg)
+    brightness(90%) contrast(96%);
+}
