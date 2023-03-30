@@ -167,14 +167,16 @@
 }
 
 .biggerTextArea > div:nth-child(1),
-.biggerTextArea > div:nth-child(3) {
+.biggerTextArea > div:nth-child(3),
+.smileyFace {
   align-self: flex-end;
   position: absolute;
   cursor: pointer;
   display: flex;
 }
 
-.biggerTextArea > div:nth-child(3) {
+.biggerTextArea > div:nth-child(3),
+.smileyFace {
   right: 1rem;
 }
 
