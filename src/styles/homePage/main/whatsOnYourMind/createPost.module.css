@@ -27,10 +27,7 @@
   position: fixed;
   opacity: 0;
   pointer-events: none;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -94,13 +91,10 @@
 
 .privacy > div:nth-child(1) > div {
   position: absolute;
-  top: 0;
   cursor: pointer;
   border-radius: 50%;
-  bottom: 0;
-  right: 0;
   transition: cubic-bezier(0, 0, 1, 1) 100ms;
-  left: 0;
+  inset: 0;
 }
 
 .privacy > div:nth-child(2) {
@@ -196,11 +190,8 @@
   position: absolute;
   opacity: 0;
   cursor: pointer;
-  top: 0;
-  bottom: 0;
   margin: 8px;
-  right: 0;
-  left: 0;
+  inset: 0;
 }
 
 .closeDragDrop {
@@ -339,10 +330,6 @@
   cursor: pointer;
   border-radius: 50%;
   width: 36px;
-}
-
-.thirdContainer > div > div:nth-child(2) > div:first-of-type {
-  background-color: black;
 }
 
 .thirdContainer > button {
