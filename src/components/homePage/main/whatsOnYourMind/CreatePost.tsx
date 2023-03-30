@@ -20,6 +20,9 @@ interface CreatePostProps {
   firstName: string;
   surname: string;
   userProfilePicture: string;
+  popUpPictureAddingArea: boolean;
+  closePictureAddingArea: () => void;
+  openPictureAddingArea: () => void;
 }
 
 export const CreatePost = ({
@@ -28,6 +31,9 @@ export const CreatePost = ({
   firstName,
   userProfilePicture,
   surname,
+  popUpPictureAddingArea,
+  closePictureAddingArea,
+  openPictureAddingArea,
 }: CreatePostProps) => {
   return (
     <div className={`${styles.formContainer} ${popUp && styles.active}`}>
@@ -99,16 +105,44 @@ export const CreatePost = ({
             </div>
           </div>
 
-          <div className={styles.pictureAddingArea}>
-            <div>
-              <input type="file" name="" id=" " title="" />
+          {popUpPictureAddingArea && (
+            <div className={`${styles.pictureAddingArea} `}>
               <div>
+                <input type="file" name="" id=" " title="" />
+                <div>
+                  <i
+                    className={styles.icon}
+                    style={{
+                      backgroundImage: `url(${secondUtilityIcons})`,
+                      backgroundPosition: "0px -86px",
+                      backgroundSize: "38px 162px",
+                      width: "20px",
+                      height: "20px",
+                      backgroundRepeat: "no-repeat",
+                      display: "inline-block",
+                    }}
+                  ></i>
+                </div>
+                <div>Add photos/videos</div>
+                <div>or drag and drop</div>
+              </div>
+              <div className={styles.photosFromHome}>
+                <div>
+                  <Phone />
+                </div>
+                <div>Add photos and videos from your mobile device.</div>
+                <div>Add</div>
+              </div>
+              <div
+                className={styles.closeDragDrop}
+                onClick={closePictureAddingArea}
+              >
                 <i
                   className={styles.icon}
                   style={{
-                    backgroundImage: `url(${secondUtilityIcons})`,
-                    backgroundPosition: "0px -86px",
-                    backgroundSize: "38px 162px",
+                    backgroundImage: `url(${utilityIcons})`,
+                    backgroundPosition: "-66px -110px",
+                    backgroundSize: "190px 204px",
                     width: "20px",
                     height: "20px",
                     backgroundRepeat: "no-repeat",
@@ -116,38 +150,20 @@ export const CreatePost = ({
                   }}
                 ></i>
               </div>
-              <div>Add photos/videos</div>
-              <div>or drag and drop</div>
             </div>
-            <div className={styles.photosFromHome}>
-              <div>
-                <Phone />
-              </div>
-              <div>Add photos and videos from your mobile device.</div>
-              <div>Add</div>
-            </div>
-            <div className={styles.closeDragDrop}>
-              <i
-                className={styles.icon}
-                style={{
-                  backgroundImage: `url(${utilityIcons})`,
-                  backgroundPosition: "-66px -110px",
-                  backgroundSize: "190px 204px",
-                  width: "20px",
-                  height: "20px",
-                  backgroundRepeat: "no-repeat",
-                  display: "inline-block",
-                }}
-              ></i>
-            </div>
-          </div>
+          )}
         </div>
 
         <div className={styles.thirdContainer}>
           <div>
             <div>Add to your post</div>
             <div>
-              <div>
+              <div
+                style={{
+                  backgroundColor: popUpPictureAddingArea ? "black" : "",
+                }}
+                onClick={openPictureAddingArea}
+              >
                 <img src={images} alt="" height="24px" width="24px" />
               </div>
               <div>

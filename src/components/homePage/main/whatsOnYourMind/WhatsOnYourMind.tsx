@@ -7,11 +7,14 @@ import { fetchUserImage } from "../../../../utils/fetchUserImage";
 import { fetchUserName } from "../../../../utils/fetchUserName";
 import { useEffect, useState } from "react";
 import { CreatePost } from "./CreatePost";
+
 export const WhatsOnYourMind = () => {
   const [profileImageURL, setProfileImageURL] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
   const [showCreatePost, setShowCreatePost] = useState(false);
+  const [showPictureAddingArea, setShowPictureAddingArea] = useState(false);
+
   useEffect(() => {
     const userID = localStorage.getItem("UserID");
     const getUserName = async () => await fetchUserName(userID);
@@ -24,6 +27,8 @@ export const WhatsOnYourMind = () => {
   }, []);
 
   const popUpCreatePost = () => setShowCreatePost(!showCreatePost);
+  const popUpPictureAddingArea = () => setShowPictureAddingArea(true);
+  const closePictureAddingArea = () => setShowPictureAddingArea(false);
 
   return (
     <div className={styles.container}>
@@ -43,7 +48,12 @@ export const WhatsOnYourMind = () => {
           </div>
           <span>Live video</span>
         </div>
-        <div onClick={popUpCreatePost}>
+        <div
+          onClick={() => {
+            popUpCreatePost();
+            popUpPictureAddingArea();
+          }}
+        >
           <div>
             <img src={Photos} alt="" width="24px" height="24px" />
           </div>
@@ -62,6 +72,9 @@ export const WhatsOnYourMind = () => {
         firstName={firstName}
         userProfilePicture={profileImageURL}
         surname={surname}
+        popUpPictureAddingArea={showPictureAddingArea}
+        openPictureAddingArea={popUpPictureAddingArea}
+        closePictureAddingArea={closePictureAddingArea}
       />
     </div>
   );
