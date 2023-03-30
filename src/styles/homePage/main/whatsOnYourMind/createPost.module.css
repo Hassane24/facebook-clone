@@ -1,7 +1,6 @@
 .formContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
   position: fixed;
   min-height: 100vh;
   z-index: 1;
@@ -17,6 +16,8 @@
   width: 500px;
   border-radius: 8px;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .formContainer.active {
@@ -133,6 +134,49 @@
 }
 
 /* --------------------------------------------Second container styling-------------------------------------------- */
+.secondContainer {
+  flex-grow: 1;
+}
+
+.biggerTextArea {
+  display: flex;
+  padding: 0 16px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.biggerTextArea > textarea {
+  width: 100%;
+  resize: none;
+  background-color: transparent;
+  border: none;
+  font-weight: 400;
+  color: #e4e6eb;
+  font-size: 24px;
+}
+
+.biggerTextArea > textarea::placeholder {
+  color: #b0b3b8;
+  font-size: 24px;
+}
+
+.biggerTextArea > textarea::-webkit-scrollbar,
+.textArea > textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.biggerTextArea > div:nth-child(1),
+.biggerTextArea > div:nth-child(3) {
+  align-self: flex-end;
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+}
+
+.biggerTextArea > div:nth-child(3) {
+  right: 1rem;
+}
 
 .textArea {
   display: flex;
@@ -156,7 +200,8 @@
   color: #b0b3b8;
 }
 
-.textArea > textarea:focus {
+.textArea > textarea:focus,
+.biggerTextArea > textarea:focus {
   border: none;
   outline: none;
 }
@@ -166,7 +211,8 @@
   align-self: flex-start;
 }
 
-.textArea > div > svg {
+.textArea > div > svg,
+.biggerTextArea > div:nth-child(3) {
   transition: cubic-bezier(0, 0, 1, 1) 100ms;
   border-radius: 50%;
   opacity: 0.7;
@@ -174,7 +220,8 @@
   cursor: pointer;
 }
 
-.textArea > div > svg:hover {
+.textArea > div > svg:hover,
+.biggerTextArea > div:nth-child(3):hover {
   opacity: 1;
 }
 

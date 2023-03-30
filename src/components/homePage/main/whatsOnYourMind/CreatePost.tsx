@@ -6,6 +6,7 @@ import checkIn from "../../../../assets/check-in.png";
 import lifeEvent from "../../../../assets/life-event.png";
 import feeling from "../../../../assets/feeling.png";
 import Public from "../../../../assets/public.png";
+import Aa from "../../../../assets/Aa.png";
 import styles from "../../../../styles/homePage/main/whatsOnYourMind/createPost.module.css";
 import {
   DefaultProfilePicture,
@@ -36,7 +37,10 @@ export const CreatePost = ({
   openPictureAddingArea,
 }: CreatePostProps) => {
   return (
-    <div className={`${styles.formContainer} ${popUp && styles.active}`}>
+    <div
+      style={{ padding: popUpPictureAddingArea ? "" : "100px" }}
+      className={`${styles.formContainer} ${popUp && styles.active}`}
+    >
       <form className={`${styles.form} ${popUp && styles.active}`}>
         <div className={styles.firstContainer}>
           <div className={styles.createPost}>
@@ -95,7 +99,16 @@ export const CreatePost = ({
         </div>
 
         <div className={styles.secondContainer}>
-          <div className={styles.textArea}>
+          <div
+            className={`${popUpPictureAddingArea && styles.textArea} ${
+              !popUpPictureAddingArea && styles.biggerTextArea
+            }`}
+          >
+            {!popUpPictureAddingArea && (
+              <div>
+                <img src={Aa} alt="" height={"38px"} width="38px" />
+              </div>
+            )}
             <textarea
               wrap="soft"
               placeholder={`What's on your mind, ${firstName}?`}
