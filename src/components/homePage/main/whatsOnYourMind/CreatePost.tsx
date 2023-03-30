@@ -14,14 +14,15 @@ import {
   SmileyFace,
   Options,
 } from "../../../../utils/svgsFunction";
+import { useState } from "react";
 
 interface CreatePostProps {
+  popUpPictureAddingArea: boolean;
   popUp: boolean;
-  closeCreatePost: () => void;
   firstName: string;
   surname: string;
   userProfilePicture: string;
-  popUpPictureAddingArea: boolean;
+  closeCreatePost: () => void;
   closePictureAddingArea: () => void;
   openPictureAddingArea: () => void;
 }
@@ -36,6 +37,11 @@ export const CreatePost = ({
   closePictureAddingArea,
   openPictureAddingArea,
 }: CreatePostProps) => {
+  const [textAreaValue, setTextAreaValue] = useState("");
+
+  const textAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setTextAreaValue(e.target.value);
+
   return (
     <div
       style={{ padding: popUpPictureAddingArea ? "" : "100px" }}
@@ -104,7 +110,7 @@ export const CreatePost = ({
               !popUpPictureAddingArea && styles.biggerTextArea
             }`}
           >
-            {!popUpPictureAddingArea && (
+            {!popUpPictureAddingArea && textAreaValue.length < 140 && (
               <div>
                 <img src={Aa} alt="" height={"38px"} width="38px" />
               </div>
@@ -112,8 +118,16 @@ export const CreatePost = ({
             <textarea
               wrap="soft"
               placeholder={`What's on your mind, ${firstName}?`}
+              value={textAreaValue}
+              onChange={textAreaHandler}
             />
-            <div>
+            <div
+              className={
+                !popUpPictureAddingArea &&
+                textAreaValue.length >= 140 &&
+                styles.smileyFace
+              }
+            >
               <SmileyFace />
             </div>
           </div>
