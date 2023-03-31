@@ -14,6 +14,7 @@ export const WhatsOnYourMind = () => {
   const [surname, setSurname] = useState<string>("");
   const [showCreatePost, setShowCreatePost] = useState(false);
   const [showPictureAddingArea, setShowPictureAddingArea] = useState(false);
+  const [whatsOnYourMindValue, setWhatsOnYourMindValue] = useState("");
 
   useEffect(() => {
     const userID = localStorage.getItem("UserID");
@@ -37,8 +38,17 @@ export const WhatsOnYourMind = () => {
           <DefaultProfilePicture userImage={profileImageURL} />
           <div className={styles.overlayDiv}></div>
         </div>
-        <div className={styles.onYourMindText} onClick={popUpCreatePost}>
-          <span>What's on your mind, {firstName}?</span>
+        <div
+          className={
+            whatsOnYourMindValue
+              ? styles.coloredYourMindText
+              : styles.onYourMindText
+          }
+          onClick={popUpCreatePost}
+        >
+          <span>
+            {whatsOnYourMindValue || "What's on your mind, " + firstName + "?"}
+          </span>
         </div>
       </div>
       <div className={styles.choices}>
@@ -75,6 +85,7 @@ export const WhatsOnYourMind = () => {
         popUpPictureAddingArea={showPictureAddingArea}
         openPictureAddingArea={popUpPictureAddingArea}
         closePictureAddingArea={closePictureAddingArea}
+        setWhatsOnYourMindValue={setWhatsOnYourMindValue}
       />
     </div>
   );
