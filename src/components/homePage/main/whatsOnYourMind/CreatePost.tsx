@@ -30,9 +30,14 @@ interface CreatePostProps {
 
 export const CreatePost = (props: CreatePostProps) => {
   const [textAreaValue, setTextAreaValue] = useState("");
+  const [image, setImage] = useState<File | null>(null);
 
   const textAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setTextAreaValue(e.target.value);
+
+  const inputFileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) setImage(e.target.files[0]);
+  };
 
   return (
     <div
@@ -139,7 +144,14 @@ export const CreatePost = (props: CreatePostProps) => {
           {props.popUpPictureAddingArea && (
             <div className={`${styles.pictureAddingArea}`}>
               <div>
-                <input type="file" name="" id=" " title="" />
+                <input
+                  type="file"
+                  name="image"
+                  id="image"
+                  title=""
+                  accept="image/png, image/jpeg"
+                  onChange={inputFileHandler}
+                />
                 <div>
                   <i
                     className={styles.icon}
@@ -166,7 +178,10 @@ export const CreatePost = (props: CreatePostProps) => {
               </div>
               <div
                 className={styles.closeDragDrop}
-                onClick={props.closePictureAddingArea}
+                onClick={() => {
+                  props.closePictureAddingArea();
+                  setImage(null);
+                }}
               >
                 <i
                   className={styles.icon}
@@ -214,7 +229,22 @@ export const CreatePost = (props: CreatePostProps) => {
               </div>
             </div>
           </div>
-          <button type="button">Post</button>
+          <div
+            className={
+              image || textAreaValue !== "" ? styles.blueDiv : undefined
+            }
+          >
+            <button
+              className={
+                image || textAreaValue !== "" ? styles.blueButton : undefined
+              }
+              type="button"
+            >
+              Post
+            </button>
+            {/* REMINDER: the post picture method goes on this div */}
+            {image || textAreaValue !== "" ? <div></div> : null}
+          </div>
         </div>
       </form>
       <div
