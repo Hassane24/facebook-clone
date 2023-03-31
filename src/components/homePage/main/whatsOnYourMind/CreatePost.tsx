@@ -218,7 +218,10 @@ export const CreatePost = (props: CreatePostProps) => {
         </div>
       </form>
       <div
-        onClick={props.closeCreatePost}
+        onClick={() => {
+          props.setWhatsOnYourMindValue(textAreaValue);
+          props.closeCreatePost();
+        }}
         className={`${styles.overlay} ${
           props.popUp ? styles.overlayActive : undefined
         }`}
