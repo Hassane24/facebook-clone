@@ -25,18 +25,10 @@ interface CreatePostProps {
   closeCreatePost: () => void;
   closePictureAddingArea: () => void;
   openPictureAddingArea: () => void;
+  setWhatsOnYourMindValue: (value: string) => void;
 }
 
-export const CreatePost = ({
-  popUp,
-  closeCreatePost,
-  firstName,
-  userProfilePicture,
-  surname,
-  popUpPictureAddingArea,
-  closePictureAddingArea,
-  openPictureAddingArea,
-}: CreatePostProps) => {
+export const CreatePost = (props: CreatePostProps) => {
   const [textAreaValue, setTextAreaValue] = useState("");
 
   const textAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -44,14 +36,24 @@ export const CreatePost = ({
 
   return (
     <div
-      style={{ padding: popUpPictureAddingArea ? "" : "100px" }}
-      className={`${styles.formContainer} ${popUp && styles.active}`}
+      style={{ padding: props.popUpPictureAddingArea ? "" : "100px" }}
+      className={`${styles.formContainer} ${
+        props.popUp ? styles.active : undefined
+      }`}
     >
-      <form className={`${styles.form} ${popUp && styles.active}`}>
+      <form
+        className={`${styles.form} ${props.popUp ? styles.active : undefined}`}
+      >
         <div className={styles.firstContainer}>
           <div className={styles.createPost}>
             <div className={styles.createPostText}>Create post</div>
-            <div className={styles.closeFormButton} onClick={closeCreatePost}>
+            <div
+              className={styles.closeFormButton}
+              onClick={() => {
+                props.setWhatsOnYourMindValue(textAreaValue);
+                props.closeCreatePost();
+              }}
+            >
               <i
                 className={styles.icon}
                 style={{
@@ -69,12 +71,12 @@ export const CreatePost = ({
 
           <div className={styles.privacy}>
             <div>
-              <DefaultProfilePicture userImage={userProfilePicture} />
+              <DefaultProfilePicture userImage={props.userProfilePicture} />
               <div></div>
             </div>
             <div>
               <span>
-                {firstName} {surname}
+                {props.firstName} {props.surname}
               </span>
               <div className={styles.options}>
                 <div>
@@ -106,34 +108,36 @@ export const CreatePost = ({
 
         <div className={styles.secondContainer}>
           <div
-            className={`${popUpPictureAddingArea && styles.textArea} ${
-              !popUpPictureAddingArea && styles.biggerTextArea
+            className={`${
+              props.popUpPictureAddingArea ? styles.textArea : undefined
+            } ${
+              !props.popUpPictureAddingArea ? styles.biggerTextArea : undefined
             }`}
           >
-            {!popUpPictureAddingArea && textAreaValue.length < 140 && (
+            {!props.popUpPictureAddingArea && textAreaValue.length < 140 && (
               <div>
                 <img src={Aa} alt="" height={"38px"} width="38px" />
               </div>
             )}
             <textarea
               wrap="soft"
-              placeholder={`What's on your mind, ${firstName}?`}
+              placeholder={`What's on your mind, ${props.firstName}?`}
               value={textAreaValue}
               onChange={textAreaHandler}
             />
             <div
               className={
-                !popUpPictureAddingArea &&
-                textAreaValue.length >= 140 &&
-                styles.smileyFace
+                !props.popUpPictureAddingArea && textAreaValue.length >= 140
+                  ? styles.smileyFace
+                  : undefined
               }
             >
               <SmileyFace />
             </div>
           </div>
 
-          {popUpPictureAddingArea && (
-            <div className={`${styles.pictureAddingArea} `}>
+          {props.popUpPictureAddingArea && (
+            <div className={`${styles.pictureAddingArea}`}>
               <div>
                 <input type="file" name="" id=" " title="" />
                 <div>
@@ -162,7 +166,7 @@ export const CreatePost = ({
               </div>
               <div
                 className={styles.closeDragDrop}
-                onClick={closePictureAddingArea}
+                onClick={props.closePictureAddingArea}
               >
                 <i
                   className={styles.icon}
@@ -187,9 +191,9 @@ export const CreatePost = ({
             <div>
               <div
                 style={{
-                  backgroundColor: popUpPictureAddingArea ? "black" : "",
+                  backgroundColor: props.popUpPictureAddingArea ? "black" : "",
                 }}
-                onClick={openPictureAddingArea}
+                onClick={props.openPictureAddingArea}
               >
                 <img src={images} alt="" height="24px" width="24px" />
               </div>
@@ -214,8 +218,10 @@ export const CreatePost = ({
         </div>
       </form>
       <div
-        onClick={closeCreatePost}
-        className={`${styles.overlay} ${popUp && styles.overlayActive}`}
+        onClick={props.closeCreatePost}
+        className={`${styles.overlay} ${
+          props.popUp ? styles.overlayActive : undefined
+        }`}
       ></div>
     </div>
   );
