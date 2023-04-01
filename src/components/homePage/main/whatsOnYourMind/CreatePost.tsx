@@ -31,12 +31,20 @@ interface CreatePostProps {
 export const CreatePost = (props: CreatePostProps) => {
   const [textAreaValue, setTextAreaValue] = useState("");
   const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<
+    string | null | undefined | ArrayBuffer
+  >("");
 
   const textAreaHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setTextAreaValue(e.target.value);
 
   const inputFileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) setImage(e.target.files[0]);
+    if (e.target.files) {
+      let reader = new FileReader();
+      reader.onload = (ev) => setImageUrl(ev.target?.result);
+      reader.readAsDataURL(e.target.files[0]);
+      setImage(e.target.files[0]);
+    }
   };
 
   return (
@@ -144,30 +152,39 @@ export const CreatePost = (props: CreatePostProps) => {
           {props.popUpPictureAddingArea && (
             <div className={`${styles.pictureAddingArea}`}>
               <div>
-                <input
-                  type="file"
-                  name="image"
-                  id="image"
-                  title=""
-                  accept="image/png, image/jpeg"
-                  onChange={inputFileHandler}
-                />
-                <div>
-                  <i
-                    className={styles.icon}
-                    style={{
-                      backgroundImage: `url(${secondUtilityIcons})`,
-                      backgroundPosition: "0px -86px",
-                      backgroundSize: "38px 162px",
-                      width: "20px",
-                      height: "20px",
-                      backgroundRepeat: "no-repeat",
-                      display: "inline-block",
-                    }}
-                  ></i>
-                </div>
-                <div>Add photos/videos</div>
-                <div>or drag and drop</div>
+                {!imageUrl && (
+                  <>
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      title=""
+                      accept="image/png, image/jpeg"
+                      onChange={inputFileHandler}
+                    />
+                    <div>
+                      <i
+                        className={styles.icon}
+                        style={{
+                          backgroundImage: `url(${secondUtilityIcons})`,
+                          backgroundPosition: "0px -86px",
+                          backgroundSize: "38px 162px",
+                          width: "20px",
+                          height: "20px",
+                          backgroundRepeat: "no-repeat",
+                          display: "inline-block",
+                        }}
+                      ></i>
+                    </div>
+                    <div>Add photos/videos</div>
+                    <div>or drag and drop</div>
+                  </>
+                )}
+                {imageUrl && (
+                  <div className={styles.imageHolder}>
+                    <img src={imageUrl as string} alt="" />
+                  </div>
+                )}
               </div>
               <div className={styles.photosFromHome}>
                 <div>
@@ -181,6 +198,7 @@ export const CreatePost = (props: CreatePostProps) => {
                 onClick={() => {
                   props.closePictureAddingArea();
                   setImage(null);
+                  setImageUrl(null);
                 }}
               >
                 <i
