@@ -22,12 +22,9 @@ const Settings = ({
   surname,
 }: SettingsProps) => {
   const [showPopUp, setShowPopUp] = useState<Boolean>(false);
-  const [popUpXPosition, setPopUpXPosition] = useState<number>(0);
 
-  const onClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
-    setShowPopUp(!showPopUp);
-    setPopUpXPosition(e.clientX - 180);
-  };
+  const onClickHandler = () => setShowPopUp(!showPopUp);
+
   return (
     <div className={styles.settings}>
       <div>
@@ -44,7 +41,6 @@ const Settings = ({
         <AccountPopUp
           profilePicture={profilePicture}
           show={showPopUp}
-          left={popUpXPosition}
           firstName={firstName}
           surname={surname}
         />
