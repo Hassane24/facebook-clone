@@ -13,7 +13,6 @@ import {
 } from "../../../utils/svgsFunction";
 interface PopUp {
   show: Boolean;
-  left: number;
   profilePicture: string;
   surname: string | undefined;
   firstName: string | undefined;
@@ -30,14 +29,9 @@ export const AccountPopUp = (props: PopUp) => {
       .catch((err) => console.log(err));
   };
   return (
-    <div>
+    <>
       {props.show && (
-        <div
-          style={{
-            left: props.left,
-          }}
-          className={styles.accountPopUp}
-        >
+        <div className={styles.accountPopUp}>
           <div className={styles.yourAccount}>
             <a href="">
               <div>
@@ -59,7 +53,7 @@ export const AccountPopUp = (props: PopUp) => {
               style={{
                 backgroundColor: "transparent",
                 position: "absolute",
-                transform: "translate(620%)",
+                right: "1rem",
               }}
             >
               <Arrow />
@@ -74,7 +68,7 @@ export const AccountPopUp = (props: PopUp) => {
               style={{
                 backgroundColor: "transparent",
                 position: "absolute",
-                transform: "translate(620%)",
+                right: "1rem",
               }}
             >
               <Arrow />
@@ -89,7 +83,7 @@ export const AccountPopUp = (props: PopUp) => {
               style={{
                 backgroundColor: "transparent",
                 position: "absolute",
-                transform: "translate(620%)",
+                right: "1rem",
               }}
             >
               <Arrow />
@@ -109,6 +103,6 @@ export const AccountPopUp = (props: PopUp) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
