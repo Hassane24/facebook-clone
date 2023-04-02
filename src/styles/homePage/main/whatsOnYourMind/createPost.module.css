@@ -390,7 +390,6 @@
 .thirdContainer > div:nth-child(2),
 .thirdContainer > .blueDiv {
   background-color: rgb(255, 255, 255, 0.2);
-  pointer-events: all;
   cursor: not-allowed;
   border-radius: 6px;
   margin: 16px 12px 0px 12px;
@@ -402,7 +401,6 @@
   background-color: rgb(255, 255, 255, 0.2);
   border-radius: 6px;
   border: none;
-  cursor: not-allowed;
   color: white;
   pointer-events: none;
   font-size: 15px;
@@ -413,11 +411,11 @@
 .thirdContainer > div:nth-child(2) > .blueButton {
   background-color: rgb(35 116 225);
   cursor: pointer;
-  pointer-events: all;
 }
 
 .thirdContainer > .blueDiv {
   background-color: rgb(35 116 225);
+  pointer-events: all;
   position: relative;
 }
 
