@@ -19,6 +19,13 @@ const LoginPage = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         localStorage.setItem("UserID", user.uid);
+        localStorage.setItem("profile-picture", user.photoURL as string);
+        const userName = user.displayName;
+        const firstName = userName?.split(" ")[0];
+        const surname = userName?.split(" ")[2];
+        localStorage.setItem("first-name", firstName as string);
+        localStorage.setItem("surname", surname as string);
+
         navigate("/home");
       })
       .catch((error) => {
