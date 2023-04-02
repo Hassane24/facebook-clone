@@ -1,9 +1,9 @@
 .accountPopUp {
   position: fixed;
-  transform: translate(180px, 0px) translate(-100%, 0px);
   width: 360px;
   z-index: 1;
   top: 56px;
+  right: 1rem;
   display: flex;
   flex-direction: column;
   background-color: #242526;
@@ -14,12 +14,9 @@
 
 .accountPopUp > .settingsOptions {
   min-height: 44px;
-  line-height: 17px;
-  text-decoration-style: solid;
-  font-weight: bold;
+  position: relative;
   color: #e4e6eb;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   column-gap: 12px;
@@ -97,7 +94,7 @@
 
 .seeAllProfiles {
   font-size: 0.9375rem;
-  width: calc(100% + 8px);
+  width: 100%;
   font-weight: 500;
   color: #2e89ff;
   height: 35px;
