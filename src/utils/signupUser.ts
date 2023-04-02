@@ -1,5 +1,5 @@
 import { auth, db, storage } from "../firebase/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -28,6 +28,12 @@ export const signupUser = async (
       const imageLink = await getDownloadURL(
         ref(storage, `profile-pics/${createdUser.user.uid}.png`)
       );
+
+      if (auth.currentUser)
+        updateProfile(auth.currentUser, {
+          displayName: firstName + " " + surname,
+          photoURL: imageLink,
+        });
 
       await setDoc(doc(db, "users", firstName), {
         userID: createdUser.user.uid,
