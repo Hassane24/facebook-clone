@@ -24,7 +24,7 @@ export const AccountPopUp = (props: PopUp) => {
   const clickHandler = () => {
     signOut(auth)
       .then(() => {
-        localStorage.removeItem("UserID");
+        localStorage.clear();
         navigate("/login");
       })
       .catch((err) => console.log(err));
