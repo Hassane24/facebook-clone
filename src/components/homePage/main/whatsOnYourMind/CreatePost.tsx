@@ -15,6 +15,10 @@ import {
   Options,
 } from "../../../../utils/svgsFunction";
 import { useState } from "react";
+import { storage, db } from "../../../../firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
+
+import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 
 interface CreatePostProps {
   popUpPictureAddingArea: boolean;
@@ -41,9 +45,58 @@ export const CreatePost = (props: CreatePostProps) => {
   const inputFileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       let reader = new FileReader();
-      reader.onload = (ev) => setImageUrl(ev.target?.result);
+      reader.onload = (event) => setImageUrl(event.target?.result);
       reader.readAsDataURL(e.target.files[0]);
       setImage(e.target.files[0]);
+    }
+  };
+
+  const postStatus = async () => {
+    try {
+      const firstName = localStorage.getItem("first-name");
+      const surname = localStorage.getItem("surname");
+      const userPfpUrl = localStorage.getItem("profile-picture");
+
+      if (image) {
+        const imageRef = ref(storage, `post-images/${image?.lastModified}.png`);
+        await uploadBytes(imageRef, image);
+        const postPictureURL = await getDownloadURL(imageRef);
+        await setDoc(doc(db, "posts", `${new Date().getTime()}`), {
+          postText: textAreaValue,
+          pictureUrl: postPictureURL,
+          userPfpUrl: userPfpUrl,
+          firstName: firstName,
+          surname: surname,
+          reactions: {
+            like: 0,
+            love: 0,
+            haha: 0,
+            sad: 0,
+            wow: 0,
+            care: 0,
+            angry: 0,
+          },
+        });
+      } else {
+        await setDoc(doc(db, "posts", `${new Date().getTime()}`), {
+          postText: textAreaValue,
+          pictureUrl: null,
+          userPfpUrl: userPfpUrl,
+          firstName: firstName,
+          surname: surname,
+          reactions: {
+            like: 0,
+            love: 0,
+            haha: 0,
+            sad: 0,
+            wow: 0,
+            care: 0,
+            angry: 0,
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -261,7 +314,9 @@ export const CreatePost = (props: CreatePostProps) => {
               Post
             </button>
             {/* REMINDER: the post picture method goes on this div */}
-            {image || textAreaValue !== "" ? <div></div> : null}
+            {image || textAreaValue !== "" ? (
+              <div onClick={postStatus}></div>
+            ) : null}
           </div>
         </div>
       </form>
