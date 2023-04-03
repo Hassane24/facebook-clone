@@ -47,6 +47,7 @@
 .secondContainer {
   display: flex;
   align-items: center;
+  position: relative;
   margin: 0 16px;
   border-top: 1px solid #3e4042;
 }
@@ -72,6 +73,38 @@
 
 .interaction > div {
   display: flex;
+}
+
+.secondContainer > div:nth-child(4) {
+  transform: translateY(2rem);
+  transition: cubic-bezier(0, 1, 0, 1) 100ms;
+  left: -5px;
+  position: absolute;
+}
+
+.secondContainer > div:nth-child(4).active {
+  transform: translateY(-2.5rem);
+}
+
+.interactPopUp {
+  background-color: #18191a;
+  display: flex;
+  border-radius: 25px;
+  padding: 6px 0;
+}
+
+.interactPopUp > div {
+  margin: 0 6px;
+}
+
+.interactPopUp > div > img {
+  display: block;
+  transition: ease-in-out 100ms;
+  cursor: pointer;
+}
+
+.interactPopUp > div > img:hover {
+  transform: scale(1.4);
 }
 
 .icons {
