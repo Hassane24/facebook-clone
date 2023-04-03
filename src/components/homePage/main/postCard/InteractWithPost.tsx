@@ -2,8 +2,17 @@ import styles from "../../../../styles/homePage/main/postCard/interactWithPost.m
 import haha from "../../../../assets/haha.png";
 import love from "../../../../assets/love.png";
 import like from "../../../../assets/like.png";
+import sad from "../../../../assets/sad.png";
+import wow from "../../../../assets/wow.png";
+import care from "../../../../assets/care.png";
+import angry from "../../../../assets/angry.png";
 import utilityIcons from "../../../../assets/utility-icons-3.png";
+import { useState } from "react";
 export const InteractWithPost = () => {
+  const [showInteractPopUp, setShowInteractPopUp] = useState(false);
+
+  const revealInteractPopUp = () => setShowInteractPopUp(true);
+  const hideInteractPopUp = () => setShowInteractPopUp(false);
   return (
     <div className={styles.interactionsContainer}>
       <div className={styles.firstContainer}>
@@ -27,7 +36,11 @@ export const InteractWithPost = () => {
         </div>
       </div>
       <div className={styles.secondContainer}>
-        <div className={styles.interaction}>
+        <div
+          className={styles.interaction}
+          onMouseEnter={revealInteractPopUp}
+          onMouseLeave={hideInteractPopUp}
+        >
           <div>
             <i
               className={styles.icons}
@@ -77,6 +90,39 @@ export const InteractWithPost = () => {
             ></i>
           </div>
           Share
+        </div>
+        <div className={showInteractPopUp ? styles.active : undefined}>
+          {showInteractPopUp && (
+            <div
+              onMouseEnter={revealInteractPopUp}
+              onMouseLeave={hideInteractPopUp}
+              className={`${styles.interactPopUp} ${
+                showInteractPopUp ? styles.active : undefined
+              }`}
+            >
+              <div>
+                <img src={like} alt="" height={"40px"} width={"40px"} />
+              </div>
+              <div>
+                <img src={love} alt="" height={"40px"} width={"40px"} />
+              </div>
+              <div>
+                <img src={care} alt="" height={"40px"} width={"40px"} />
+              </div>
+              <div>
+                <img src={haha} alt="" height={"40px"} width={"40px"} />
+              </div>
+              <div>
+                <img src={wow} alt="" height={"40px"} width={"40px"} />
+              </div>
+              <div>
+                <img src={sad} alt="" height={"40px"} width={"40px"} />
+              </div>
+              <div>
+                <img src={angry} alt="" height={"40px"} width={"40px"} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
