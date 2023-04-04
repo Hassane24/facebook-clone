@@ -3,4 +3,8 @@
   background-color: #242526;
   height: 56px;
   justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  top: 0;
 }
