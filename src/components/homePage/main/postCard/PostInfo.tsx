@@ -2,16 +2,22 @@ import { DefaultProfilePicture, Options } from "../../../../utils/svgsFunction";
 import Public from "../../../../assets/public.png";
 import utilityIcons from "../../../../assets/utility-icons.png";
 import styles from "../../../../styles/homePage/main/postCard/postInfo.module.css";
-export const PostInfo = () => {
+export const PostInfo = (props: {
+  firstName: string;
+  surname: string;
+  pfpURL: string;
+}) => {
   return (
     <div className={styles.postInfoContainer}>
       <div>
         <div className={styles.imageHolder}>
-          <DefaultProfilePicture />
+          <DefaultProfilePicture userImage={props.pfpURL} />
           <div className={styles.imageOverlay}></div>
         </div>
         <div>
-          <span className={styles.username}>firstName surname</span>
+          <span className={styles.username}>
+            {props.firstName} {props.surname}
+          </span>
           <div className={styles.date}>
             <div>date</div>
             <div>.</div>
