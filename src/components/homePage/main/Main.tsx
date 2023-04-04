@@ -24,45 +24,48 @@ export const Main = () => {
 
   const postStatus = async (e?: React.ChangeEvent<HTMLInputElement>) => {
     if (e) {
-      if (e.target.files) setImage(e.target.files[0]);
-    }
-    try {
-      const firstName = localStorage.getItem("first-name");
-      const surname = localStorage.getItem("surname");
-      const userPfpUrl = localStorage.getItem("profile-picture");
-      const postInfo = {
-        postName: new Date().getTime(),
-        postText: textArea.current?.value,
-        pictureUrl: "",
-        userPfpUrl: userPfpUrl,
-        firstName: firstName,
-        surname: surname,
-        reactions: {
-          like: 0,
-          love: 0,
-          haha: 0,
-          sad: 0,
-          wow: 0,
-          care: 0,
-          angry: 0,
-        },
-      };
+      if (e.target.files) return setImage(e.target.files[0]);
+    } else
+      try {
+        const firstName = localStorage.getItem("first-name");
+        const surname = localStorage.getItem("surname");
+        const userPfpUrl = localStorage.getItem("profile-picture");
+        const postInfo = {
+          postName: new Date().getTime(),
+          postText: textArea.current?.value,
+          pictureUrl: "",
+          userPfpUrl: userPfpUrl,
+          firstName: firstName,
+          surname: surname,
+          reactions: {
+            like: 0,
+            love: 0,
+            haha: 0,
+            sad: 0,
+            wow: 0,
+            care: 0,
+            angry: 0,
+          },
+        };
 
-      if (image) {
-        const imageRef = ref(storage, `post-images/${image?.lastModified}.png`);
-        await uploadBytes(imageRef, image);
-        const postPictureURL = await getDownloadURL(imageRef);
-        postInfo.pictureUrl = postPictureURL;
-        await setDoc(doc(db, "posts", `${new Date().getTime()}`), postInfo);
-        setImage(null);
-      } else {
-        await setDoc(doc(db, "posts", `${new Date().getTime()}`), postInfo);
+        if (image) {
+          const imageRef = ref(
+            storage,
+            `post-images/${image?.lastModified}.png`
+          );
+          await uploadBytes(imageRef, image);
+          const postPictureURL = await getDownloadURL(imageRef);
+          postInfo.pictureUrl = postPictureURL;
+          await setDoc(doc(db, "posts", `${new Date().getTime()}`), postInfo);
+          setImage(null);
+        } else {
+          await setDoc(doc(db, "posts", `${new Date().getTime()}`), postInfo);
+        }
+
+        setPosts([...posts, postInfo]);
+      } catch (error) {
+        console.log(error);
       }
-
-      setPosts([...posts, postInfo]);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
