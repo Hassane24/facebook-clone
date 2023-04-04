@@ -1,6 +1,7 @@
 .main {
   padding: 1rem 2rem 0 2rem;
   display: flex;
+  grid-column: 2;
   align-items: center;
   position: relative;
   flex-direction: column;
