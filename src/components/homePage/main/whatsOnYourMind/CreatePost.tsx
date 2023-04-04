@@ -62,6 +62,7 @@ export const CreatePost = (props: CreatePostProps) => {
         await uploadBytes(imageRef, image);
         const postPictureURL = await getDownloadURL(imageRef);
         await setDoc(doc(db, "posts", `${new Date().getTime()}`), {
+          postName: new Date().getTime(),
           postText: textAreaValue,
           pictureUrl: postPictureURL,
           userPfpUrl: userPfpUrl,
@@ -79,6 +80,8 @@ export const CreatePost = (props: CreatePostProps) => {
         });
       } else {
         await setDoc(doc(db, "posts", `${new Date().getTime()}`), {
+          postName: new Date().getTime(),
+
           postText: textAreaValue,
           pictureUrl: null,
           userPfpUrl: userPfpUrl,
