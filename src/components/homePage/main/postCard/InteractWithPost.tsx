@@ -7,9 +7,21 @@ import wow from "../../../../assets/wow.png";
 import care from "../../../../assets/care.png";
 import angry from "../../../../assets/angry.png";
 import utilityIcons from "../../../../assets/utility-icons-3.png";
-import { useState } from "react";
-export const InteractWithPost = () => {
+import { useState, useEffect, useRef } from "react";
+
+interface Props {
+  interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
+  postName: string;
+}
+
+export const InteractWithPost = (props: Props) => {
   const [showInteractPopUp, setShowInteractPopUp] = useState(false);
+
+  const postNameRef = useRef<string>();
+
+  useEffect(() => {
+    postNameRef.current = props.postName;
+  }, [props.postName]);
 
   const revealInteractPopUp = () => setShowInteractPopUp(true);
   const hideInteractPopUp = () => setShowInteractPopUp(false);
@@ -100,26 +112,103 @@ export const InteractWithPost = () => {
                 showInteractPopUp ? styles.active : undefined
               }`}
             >
-              <div>
-                <img src={like} alt="" height={"40px"} width={"40px"} />
+              <div
+                onClick={(e) => {
+                  props.interactionHandler(e);
+                  hideInteractPopUp();
+                }}
+              >
+                <img
+                  src={like}
+                  alt="like"
+                  height={"40px"}
+                  width={"40px"}
+                  id={props.postName}
+                />
               </div>
-              <div>
-                <img src={love} alt="" height={"40px"} width={"40px"} />
+              <div
+                onClick={(e) => {
+                  props.interactionHandler(e);
+                  hideInteractPopUp();
+                }}
+              >
+                <img
+                  src={love}
+                  alt="love"
+                  height={"40px"}
+                  width={"40px"}
+                  id={props.postName}
+                />
               </div>
-              <div>
-                <img src={care} alt="" height={"40px"} width={"40px"} />
+              <div
+                onClick={(e) => {
+                  props.interactionHandler(e);
+                  hideInteractPopUp();
+                }}
+              >
+                <img
+                  src={care}
+                  alt="care"
+                  height={"40px"}
+                  width={"40px"}
+                  id={props.postName}
+                />
               </div>
-              <div>
-                <img src={haha} alt="" height={"40px"} width={"40px"} />
+              <div
+                onClick={(e) => {
+                  props.interactionHandler(e);
+                  hideInteractPopUp();
+                }}
+              >
+                <img
+                  src={haha}
+                  alt="haha"
+                  height={"40px"}
+                  width={"40px"}
+                  id={props.postName}
+                />
               </div>
-              <div>
-                <img src={wow} alt="" height={"40px"} width={"40px"} />
+              <div
+                onClick={(e) => {
+                  props.interactionHandler(e);
+                  hideInteractPopUp();
+                }}
+              >
+                <img
+                  src={wow}
+                  alt="wow"
+                  height={"40px"}
+                  width={"40px"}
+                  id={props.postName}
+                />
               </div>
-              <div>
-                <img src={sad} alt="" height={"40px"} width={"40px"} />
+              <div
+                onClick={(e) => {
+                  props.interactionHandler(e);
+                  hideInteractPopUp();
+                }}
+              >
+                <img
+                  src={sad}
+                  alt="sad"
+                  height={"40px"}
+                  width={"40px"}
+                  id={props.postName}
+                />
               </div>
-              <div>
-                <img src={angry} alt="" height={"40px"} width={"40px"} />
+              <div
+                onClick={(e) => {
+                  props.interactionHandler(e);
+                  hideInteractPopUp();
+                }}
+              >
+                <img
+                  src={angry}
+                  alt="angry"
+                  height={"40px"}
+                  width={"40px"}
+                  id={props.postName}
+                />
               </div>
             </div>
           )}
