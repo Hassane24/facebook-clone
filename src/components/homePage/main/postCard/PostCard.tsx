@@ -8,7 +8,9 @@ interface postCardProps {
   surname: string;
   pfpURL: string;
   postText: string;
+  postName: string;
   postImage: string;
+  interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const PostCard = (props: postCardProps) => {
@@ -20,7 +22,10 @@ export const PostCard = (props: postCardProps) => {
         surname={props.surname}
       />
       <PostContent postText={props.postText} postImage={props.postImage} />
-      <InteractWithPost />
+      <InteractWithPost
+        postName={props.postName}
+        interactionHandler={props.interactionHandler}
+      />
     </div>
   );
 };
