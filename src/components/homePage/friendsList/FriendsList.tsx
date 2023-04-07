@@ -1,4 +1,10 @@
-import { collection, DocumentData, getDocs } from "firebase/firestore";
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  where,
+  query,
+} from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
 import { Contacts } from "./Contacts";
 import { Friend } from "./Friend";
@@ -8,8 +14,13 @@ export const FriendsList = () => {
   const [friendsInfo, setFriendsInfo] = useState<DocumentData[]>([]);
 
   useEffect(() => {
+    const userID = localStorage.getItem("UserID");
     const userInfo: DocumentData[] = [];
-    getDocs(collection(db, "users"))
+    const documentRef = query(
+      collection(db, "users"),
+      where("userID", "!=", userID)
+    );
+    getDocs(documentRef)
       .then((docs) => {
         docs.forEach((doc) => {
           userInfo.push(doc.data());
