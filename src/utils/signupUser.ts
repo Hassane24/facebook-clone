@@ -45,7 +45,20 @@ export const signupUser = async (
         imageLink: imageLink,
         profileImage: `profile-pics/${createdUser.user.uid}.png`,
       });
+
+      localStorage.setItem("UserID", createdUser.user.uid);
+      const userName = createdUser.user.displayName;
+      const first_name = userName?.split(" ")[0];
+      const sur_name = userName?.split(" ")[1];
+      localStorage.setItem("first-name", first_name as string);
+      localStorage.setItem("surname", sur_name as string);
+      if (createdUser.user.photoURL)
+        localStorage.setItem("profile-picture", createdUser.user.photoURL);
     } else {
+      if (auth.currentUser !== null)
+        updateProfile(auth.currentUser, {
+          displayName: firstName + " " + surname,
+        });
       await setDoc(doc(db, "users", firstName), {
         userID: createdUser.user.uid,
         firstName: firstName,
@@ -55,9 +68,14 @@ export const signupUser = async (
         loggedIn: true,
         profileImage: "",
       });
-    }
 
-    localStorage.setItem("UserID", createdUser.user.uid);
+      localStorage.setItem("UserID", createdUser.user.uid);
+      const userName = createdUser.user.displayName;
+      const first_name = userName?.split(" ")[0];
+      const sur_name = userName?.split(" ")[1];
+      localStorage.setItem("first-name", first_name as string);
+      localStorage.setItem("surname", sur_name as string);
+    }
   } catch (error) {
     console.log(error);
   }

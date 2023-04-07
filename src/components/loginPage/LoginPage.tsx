@@ -19,10 +19,11 @@ const LoginPage = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         localStorage.setItem("UserID", user.uid);
-        localStorage.setItem("profile-picture", user.photoURL as string);
+        if (user.photoURL)
+          localStorage.setItem("profile-picture", user.photoURL);
         const userName = user.displayName;
         const firstName = userName?.split(" ")[0];
-        const surname = userName?.split(" ")[2];
+        const surname = userName?.split(" ")[1];
         localStorage.setItem("first-name", firstName as string);
         localStorage.setItem("surname", surname as string);
 
