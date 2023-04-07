@@ -21,7 +21,7 @@ interface CreatePostProps {
   popUp: boolean;
   firstName: string;
   surname: string;
-  userProfilePicture: string;
+  userProfilePicture: string | undefined;
   image: File | null;
   closeCreatePost: () => void;
   closePictureAddingArea: () => void;

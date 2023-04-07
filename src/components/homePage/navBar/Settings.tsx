@@ -9,8 +9,8 @@ import { useState } from "react";
 import { AccountPopUp } from "./AccountPopUp";
 
 interface SettingsProps {
-  userImage: string;
-  profilePicture: string;
+  userImage: string | undefined;
+  profilePicture: string | undefined;
   firstName: string | undefined;
   surname: string | undefined;
 }

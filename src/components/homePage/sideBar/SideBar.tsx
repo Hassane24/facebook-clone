@@ -6,8 +6,6 @@ import Icons from "../../../assets/side-bar-icons.png";
 import { SideBarItem } from "./SideBarItem";
 import { useEffect, useState } from "react";
 import styles from "../../../styles/homePage/sideBar/sideBar.module.css";
-import { fetchUserImage } from "../../../utils/fetchUserImage";
-import { fetchUserName } from "../../../utils/fetchUserName";
 
 export const SideBar = () => {
   const [profileImageURL, setProfileImageURL] = useState<string>();
@@ -23,14 +21,14 @@ export const SideBar = () => {
   ];
 
   useEffect(() => {
-    const userID = localStorage.getItem("UserID");
-    const getUserName = async () => await fetchUserName(userID);
-    getUserName().then((userName) => {
-      setFirstName(userName[0].firstName);
-      setSurname(userName[0].surname);
-    });
-    const getUserImage = async () => await fetchUserImage(userID);
-    getUserImage().then((imageLink) => setProfileImageURL(imageLink));
+    const profilePictureURL = localStorage.getItem("profile-picture");
+    const firstName = localStorage.getItem("first-name");
+    const surname = localStorage.getItem("surname");
+    profilePictureURL === null
+      ? setProfileImageURL(undefined)
+      : setProfileImageURL(profilePictureURL);
+    setFirstName(firstName as string);
+    setSurname(surname as string);
   }, []);
 
   return (

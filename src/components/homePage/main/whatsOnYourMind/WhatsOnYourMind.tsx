@@ -3,8 +3,6 @@ import Photos from "../../../../assets/images.png";
 import Feeling from "../../../../assets/feeling.png";
 import { DefaultProfilePicture } from "../../../../utils/svgsFunction";
 import styles from "../../../../styles/homePage/main/whatsOnYourMind/whatsOnYourMind.module.css";
-import { fetchUserImage } from "../../../../utils/fetchUserImage";
-import { fetchUserName } from "../../../../utils/fetchUserName";
 import { useEffect, useState, forwardRef } from "react";
 import { CreatePost } from "./CreatePost";
 
@@ -15,7 +13,9 @@ interface Props {
 
 export const WhatsOnYourMind = forwardRef<HTMLTextAreaElement, Props>(
   ({ inputFileHandler, image }, ref) => {
-    const [profileImageURL, setProfileImageURL] = useState<string>("");
+    const [profileImageURL, setProfileImageURL] = useState<string | undefined>(
+      undefined
+    );
     const [firstName, setFirstName] = useState<string>("");
     const [surname, setSurname] = useState<string>("");
     const [showCreatePost, setShowCreatePost] = useState(false);
@@ -23,14 +23,15 @@ export const WhatsOnYourMind = forwardRef<HTMLTextAreaElement, Props>(
     const [whatsOnYourMindValue, setWhatsOnYourMindValue] = useState("");
 
     useEffect(() => {
-      const userID = localStorage.getItem("UserID");
-      const getUserName = async () => await fetchUserName(userID);
-      getUserName().then((userName) => {
-        setFirstName(userName[0].firstName);
-        setSurname(userName[0].surname);
-      });
-      const getUserImage = async () => await fetchUserImage(userID);
-      getUserImage().then((imageLink) => setProfileImageURL(imageLink));
+      const profilePictureURL = localStorage.getItem("profile-picture");
+      const firstName = localStorage.getItem("first-name");
+      const surname = localStorage.getItem("surname");
+      profilePictureURL === null
+        ? setProfileImageURL(undefined)
+        : setProfileImageURL(profilePictureURL);
+
+      setFirstName(firstName as string);
+      setSurname(surname as string);
     }, []);
 
     const popUpCreatePost = () => setShowCreatePost(!showCreatePost);

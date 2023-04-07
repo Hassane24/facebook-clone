@@ -1,15 +1,18 @@
 import { CreateStroyCard } from "./CreateStoryCard";
 import { StoryReel } from "./StoryReel";
-import { fetchUserImage } from "../../../../utils/fetchUserImage";
 import { useEffect, useState } from "react";
 import styles from "../../../../styles/homePage/main/story/story.module.css";
 export const Story = () => {
-  const [profileImageURL, setProfileImageURL] = useState<string>("");
+  const [profileImageURL, setProfileImageURL] = useState<string | undefined>(
+    undefined
+  );
 
   useEffect(() => {
-    const userID = localStorage.getItem("UserID");
-    const getUserImage = async () => await fetchUserImage(userID);
-    getUserImage().then((imageLink) => setProfileImageURL(imageLink));
+    const profilePictureURL = localStorage.getItem("profile-picture");
+
+    profilePictureURL === null
+      ? setProfileImageURL(undefined)
+      : setProfileImageURL(profilePictureURL);
   }, []);
 
   return (

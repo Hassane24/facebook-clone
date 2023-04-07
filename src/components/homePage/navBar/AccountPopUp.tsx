@@ -13,7 +13,7 @@ import {
 } from "../../../utils/svgsFunction";
 interface PopUp {
   show: Boolean;
-  profilePicture: string;
+  profilePicture: string | undefined;
   surname: string | undefined;
   firstName: string | undefined;
 }
