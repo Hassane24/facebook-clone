@@ -88,13 +88,12 @@ export const Main = () => {
     const postNameNumber = parseInt((e.target as HTMLElement).id);
     const postNameString = (e.target as HTMLElement).id;
     const userID = localStorage.getItem("UserID");
-
     switch (nameOfInteraction) {
       case "like":
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
-            (post) => post.postName == postNameNumber
+            (post) => post.postName === postNameNumber
           );
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
@@ -123,7 +122,7 @@ export const Main = () => {
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
-            (post) => post.postName == postNameNumber
+            (post) => post.postName === postNameNumber
           );
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
@@ -152,7 +151,7 @@ export const Main = () => {
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
-            (post) => post.postName == postNameNumber
+            (post) => post.postName === postNameNumber
           );
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
@@ -181,7 +180,7 @@ export const Main = () => {
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
-            (post) => post.postName == postNameNumber
+            (post) => post.postName === postNameNumber
           );
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
@@ -210,7 +209,7 @@ export const Main = () => {
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
-            (post) => post.postName == postNameNumber
+            (post) => post.postName === postNameNumber
           );
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
@@ -239,7 +238,7 @@ export const Main = () => {
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
-            (post) => post.postName == postNameNumber
+            (post) => post.postName === postNameNumber
           );
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
@@ -268,7 +267,7 @@ export const Main = () => {
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
-            (post) => post.postName == postNameNumber
+            (post) => post.postName === postNameNumber
           );
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
@@ -313,7 +312,6 @@ export const Main = () => {
             postImage={post.pictureUrl}
             postText={post.postText}
             pfpURL={post.userPfpUrl}
-            reactions={post.reactions}
             interactionHandler={interactionHandler}
           />
         </div>
