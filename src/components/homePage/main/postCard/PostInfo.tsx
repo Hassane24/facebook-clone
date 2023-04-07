@@ -3,9 +3,9 @@ import Public from "../../../../assets/public.png";
 import utilityIcons from "../../../../assets/utility-icons.png";
 import styles from "../../../../styles/homePage/main/postCard/postInfo.module.css";
 export const PostInfo = (props: {
-  firstName: string;
-  surname: string;
-  pfpURL: string;
+  firstName: string | null;
+  surname: string | null;
+  pfpURL: string | null;
 }) => {
   return (
     <div className={styles.postInfoContainer}>

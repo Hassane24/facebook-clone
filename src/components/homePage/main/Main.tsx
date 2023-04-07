@@ -6,9 +6,22 @@ import { useState, useEffect, useRef } from "react";
 import { db, storage } from "../../../firebase/firebase";
 import { getDocs, collection, setDoc, doc } from "firebase/firestore";
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
+import { reactionObject } from "./postCard/InteractWithPost";
+
+interface Post {
+  postName: number;
+  postText: string | undefined;
+  pictureUrl: string;
+  userPfpUrl: string | null;
+  firstName: string | null;
+  surname: string | null;
+  reactors: string[];
+  numberOfInteractions: number;
+  reactions: reactionObject[];
+}
 
 export const Main = () => {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [image, setImage] = useState<File | null>(null);
   const textArea = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
@@ -30,7 +43,7 @@ export const Main = () => {
         const firstName = localStorage.getItem("first-name");
         const surname = localStorage.getItem("surname");
         const userPfpUrl = localStorage.getItem("profile-picture");
-        const postInfo = {
+        const postInfo: Post = {
           postName: new Date().getTime(),
           postText: textArea.current?.value,
           pictureUrl: "",
@@ -38,15 +51,16 @@ export const Main = () => {
           firstName: firstName,
           surname: surname,
           reactors: [],
-          reactions: {
-            like: 0,
-            love: 0,
-            haha: 0,
-            sad: 0,
-            wow: 0,
-            care: 0,
-            angry: 0,
-          },
+          numberOfInteractions: 0,
+          reactions: [
+            { key: "like", number: 0 },
+            { key: "love", number: 0 },
+            { key: "care", number: 0 },
+            { key: "haha", number: 0 },
+            { key: "sad", number: 0 },
+            { key: "wow", number: 0 },
+            { key: "angry", number: 0 },
+          ],
         };
 
         if (image) {
@@ -71,24 +85,36 @@ export const Main = () => {
 
   const interactionHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     const nameOfInteraction = (e.target as HTMLElement).getAttribute("alt");
-    const postName = (e.target as HTMLElement).id;
+    const postNameNumber = parseInt((e.target as HTMLElement).id);
+    const postNameString = (e.target as HTMLElement).id;
     const userID = localStorage.getItem("UserID");
+
     switch (nameOfInteraction) {
       case "like":
         setPosts((prevState) => {
           let newState = [...prevState];
-          const chosenPost = newState.find((post) => post.postName == postName);
-          if (!chosenPost.reactors.includes(userID)) {
-            chosenPost.reactors.push(userID);
-            chosenPost.reactions.like++;
-          }
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-            },
-            { merge: true }
+          const chosenPost = newState.find(
+            (post) => post.postName == postNameNumber
           );
+          const chosenReaction = chosenPost?.reactions.find(
+            (reaction) => reaction.key === nameOfInteraction
+          );
+          if (chosenPost && chosenReaction?.number !== undefined) {
+            if (userID !== null && !chosenPost.reactors.includes(userID)) {
+              chosenReaction.number++;
+              chosenPost.reactors.push(userID);
+              chosenPost.numberOfInteractions++;
+            }
+            setDoc(
+              doc(db, "posts", postNameString),
+              {
+                reactions: chosenPost.reactions,
+                reactors: chosenPost.reactors,
+                numberOfInteractions: chosenPost.numberOfInteractions,
+              },
+              { merge: true }
+            );
+          }
           return newState;
         });
 
@@ -96,18 +122,28 @@ export const Main = () => {
       case "love":
         setPosts((prevState) => {
           let newState = [...prevState];
-          const chosenPost = newState.find((post) => post.postName == postName);
-          if (!chosenPost.reactors.includes(userID)) {
-            chosenPost.reactors.push(userID);
-            chosenPost.reactions.love++;
-          }
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-            },
-            { merge: true }
+          const chosenPost = newState.find(
+            (post) => post.postName == postNameNumber
           );
+          const chosenReaction = chosenPost?.reactions.find(
+            (reaction) => reaction.key === nameOfInteraction
+          );
+          if (chosenPost && chosenReaction?.number !== undefined) {
+            if (userID !== null && !chosenPost.reactors.includes(userID)) {
+              chosenReaction.number++;
+              chosenPost.reactors.push(userID);
+              chosenPost.numberOfInteractions++;
+            }
+            setDoc(
+              doc(db, "posts", postNameString),
+              {
+                reactions: chosenPost.reactions,
+                reactors: chosenPost.reactors,
+                numberOfInteractions: chosenPost.numberOfInteractions,
+              },
+              { merge: true }
+            );
+          }
           return newState;
         });
         break;
@@ -115,19 +151,28 @@ export const Main = () => {
       case "care":
         setPosts((prevState) => {
           let newState = [...prevState];
-          const chosenPost = newState.find((post) => post.postName == postName);
-          if (!chosenPost.reactors.includes(userID)) {
-            chosenPost.reactors.push(userID);
-            chosenPost.reactions.care++;
-          }
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-              reactors: chosenPost.reactors,
-            },
-            { merge: true }
+          const chosenPost = newState.find(
+            (post) => post.postName == postNameNumber
           );
+          const chosenReaction = chosenPost?.reactions.find(
+            (reaction) => reaction.key === nameOfInteraction
+          );
+          if (chosenPost && chosenReaction?.number !== undefined) {
+            if (userID !== null && !chosenPost.reactors.includes(userID)) {
+              chosenReaction.number++;
+              chosenPost.reactors.push(userID);
+              chosenPost.numberOfInteractions++;
+            }
+            setDoc(
+              doc(db, "posts", postNameString),
+              {
+                reactions: chosenPost.reactions,
+                reactors: chosenPost.reactors,
+                numberOfInteractions: chosenPost.numberOfInteractions,
+              },
+              { merge: true }
+            );
+          }
           return newState;
         });
         break;
@@ -135,18 +180,28 @@ export const Main = () => {
       case "haha":
         setPosts((prevState) => {
           let newState = [...prevState];
-          const chosenPost = newState.find((post) => post.postName == postName);
-          if (!chosenPost.reactors.includes(userID)) {
-            chosenPost.reactors.push(userID);
-            chosenPost.reactions.haha++;
-          }
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-            },
-            { merge: true }
+          const chosenPost = newState.find(
+            (post) => post.postName == postNameNumber
           );
+          const chosenReaction = chosenPost?.reactions.find(
+            (reaction) => reaction.key === nameOfInteraction
+          );
+          if (chosenPost && chosenReaction?.number !== undefined) {
+            if (userID !== null && !chosenPost.reactors.includes(userID)) {
+              chosenReaction.number++;
+              chosenPost.reactors.push(userID);
+              chosenPost.numberOfInteractions++;
+            }
+            setDoc(
+              doc(db, "posts", postNameString),
+              {
+                reactions: chosenPost.reactions,
+                reactors: chosenPost.reactors,
+                numberOfInteractions: chosenPost.numberOfInteractions,
+              },
+              { merge: true }
+            );
+          }
           return newState;
         });
         break;
@@ -154,18 +209,28 @@ export const Main = () => {
       case "wow":
         setPosts((prevState) => {
           let newState = [...prevState];
-          const chosenPost = newState.find((post) => post.postName == postName);
-          if (!chosenPost.reactors.includes(userID)) {
-            chosenPost.reactors.push(userID);
-            chosenPost.reactions.wow++;
-          }
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-            },
-            { merge: true }
+          const chosenPost = newState.find(
+            (post) => post.postName == postNameNumber
           );
+          const chosenReaction = chosenPost?.reactions.find(
+            (reaction) => reaction.key === nameOfInteraction
+          );
+          if (chosenPost && chosenReaction?.number !== undefined) {
+            if (userID !== null && !chosenPost.reactors.includes(userID)) {
+              chosenReaction.number++;
+              chosenPost.reactors.push(userID);
+              chosenPost.numberOfInteractions++;
+            }
+            setDoc(
+              doc(db, "posts", postNameString),
+              {
+                reactions: chosenPost.reactions,
+                reactors: chosenPost.reactors,
+                numberOfInteractions: chosenPost.numberOfInteractions,
+              },
+              { merge: true }
+            );
+          }
           return newState;
         });
         break;
@@ -173,18 +238,28 @@ export const Main = () => {
       case "sad":
         setPosts((prevState) => {
           let newState = [...prevState];
-          const chosenPost = newState.find((post) => post.postName == postName);
-          if (!chosenPost.reactors.includes(userID)) {
-            chosenPost.reactors.push(userID);
-            chosenPost.reactions.sad++;
-          }
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-            },
-            { merge: true }
+          const chosenPost = newState.find(
+            (post) => post.postName == postNameNumber
           );
+          const chosenReaction = chosenPost?.reactions.find(
+            (reaction) => reaction.key === nameOfInteraction
+          );
+          if (chosenPost && chosenReaction?.number !== undefined) {
+            if (userID !== null && !chosenPost.reactors.includes(userID)) {
+              chosenReaction.number++;
+              chosenPost.reactors.push(userID);
+              chosenPost.numberOfInteractions++;
+            }
+            setDoc(
+              doc(db, "posts", postNameString),
+              {
+                reactions: chosenPost.reactions,
+                reactors: chosenPost.reactors,
+                numberOfInteractions: chosenPost.numberOfInteractions,
+              },
+              { merge: true }
+            );
+          }
           return newState;
         });
         break;
@@ -192,18 +267,28 @@ export const Main = () => {
       case "angry":
         setPosts((prevState) => {
           let newState = [...prevState];
-          const chosenPost = newState.find((post) => post.postName == postName);
-          if (!chosenPost.reactors.includes(userID)) {
-            chosenPost.reactors.push(userID);
-            chosenPost.reactions.angry++;
-          }
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-            },
-            { merge: true }
+          const chosenPost = newState.find(
+            (post) => post.postName == postNameNumber
           );
+          const chosenReaction = chosenPost?.reactions.find(
+            (reaction) => reaction.key === nameOfInteraction
+          );
+          if (chosenPost && chosenReaction?.number !== undefined) {
+            if (userID !== null && !chosenPost.reactors.includes(userID)) {
+              chosenReaction.number++;
+              chosenPost.reactors.push(userID);
+              chosenPost.numberOfInteractions++;
+            }
+            setDoc(
+              doc(db, "posts", postNameString),
+              {
+                reactions: chosenPost.reactions,
+                reactors: chosenPost.reactors,
+                numberOfInteractions: chosenPost.numberOfInteractions,
+              },
+              { merge: true }
+            );
+          }
           return newState;
         });
         break;
@@ -218,15 +303,17 @@ export const Main = () => {
         image={image}
         ref={textArea}
       />
-      {posts.map((post) => (
-        <div key={post.postName}>
+      {posts.map((post, index) => (
+        <div key={index}>
           <PostCard
+            numberOfInteractions={post.numberOfInteractions}
             postName={post.postName}
             surname={post.surname}
             firstName={post.firstName}
             postImage={post.pictureUrl}
             postText={post.postText}
             pfpURL={post.userPfpUrl}
+            reactions={post.reactions}
             interactionHandler={interactionHandler}
           />
         </div>

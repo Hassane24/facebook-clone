@@ -3,7 +3,7 @@ export const PostContent = ({
   postText,
   postImage,
 }: {
-  postText: string;
+  postText: string | undefined;
   postImage: string | null;
 }) => {
   return (

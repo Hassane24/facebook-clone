@@ -1,15 +1,18 @@
 import { InteractWithPost } from "./InteractWithPost";
 import { PostContent } from "./PostContent";
 import { PostInfo } from "./PostInfo";
+import { reactionObject } from "./InteractWithPost";
 import styles from "../../../../styles/homePage/main/postCard/postCard.module.css";
 
 interface postCardProps {
-  firstName: string;
-  surname: string;
-  pfpURL: string;
-  postText: string;
-  postName: string;
+  firstName: string | null;
+  surname: string | null;
+  pfpURL: string | null;
+  postText: string | undefined;
+  postName: number;
   postImage: string;
+  numberOfInteractions: number;
+  reactions: reactionObject[];
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -23,7 +26,9 @@ export const PostCard = (props: postCardProps) => {
       />
       <PostContent postText={props.postText} postImage={props.postImage} />
       <InteractWithPost
+        reactions={props.reactions}
         postName={props.postName}
+        numberOfInteractions={props.numberOfInteractions}
         interactionHandler={props.interactionHandler}
       />
     </div>
