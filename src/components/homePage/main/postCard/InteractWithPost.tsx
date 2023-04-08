@@ -22,8 +22,25 @@ export interface reactionObject {
   number: number;
 }
 
+interface reactionNamesStates {
+  reaction: string;
+  itsState: boolean;
+}
+
+const stateOfReactionNames: reactionNamesStates[] = [
+  { reaction: "like", itsState: false },
+  { reaction: "love", itsState: false },
+  { reaction: "care", itsState: false },
+  { reaction: "haha", itsState: false },
+  { reaction: "sad", itsState: false },
+  { reaction: "wow", itsState: false },
+  { reaction: "angry", itsState: false },
+];
+
 export const InteractWithPost = (props: Props) => {
   const [showInteractPopUp, setShowInteractPopUp] = useState(false);
+  const [showNameOfInteraction, setShowNameOfInteraction] =
+    useState<reactionNamesStates[]>(stateOfReactionNames);
   const [reactions, setReactions] = useState<reactionObject[]>([]);
 
   const postNameRef = useRef<string>();
@@ -52,6 +69,34 @@ export const InteractWithPost = (props: Props) => {
 
   const revealInteractPopUp = () => setShowInteractPopUp(true);
   const hideInteractPopUp = () => setShowInteractPopUp(false);
+
+  const revealInteractionName = (e: React.MouseEvent<HTMLDivElement>) => {
+    const nameOfHoveredReaction = (e.target as HTMLDivElement).getAttribute(
+      "alt"
+    );
+    setShowNameOfInteraction((prevState) => {
+      const newSate = [...prevState];
+      const hoveredReaction = newSate.find(
+        (reaction) => reaction.reaction === nameOfHoveredReaction
+      );
+      if (hoveredReaction) hoveredReaction.itsState = true;
+      return newSate;
+    });
+  };
+
+  const hideInteractionName = (e: React.MouseEvent<HTMLDivElement>) => {
+    const nameOfHoveredReaction = (e.target as HTMLDivElement).getAttribute(
+      "alt"
+    );
+    setShowNameOfInteraction((prevState) => {
+      const newSate = [...prevState];
+      const hoveredReaction = newSate.find(
+        (reaction) => reaction.reaction === nameOfHoveredReaction
+      );
+      if (hoveredReaction) hoveredReaction.itsState = false;
+      return newSate;
+    });
+  };
 
   return (
     <div className={styles.interactionsContainer}>
@@ -104,10 +149,7 @@ export const InteractWithPost = (props: Props) => {
           </div>
           Like
         </div>
-        <div
-          onClick={() => console.log(reactions)}
-          className={styles.interaction}
-        >
+        <div className={styles.interaction}>
           <div>
             <i
               className={styles.icons}
@@ -152,6 +194,8 @@ export const InteractWithPost = (props: Props) => {
               }`}
             >
               <div
+                onMouseEnter={revealInteractionName}
+                onMouseLeave={hideInteractionName}
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
@@ -164,8 +208,21 @@ export const InteractWithPost = (props: Props) => {
                   width={"40px"}
                   id={postNameRef.current}
                 />
+                <div
+                  className={
+                    showNameOfInteraction.find(
+                      (reaction) => reaction.reaction === "like"
+                    )?.itsState
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  Like
+                </div>
               </div>
               <div
+                onMouseEnter={revealInteractionName}
+                onMouseLeave={hideInteractionName}
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
@@ -178,8 +235,21 @@ export const InteractWithPost = (props: Props) => {
                   width={"40px"}
                   id={postNameRef.current}
                 />
+                <div
+                  className={
+                    showNameOfInteraction.find(
+                      (reaction) => reaction.reaction === "love"
+                    )?.itsState
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  Love
+                </div>
               </div>
               <div
+                onMouseEnter={revealInteractionName}
+                onMouseLeave={hideInteractionName}
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
@@ -192,8 +262,21 @@ export const InteractWithPost = (props: Props) => {
                   width={"40px"}
                   id={postNameRef.current}
                 />
+                <div
+                  className={
+                    showNameOfInteraction.find(
+                      (reaction) => reaction.reaction === "care"
+                    )?.itsState
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  Care
+                </div>
               </div>
               <div
+                onMouseEnter={revealInteractionName}
+                onMouseLeave={hideInteractionName}
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
@@ -206,8 +289,21 @@ export const InteractWithPost = (props: Props) => {
                   width={"40px"}
                   id={postNameRef.current}
                 />
+                <div
+                  className={
+                    showNameOfInteraction.find(
+                      (reaction) => reaction.reaction === "haha"
+                    )?.itsState
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  Haha
+                </div>
               </div>
               <div
+                onMouseEnter={revealInteractionName}
+                onMouseLeave={hideInteractionName}
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
@@ -220,8 +316,21 @@ export const InteractWithPost = (props: Props) => {
                   width={"40px"}
                   id={postNameRef.current}
                 />
+                <div
+                  className={
+                    showNameOfInteraction.find(
+                      (reaction) => reaction.reaction === "wow"
+                    )?.itsState
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  Wow
+                </div>
               </div>
               <div
+                onMouseEnter={revealInteractionName}
+                onMouseLeave={hideInteractionName}
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
@@ -234,8 +343,21 @@ export const InteractWithPost = (props: Props) => {
                   width={"40px"}
                   id={postNameRef.current}
                 />
+                <div
+                  className={
+                    showNameOfInteraction.find(
+                      (reaction) => reaction.reaction === "sad"
+                    )?.itsState
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  Sad
+                </div>
               </div>
               <div
+                onMouseEnter={revealInteractionName}
+                onMouseLeave={hideInteractionName}
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
@@ -248,6 +370,17 @@ export const InteractWithPost = (props: Props) => {
                   width={"40px"}
                   id={postNameRef.current}
                 />
+                <div
+                  className={
+                    showNameOfInteraction.find(
+                      (reaction) => reaction.reaction === "angry"
+                    )?.itsState
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  Angry
+                </div>
               </div>
             </div>
           )}
