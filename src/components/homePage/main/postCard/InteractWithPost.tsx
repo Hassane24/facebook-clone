@@ -57,7 +57,9 @@ export const InteractWithPost = (props: Props) => {
     if (postNameRef.current) {
       const documentRef = doc(db, "posts", postNameRef.current);
       await getDoc(documentRef).then((res) =>
-        reactionsArray.push(...res.get("reactions"))
+        res.get("reactions")
+          ? reactionsArray.push(...res.get("reactions"))
+          : null
       );
       const reactionsToDisplay = reactionsArray
         .sort((a, b) => b.number - a.number)
@@ -199,6 +201,7 @@ export const InteractWithPost = (props: Props) => {
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
+                  hideInteractionName(e);
                 }}
               >
                 <img
@@ -226,6 +229,7 @@ export const InteractWithPost = (props: Props) => {
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
+                  hideInteractionName(e);
                 }}
               >
                 <img
@@ -253,6 +257,7 @@ export const InteractWithPost = (props: Props) => {
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
+                  hideInteractionName(e);
                 }}
               >
                 <img
@@ -280,6 +285,7 @@ export const InteractWithPost = (props: Props) => {
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
+                  hideInteractionName(e);
                 }}
               >
                 <img
@@ -307,6 +313,7 @@ export const InteractWithPost = (props: Props) => {
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
+                  hideInteractionName(e);
                 }}
               >
                 <img
@@ -334,6 +341,7 @@ export const InteractWithPost = (props: Props) => {
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
+                  hideInteractionName(e);
                 }}
               >
                 <img
@@ -361,6 +369,7 @@ export const InteractWithPost = (props: Props) => {
                 onClick={(e) => {
                   props.interactionHandler(e);
                   hideInteractPopUp();
+                  hideInteractionName(e);
                 }}
               >
                 <img
