@@ -7,7 +7,9 @@
   margin-bottom: 5px;
   margin-top: -10px;
   color: #e4e6eb;
-  font-size: 15px;
+  font-size: 24px;
+  overflow: hidden;
+  word-break: break-all;
 }
 
 .imageHolder {
