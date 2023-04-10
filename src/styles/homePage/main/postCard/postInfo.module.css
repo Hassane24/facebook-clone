@@ -57,7 +57,7 @@
 
 .date > div:nth-child(1) {
   margin-bottom: 2px;
-  padding: 0 3px;
+  padding-right: 3px;
 }
 
 .date > div:nth-child(1):hover {
@@ -75,6 +75,25 @@
   height: 12px;
   padding: 0 3px;
   margin-left: 6px;
+}
+
+.date > div:nth-child(4) {
+  position: absolute;
+  opacity: 0;
+  z-index: 3;
+  padding: 12px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+  border-radius: 12px;
+  width: max-content;
+  background-color: #a6a8ad;
+  transition: ease-in-out 300ms;
+  left: -40%;
+}
+
+.date > div:nth-child(4).active {
+  opacity: 0.9;
 }
 
 .icons {
