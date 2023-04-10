@@ -8,13 +8,12 @@ import care from "../../../../assets/care.png";
 import angry from "../../../../assets/angry.png";
 import utilityIcons from "../../../../assets/utility-icons-3.png";
 import { useState, useEffect, useRef } from "react";
-import { db } from "../../../../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
 
 interface Props {
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
   postName: number;
   numberOfInteractions: number;
+  reactions: reactionObject[];
 }
 
 export interface reactionObject {
@@ -41,32 +40,25 @@ export const InteractWithPost = (props: Props) => {
   const [showInteractPopUp, setShowInteractPopUp] = useState(false);
   const [showNameOfInteraction, setShowNameOfInteraction] =
     useState<reactionNamesStates[]>(stateOfReactionNames);
-  const [reactions, setReactions] = useState<reactionObject[]>([]);
+  const [reactions, setReactions] = useState<reactionObject[]>(props.reactions);
 
   const postNameRef = useRef<string>();
 
   useEffect(() => {
     if (props.postName !== undefined) {
       postNameRef.current = props.postName.toString();
-      getReactions();
     }
   }, [props.postName]);
 
-  const getReactions = async () => {
-    const reactionsArray: reactionObject[] = [];
-    if (postNameRef.current) {
-      const documentRef = doc(db, "posts", postNameRef.current);
-      await getDoc(documentRef).then((res) =>
-        res.get("reactions")
-          ? reactionsArray.push(...res.get("reactions"))
-          : null
-      );
-      const reactionsToDisplay = reactionsArray
-        .sort((a, b) => b.number - a.number)
-        .slice(0, 3);
+  useEffect(() => {
+    getTopThreeReactions();
+  }, []);
 
-      setReactions(reactionsToDisplay);
-    }
+  const getTopThreeReactions = () => {
+    const topThreeReactions = props.reactions
+      .sort((a, b) => b.number - a.number)
+      .slice(0, 3);
+    setReactions(topThreeReactions);
   };
 
   const revealInteractPopUp = () => setShowInteractPopUp(true);
@@ -188,7 +180,7 @@ export const InteractWithPost = (props: Props) => {
         <div className={showInteractPopUp ? styles.active : undefined}>
           {showInteractPopUp && (
             <div
-              onClick={getReactions}
+              onClick={getTopThreeReactions}
               onMouseEnter={revealInteractPopUp}
               onMouseLeave={hideInteractPopUp}
               className={`${styles.interactPopUp} ${

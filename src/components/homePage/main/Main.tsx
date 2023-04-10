@@ -9,6 +9,7 @@ import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { reactionObject } from "./postCard/InteractWithPost";
 
 interface Post {
+  dateOfCreation: string;
   postName: number;
   postText: string | undefined;
   pictureUrl: string;
@@ -45,6 +46,7 @@ export const Main = () => {
         const userPfpUrl = localStorage.getItem("profile-picture");
         const postInfo: Post = {
           postName: new Date().getTime(),
+          dateOfCreation: new Date().toISOString(),
           postText: textArea.current?.value,
           pictureUrl: "",
           userPfpUrl: userPfpUrl,
@@ -302,9 +304,11 @@ export const Main = () => {
         image={image}
         ref={textArea}
       />
-      {posts.map((post, index) => (
-        <div key={index}>
+      {posts.map((post) => (
+        <div key={post.postName}>
           <PostCard
+            reactions={post.reactions}
+            dateOfCreation={post.dateOfCreation}
             numberOfInteractions={post.numberOfInteractions}
             postName={post.postName}
             surname={post.surname}
