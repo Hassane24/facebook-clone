@@ -1,12 +1,43 @@
 import { DefaultProfilePicture, Options } from "../../../../utils/svgsFunction";
 import Public from "../../../../assets/public.png";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import utilityIcons from "../../../../assets/utility-icons.png";
 import styles from "../../../../styles/homePage/main/postCard/postInfo.module.css";
-export const PostInfo = (props: {
+import { useEffect, useState } from "react";
+
+interface Props {
   firstName: string | null;
   surname: string | null;
   pfpURL: string | null;
-}) => {
+  dateOfCreation: string;
+}
+dayjs.extend(relativeTime);
+
+export const PostInfo = (props: Props) => {
+  const [postCreationDateString, setPostCreationDateString] =
+    useState<string>();
+  const postCreationDate = dayjs(props.dateOfCreation);
+
+  useEffect(() => {
+    const sixDaysSinceCreation = postCreationDate.fromNow(true);
+    const dateFormattedForLessThanAYear = postCreationDate.format(
+      "D MMMM [at] HH[:]mm"
+    );
+
+    const dateFormattedForMoreThanAYear =
+      postCreationDate.format("D MMMM YYYY");
+    const lessThanAYear = dayjs().diff(postCreationDate, "years");
+    const moreThanSevenDays = dayjs().diff(postCreationDate, "days");
+    if (moreThanSevenDays >= 7 && lessThanAYear <= 0)
+      return setPostCreationDateString(dateFormattedForLessThanAYear);
+
+    if (lessThanAYear >= 1)
+      return setPostCreationDateString(dateFormattedForMoreThanAYear);
+
+    setPostCreationDateString(sixDaysSinceCreation);
+  }, [postCreationDate]);
+
   return (
     <div className={styles.postInfoContainer}>
       <div>
@@ -19,7 +50,7 @@ export const PostInfo = (props: {
             {props.firstName} {props.surname}
           </span>
           <div className={styles.date}>
-            <div>date</div>
+            <div>{postCreationDateString}</div>
             <div>.</div>
             <div>
               <img
