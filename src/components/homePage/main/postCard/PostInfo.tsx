@@ -17,6 +17,7 @@ dayjs.extend(relativeTime);
 export const PostInfo = (props: Props) => {
   const [postCreationDateString, setPostCreationDateString] =
     useState<string>();
+  const [showFullDate, setShowFullDate] = useState(false);
   const postCreationDate = dayjs(props.dateOfCreation);
 
   useEffect(() => {
@@ -38,6 +39,9 @@ export const PostInfo = (props: Props) => {
     setPostCreationDateString(sixDaysSinceCreation);
   }, [postCreationDate]);
 
+  const popUpFullDate = () => setShowFullDate(true);
+  const hideFullDate = () => setShowFullDate(false);
+
   return (
     <div className={styles.postInfoContainer}>
       <div>
@@ -50,7 +54,9 @@ export const PostInfo = (props: Props) => {
             {props.firstName} {props.surname}
           </span>
           <div className={styles.date}>
-            <div>{postCreationDateString}</div>
+            <div onMouseEnter={popUpFullDate} onMouseLeave={hideFullDate}>
+              {postCreationDateString}
+            </div>
             <div>.</div>
             <div>
               <img
@@ -60,6 +66,9 @@ export const PostInfo = (props: Props) => {
                 height="12px"
                 className={styles.icons}
               />
+            </div>
+            <div className={showFullDate ? styles.active : undefined}>
+              {postCreationDate.format("dddd[,] D MMMM YYYY [at] HH[:]mm")}
             </div>
           </div>
         </div>
