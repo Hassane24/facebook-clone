@@ -42,11 +42,10 @@
 
 .date {
   display: inline-block;
-  column-gap: 2px;
-  align-items: center;
   color: #a6a8ad;
   font-size: 13px;
   width: 100%;
+  position: relative;
 }
 
 .date > div:nth-child(1),
@@ -58,6 +57,7 @@
 
 .date > div:nth-child(1) {
   margin-bottom: 2px;
+  padding: 0 3px;
 }
 
 .date > div:nth-child(1):hover {
@@ -66,14 +66,15 @@
 }
 
 .date > div:nth-child(2) {
-  font-weight: bold;
-  vertical-align: baseline;
-  line-height: 24px;
+  position: absolute;
+  bottom: 25%;
 }
 
 .date > div:nth-child(3) {
   display: inline-block;
   height: 12px;
+  padding: 0 3px;
+  margin-left: 6px;
 }
 
 .icons {
