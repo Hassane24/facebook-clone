@@ -16,7 +16,6 @@ interface Post {
   userPfpUrl: string | null;
   firstName: string | null;
   surname: string | null;
-  reactors: string[];
   numberOfInteractions: number;
   reactions: reactionObject[];
 }
@@ -52,16 +51,15 @@ export const Main = () => {
           userPfpUrl: userPfpUrl,
           firstName: firstName,
           surname: surname,
-          reactors: [],
           numberOfInteractions: 0,
           reactions: [
-            { key: "like", number: 0 },
-            { key: "love", number: 0 },
-            { key: "care", number: 0 },
-            { key: "haha", number: 0 },
-            { key: "sad", number: 0 },
-            { key: "wow", number: 0 },
-            { key: "angry", number: 0 },
+            { key: "like", number: 0, reactors: [] },
+            { key: "love", number: 0, reactors: [] },
+            { key: "care", number: 0, reactors: [] },
+            { key: "haha", number: 0, reactors: [] },
+            { key: "sad", number: 0, reactors: [] },
+            { key: "wow", number: 0, reactors: [] },
+            { key: "angry", number: 0, reactors: [] },
           ],
         };
 
@@ -89,28 +87,29 @@ export const Main = () => {
     const nameOfInteraction = (e.target as HTMLElement).getAttribute("alt");
     const postNameNumber = parseInt((e.target as HTMLElement).id);
     const postNameString = (e.target as HTMLElement).id;
-    const userID = localStorage.getItem("UserID");
+    const userID = localStorage.getItem("UserID") as string;
     switch (nameOfInteraction) {
       case "like":
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
             (post) => post.postName === postNameNumber
-          );
+          ) as Post;
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
+          ) as reactionObject;
+          const didUserReactToPost = chosenPost.reactions.every(
+            (reaction) => !reaction.reactors.includes(userID)
           );
-          if (chosenPost && chosenReaction?.number !== undefined) {
-            if (userID !== null && !chosenPost.reactors.includes(userID)) {
-              chosenReaction.number++;
-              chosenPost.reactors.push(userID);
-              chosenPost.numberOfInteractions++;
-            }
+          const reactors = chosenReaction?.reactors as string[];
+          if (didUserReactToPost) {
+            chosenReaction.number++;
+            reactors.push(userID);
+            chosenPost.numberOfInteractions++;
             setDoc(
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                reactors: chosenPost.reactors,
                 numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
@@ -118,28 +117,29 @@ export const Main = () => {
           }
           return newState;
         });
-
         break;
+
       case "love":
         setPosts((prevState) => {
           let newState = [...prevState];
           const chosenPost = newState.find(
             (post) => post.postName === postNameNumber
-          );
+          ) as Post;
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
+          ) as reactionObject;
+          const didUserReactToPost = chosenPost.reactions.every(
+            (reaction) => !reaction.reactors.includes(userID)
           );
-          if (chosenPost && chosenReaction?.number !== undefined) {
-            if (userID !== null && !chosenPost.reactors.includes(userID)) {
-              chosenReaction.number++;
-              chosenPost.reactors.push(userID);
-              chosenPost.numberOfInteractions++;
-            }
+          const reactors = chosenReaction?.reactors as string[];
+          if (didUserReactToPost) {
+            chosenReaction.number++;
+            reactors.push(userID);
+            chosenPost.numberOfInteractions++;
             setDoc(
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                reactors: chosenPost.reactors,
                 numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
@@ -154,21 +154,22 @@ export const Main = () => {
           let newState = [...prevState];
           const chosenPost = newState.find(
             (post) => post.postName === postNameNumber
-          );
+          ) as Post;
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
+          ) as reactionObject;
+          const didUserReactToPost = chosenPost.reactions.every(
+            (reaction) => !reaction.reactors.includes(userID)
           );
-          if (chosenPost && chosenReaction?.number !== undefined) {
-            if (userID !== null && !chosenPost.reactors.includes(userID)) {
-              chosenReaction.number++;
-              chosenPost.reactors.push(userID);
-              chosenPost.numberOfInteractions++;
-            }
+          const reactors = chosenReaction?.reactors as string[];
+          if (didUserReactToPost) {
+            chosenReaction.number++;
+            reactors.push(userID);
+            chosenPost.numberOfInteractions++;
             setDoc(
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                reactors: chosenPost.reactors,
                 numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
@@ -183,21 +184,22 @@ export const Main = () => {
           let newState = [...prevState];
           const chosenPost = newState.find(
             (post) => post.postName === postNameNumber
-          );
+          ) as Post;
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
+          ) as reactionObject;
+          const didUserReactToPost = chosenPost.reactions.every(
+            (reaction) => !reaction.reactors.includes(userID)
           );
-          if (chosenPost && chosenReaction?.number !== undefined) {
-            if (userID !== null && !chosenPost.reactors.includes(userID)) {
-              chosenReaction.number++;
-              chosenPost.reactors.push(userID);
-              chosenPost.numberOfInteractions++;
-            }
+          const reactors = chosenReaction?.reactors as string[];
+          if (didUserReactToPost) {
+            chosenReaction.number++;
+            reactors.push(userID);
+            chosenPost.numberOfInteractions++;
             setDoc(
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                reactors: chosenPost.reactors,
                 numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
@@ -212,21 +214,22 @@ export const Main = () => {
           let newState = [...prevState];
           const chosenPost = newState.find(
             (post) => post.postName === postNameNumber
-          );
+          ) as Post;
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
+          ) as reactionObject;
+          const didUserReactToPost = chosenPost.reactions.every(
+            (reaction) => !reaction.reactors.includes(userID)
           );
-          if (chosenPost && chosenReaction?.number !== undefined) {
-            if (userID !== null && !chosenPost.reactors.includes(userID)) {
-              chosenReaction.number++;
-              chosenPost.reactors.push(userID);
-              chosenPost.numberOfInteractions++;
-            }
+          const reactors = chosenReaction?.reactors as string[];
+          if (didUserReactToPost) {
+            chosenReaction.number++;
+            reactors.push(userID);
+            chosenPost.numberOfInteractions++;
             setDoc(
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                reactors: chosenPost.reactors,
                 numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
@@ -241,21 +244,22 @@ export const Main = () => {
           let newState = [...prevState];
           const chosenPost = newState.find(
             (post) => post.postName === postNameNumber
-          );
+          ) as Post;
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
+          ) as reactionObject;
+          const didUserReactToPost = chosenPost.reactions.every(
+            (reaction) => !reaction.reactors.includes(userID)
           );
-          if (chosenPost && chosenReaction?.number !== undefined) {
-            if (userID !== null && !chosenPost.reactors.includes(userID)) {
-              chosenReaction.number++;
-              chosenPost.reactors.push(userID);
-              chosenPost.numberOfInteractions++;
-            }
+          const reactors = chosenReaction?.reactors as string[];
+          if (didUserReactToPost) {
+            chosenReaction.number++;
+            reactors.push(userID);
+            chosenPost.numberOfInteractions++;
             setDoc(
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                reactors: chosenPost.reactors,
                 numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
@@ -270,21 +274,22 @@ export const Main = () => {
           let newState = [...prevState];
           const chosenPost = newState.find(
             (post) => post.postName === postNameNumber
-          );
+          ) as Post;
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === nameOfInteraction
+          ) as reactionObject;
+          const didUserReactToPost = chosenPost.reactions.every(
+            (reaction) => !reaction.reactors.includes(userID)
           );
-          if (chosenPost && chosenReaction?.number !== undefined) {
-            if (userID !== null && !chosenPost.reactors.includes(userID)) {
-              chosenReaction.number++;
-              chosenPost.reactors.push(userID);
-              chosenPost.numberOfInteractions++;
-            }
+          const reactors = chosenReaction?.reactors as string[];
+          if (didUserReactToPost) {
+            chosenReaction.number++;
+            reactors.push(userID);
+            chosenPost.numberOfInteractions++;
             setDoc(
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                reactors: chosenPost.reactors,
                 numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
@@ -293,6 +298,61 @@ export const Main = () => {
           return newState;
         });
         break;
+    }
+  };
+
+  const removeReaction = (e: React.MouseEvent<HTMLDivElement>) => {
+    const postName = (e.target as HTMLDivElement).id;
+    const userID = localStorage.getItem("UserID");
+    const chosenPost = posts.find(
+      (post) => post.postName.toString() === postName
+    );
+    const reactions = chosenPost?.reactions;
+    // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
+    if (userID && reactions !== undefined) {
+      const didUserReactToPost = reactions.every(
+        (reaction) => !reaction.reactors.includes(userID)
+      );
+      if (didUserReactToPost) {
+        setPosts((prevState) => {
+          let newState = [...prevState];
+          const chosenPost = newState.find(
+            (post) => post.postName.toString() === postName
+          ) as Post;
+          const chosenReaction = chosenPost?.reactions.find(
+            (reaction) => reaction.key === "like"
+          ) as reactionObject;
+          const reactors = chosenReaction?.reactors as string[];
+          chosenReaction.number++;
+          reactors.push(userID);
+          chosenPost.numberOfInteractions++;
+          setDoc(
+            doc(db, "posts", postName),
+            {
+              reactions: chosenPost.reactions,
+              numberOfInteractions: chosenPost.numberOfInteractions,
+            },
+            { merge: true }
+          );
+          return newState;
+        });
+      } else {
+        setPosts((prevState) => {
+          let newState = [...prevState];
+          const chosenPost = newState.find(
+            (post) => post.postName.toString() === postName
+          ) as Post;
+          let userReaction = chosenPost?.reactions.find((reaction) =>
+            reaction.reactors.includes(userID)
+          ) as reactionObject;
+          userReaction.reactors = userReaction?.reactors.filter(
+            (reactor) => reactor !== userID
+          );
+          userReaction.number = userReaction.number - 1;
+          chosenPost.numberOfInteractions--;
+          return newState;
+        });
+      }
     }
   };
 
@@ -317,6 +377,7 @@ export const Main = () => {
             postText={post.postText}
             pfpURL={post.userPfpUrl}
             interactionHandler={interactionHandler}
+            removeReaction={removeReaction}
           />
         </div>
       ))}

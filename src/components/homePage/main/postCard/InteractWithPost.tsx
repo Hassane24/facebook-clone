@@ -11,6 +11,7 @@ import { useState, useEffect, useRef } from "react";
 
 interface Props {
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
+  removeReaction: (e: React.MouseEvent<HTMLDivElement>) => void;
   postName: number;
   numberOfInteractions: number;
   reactions: reactionObject[];
@@ -19,6 +20,7 @@ interface Props {
 export interface reactionObject {
   key: string;
   number: number;
+  reactors: string[];
 }
 
 interface reactionNamesStates {
@@ -123,9 +125,11 @@ export const InteractWithPost = (props: Props) => {
       ) : null}
       <div className={styles.secondContainer}>
         <div
+          onClick={props.removeReaction}
           className={styles.interaction}
           onMouseEnter={revealInteractPopUp}
           onMouseLeave={hideInteractPopUp}
+          id={postNameRef.current}
         >
           <div>
             <i
