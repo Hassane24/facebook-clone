@@ -33,14 +33,14 @@ export const AccountPopUp = (props: PopUp) => {
       {props.show && (
         <div className={styles.accountPopUp}>
           <div className={styles.yourAccount}>
-            <a href="">
+            <div>
               <div>
                 <DefaultProfilePicture userImage={props.profilePicture} />
                 <span>
                   {props.firstName} {props.surname}
                 </span>
               </div>
-            </a>
+            </div>
             <div className={styles.thinLine}></div>
             <div className={styles.seeAllProfiles}>See all profiles</div>
           </div>

@@ -1,6 +1,6 @@
 import mostRecent from "../../../assets/most-recent.png";
 import styles from "../../../styles/homePage/sideBar/sideBarItem.module.css";
-interface SideBarItem {
+interface Props {
   sideBarItemName: string;
   imagePosition?: string;
   icons?: string;
@@ -9,7 +9,7 @@ export const SideBarItem = ({
   sideBarItemName,
   icons,
   imagePosition,
-}: SideBarItem) => {
+}: Props) => {
   return (
     <div className={styles.sideBarItem}>
       <div>
@@ -26,7 +26,7 @@ export const SideBarItem = ({
             }}
           />
         ) : (
-          <img src={mostRecent} width="36px" height="36px" />
+          <img src={mostRecent} alt="" width="36px" height="36px" />
         )}
       </div>
       <span>{sideBarItemName}</span>

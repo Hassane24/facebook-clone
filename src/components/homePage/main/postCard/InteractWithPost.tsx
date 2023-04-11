@@ -53,15 +53,11 @@ export const InteractWithPost = (props: Props) => {
   }, [props.postName]);
 
   useEffect(() => {
-    getTopThreeReactions();
-  }, []);
-
-  const getTopThreeReactions = () => {
-    const topThreeReactions = props.reactions
+    const threeReactions = props.reactions
       .sort((a, b) => b.number - a.number)
       .slice(0, 3);
-    setReactions(topThreeReactions);
-  };
+    setReactions(threeReactions);
+  }, [props.reactions]);
 
   const revealInteractPopUp = () => setShowInteractPopUp(true);
   const hideInteractPopUp = () => setShowInteractPopUp(false);
@@ -125,7 +121,10 @@ export const InteractWithPost = (props: Props) => {
       ) : null}
       <div className={styles.secondContainer}>
         <div
-          onClick={props.removeReaction}
+          onClick={(e) => {
+            props.removeReaction(e);
+            hideInteractPopUp();
+          }}
           className={styles.interaction}
           onMouseEnter={revealInteractPopUp}
           onMouseLeave={hideInteractPopUp}
@@ -133,6 +132,7 @@ export const InteractWithPost = (props: Props) => {
         >
           <div>
             <i
+              id={postNameRef.current}
               className={styles.icons}
               style={{
                 backgroundImage: `url(${utilityIcons})`,
@@ -184,7 +184,6 @@ export const InteractWithPost = (props: Props) => {
         <div className={showInteractPopUp ? styles.active : undefined}>
           {showInteractPopUp && (
             <div
-              onClick={getTopThreeReactions}
               onMouseEnter={revealInteractPopUp}
               onMouseLeave={hideInteractPopUp}
               className={`${styles.interactPopUp} ${

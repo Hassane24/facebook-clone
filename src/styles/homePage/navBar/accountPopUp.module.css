@@ -25,7 +25,7 @@
 }
 
 .accountPopUp > .settingsOptions:hover,
-.yourAccount > a:hover,
+.yourAccount > div:hover,
 .seeAllProfiles:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
@@ -59,23 +59,23 @@
   border-radius: 8px;
 }
 
-.yourAccount > a {
+.yourAccount > div {
   margin: -8px;
   text-decoration: none;
 }
 
-.yourAccount > a > div {
+.yourAccount > div > div {
   display: flex;
   align-items: center;
   height: 60px;
 }
 
-.yourAccount > a > div > img,
-.yourAccount > a > div > span {
+.yourAccount > div > div > img,
+.yourAccount > div > div > span {
   padding: 4px;
 }
 
-.yourAccount > a > div > span {
+.yourAccount > div > div > span {
   width: 100%;
   color: #e4e6eb;
   font-size: 1.0625rem;
