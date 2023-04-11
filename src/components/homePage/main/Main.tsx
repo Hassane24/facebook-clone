@@ -350,6 +350,14 @@ export const Main = () => {
           );
           userReaction.number = userReaction.number - 1;
           chosenPost.numberOfInteractions--;
+          setDoc(
+            doc(db, "posts", postName),
+            {
+              reactions: chosenPost.reactions,
+              numberOfInteractions: chosenPost.numberOfInteractions,
+            },
+            { merge: true }
+          );
           return newState;
         });
       }
