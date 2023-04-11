@@ -80,7 +80,9 @@ export const InteractWithPost = (props: Props) => {
     );
     if (userChosenReaction) {
       const reaction: userChosenReaction = {
-        nameOfReaction: userChosenReaction?.key,
+        nameOfReaction:
+          userChosenReaction?.key.charAt(0).toUpperCase() +
+          userChosenReaction?.key.slice(1),
         reactionIcon: require(`../../../../assets/${userChosenReaction?.key}.png`),
         stylingOfReaction: "rgb(32, 120, 244)",
         likeButtonStyling: "-319px",
@@ -92,7 +94,7 @@ export const InteractWithPost = (props: Props) => {
       if (
         userChosenReaction.key === "care" ||
         userChosenReaction.key === "haha" ||
-        userChosenReaction.key === "wow" ||
+        userChosenReaction.key === "sad" ||
         userChosenReaction.key === "wow"
       )
         reaction.stylingOfReaction = "rgb(247, 177, 37)";
