@@ -367,7 +367,7 @@ export const Main = () => {
       {posts.map((post) => (
         <div key={post.postName}>
           <PostCard
-            reactions={post.reactions}
+            reactions={[...post.reactions]}
             dateOfCreation={post.dateOfCreation}
             numberOfInteractions={post.numberOfInteractions}
             postName={post.postName}
