@@ -28,6 +28,14 @@ interface reactionNamesStates {
   itsState: boolean;
 }
 
+interface userChosenReaction {
+  nameOfReaction: string;
+  reactionIcon: string;
+  stylingOfReaction: string;
+  likeButtonStyling?: string;
+  webKitFilter?: string;
+}
+
 const stateOfReactionNames: reactionNamesStates[] = [
   { reaction: "like", itsState: false },
   { reaction: "love", itsState: false },
@@ -42,6 +50,9 @@ export const InteractWithPost = (props: Props) => {
   const [showInteractPopUp, setShowInteractPopUp] = useState(false);
   const [showNameOfInteraction, setShowNameOfInteraction] =
     useState<reactionNamesStates[]>(stateOfReactionNames);
+  const [userChosenReaction, setUserChosenReaction] =
+    useState<userChosenReaction>();
+  const [didUserNotReactToPost, setDidUserNotReactToPost] = useState(false);
   const [reactions, setReactions] = useState<reactionObject[]>(props.reactions);
 
   const postNameRef = useRef<string>();
@@ -53,10 +64,43 @@ export const InteractWithPost = (props: Props) => {
   }, [props.postName]);
 
   useEffect(() => {
+    const userID = localStorage.getItem("UserID") as string;
     const threeReactions = props.reactions
       .sort((a, b) => b.number - a.number)
       .slice(0, 3);
     setReactions(threeReactions);
+
+    const didUserNotReactToPost = props.reactions.every(
+      (reaction) => !reaction.reactors.includes(userID)
+    );
+    setDidUserNotReactToPost(didUserNotReactToPost);
+
+    const userChosenReaction = props.reactions.find((reaction) =>
+      reaction.reactors.includes(userID)
+    );
+    if (userChosenReaction) {
+      const reaction: userChosenReaction = {
+        nameOfReaction: userChosenReaction?.key,
+        reactionIcon: require(`../../../../assets/${userChosenReaction?.key}.png`),
+        stylingOfReaction: "rgb(32, 120, 244)",
+        likeButtonStyling: "-319px",
+        webKitFilter:
+          "invert(40%) sepia(52%) saturate(200%) saturate(200%) saturate(200%) saturate(189%) hue-rotate(191deg) brightness(103%) contrast(102%)",
+      };
+      if (userChosenReaction.key === "love")
+        reaction.stylingOfReaction = "rgb(243, 62, 88)";
+      if (
+        userChosenReaction.key === "care" ||
+        userChosenReaction.key === "haha" ||
+        userChosenReaction.key === "wow" ||
+        userChosenReaction.key === "wow"
+      )
+        reaction.stylingOfReaction = "rgb(247, 177, 37)";
+      if (userChosenReaction.key === "angry")
+        reaction.stylingOfReaction = "rgb(233, 113, 15)";
+
+      setUserChosenReaction(reaction);
+    } else setUserChosenReaction(undefined);
   }, [props.reactions]);
 
   const revealInteractPopUp = () => setShowInteractPopUp(true);
@@ -120,33 +164,78 @@ export const InteractWithPost = (props: Props) => {
         </div>
       ) : null}
       <div className={styles.secondContainer}>
-        <div
-          onClick={(e) => {
-            props.removeReaction(e);
-            hideInteractPopUp();
-          }}
-          className={styles.interaction}
-          onMouseEnter={revealInteractPopUp}
-          onMouseLeave={hideInteractPopUp}
-          id={postNameRef.current}
-        >
-          <div>
-            <i
-              id={postNameRef.current}
-              className={styles.icons}
-              style={{
-                backgroundImage: `url(${utilityIcons})`,
-                backgroundPosition: "0px -339px",
-                backgroundSize: "26px 866px",
-                width: "18px",
-                height: "18px",
-                backgroundRepeat: "no-repeat",
-                display: "inline-block",
-              }}
-            ></i>
+        {didUserNotReactToPost && userChosenReaction === undefined ? (
+          <div
+            onClick={(e) => {
+              props.removeReaction(e);
+              hideInteractPopUp();
+            }}
+            className={styles.interaction}
+            onMouseEnter={revealInteractPopUp}
+            onMouseLeave={hideInteractPopUp}
+            id={postNameRef.current}
+          >
+            <div>
+              <i
+                id={postNameRef.current}
+                className={styles.icons}
+                style={{
+                  backgroundImage: `url(${utilityIcons})`,
+                  backgroundPosition: "0px -339px",
+                  backgroundSize: "26px 866px",
+                  width: "18px",
+                  height: "18px",
+                  backgroundRepeat: "no-repeat",
+                  display: "inline-block",
+                }}
+              ></i>
+            </div>
+            Like
           </div>
-          Like
-        </div>
+        ) : (
+          <div
+            onClick={(e) => {
+              props.removeReaction(e);
+              hideInteractPopUp();
+            }}
+            className={styles.interaction}
+            onMouseEnter={revealInteractPopUp}
+            onMouseLeave={hideInteractPopUp}
+            id={postNameRef.current}
+            style={{ color: `${userChosenReaction?.stylingOfReaction}` }}
+          >
+            <div>
+              {userChosenReaction?.nameOfReaction === "like" ? (
+                <i
+                  id={postNameRef.current}
+                  className={styles.icons}
+                  style={{
+                    backgroundImage: `url(${utilityIcons})`,
+                    backgroundPosition: `0px ${userChosenReaction.likeButtonStyling}`,
+                    backgroundSize: "26px 866px",
+                    width: "18px",
+                    height: "18px",
+                    backgroundRepeat: "no-repeat",
+                    display: "inline-block",
+                    WebkitFilter: userChosenReaction.webKitFilter,
+                  }}
+                ></i>
+              ) : (
+                <img
+                  id={postNameRef.current}
+                  src={userChosenReaction?.reactionIcon}
+                  alt=""
+                  height={"18px"}
+                  width={"18px"}
+                />
+              )}
+            </div>
+            {userChosenReaction?.nameOfReaction === "like"
+              ? "Like"
+              : userChosenReaction?.nameOfReaction}
+          </div>
+        )}
+
         <div className={styles.interaction}>
           <div>
             <i
