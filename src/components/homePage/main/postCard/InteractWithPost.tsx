@@ -15,6 +15,7 @@ interface Props {
   postName: number;
   numberOfInteractions: number;
   reactions: reactionObject[];
+  allOfReactors: string[];
 }
 
 export interface reactionObject {
@@ -207,7 +208,7 @@ export const InteractWithPost = (props: Props) => {
             style={{ color: `${userChosenReaction?.stylingOfReaction}` }}
           >
             <div>
-              {userChosenReaction?.nameOfReaction === "like" ? (
+              {userChosenReaction?.nameOfReaction === "Like" ? (
                 <i
                   id={postNameRef.current}
                   className={styles.icons}

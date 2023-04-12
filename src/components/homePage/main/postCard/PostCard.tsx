@@ -13,6 +13,7 @@ interface postCardProps {
   postName: number;
   postImage: string;
   numberOfInteractions: number;
+  allOfReactors: string[];
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
   removeReaction: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
@@ -30,6 +31,7 @@ export const PostCard = (props: postCardProps) => {
       <InteractWithPost
         removeReaction={props.removeReaction}
         reactions={props.reactions}
+        allOfReactors={props.allOfReactors}
         postName={props.postName}
         numberOfInteractions={props.numberOfInteractions}
         interactionHandler={props.interactionHandler}

@@ -17,6 +17,7 @@ interface Post {
   firstName: string | null;
   surname: string | null;
   numberOfInteractions: number;
+  allOfReactors: string[];
   reactions: reactionObject[];
 }
 
@@ -48,6 +49,7 @@ export const Main = () => {
           dateOfCreation: new Date().toISOString(),
           postText: textArea.current?.value,
           pictureUrl: "",
+          allOfReactors: [],
           userPfpUrl: userPfpUrl,
           firstName: firstName,
           surname: surname,
@@ -101,6 +103,7 @@ export const Main = () => {
             (reaction) => reaction.key === nameOfInteraction
           ) as reactionObject;
 
+          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
           const didUserReactToPost = chosenPost.reactions.every(
             (reaction) => !reaction.reactors.includes(userID)
           );
@@ -111,6 +114,7 @@ export const Main = () => {
           const reactors = chosenReaction?.reactors as string[];
 
           if (didUserReactToPost) {
+            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
             chosenReaction.number++;
             reactors.push(userID);
             chosenPost.numberOfInteractions++;
@@ -119,6 +123,7 @@ export const Main = () => {
               {
                 reactions: chosenPost.reactions,
                 numberOfInteractions: chosenPost.numberOfInteractions,
+                allOfReactors: chosenPost.allOfReactors,
               },
               { merge: true }
             );
@@ -129,9 +134,7 @@ export const Main = () => {
               (reaction) => reaction.reactors.includes(userID)
             ) as reactionObject;
             reactionThatUserHadBefore.number--;
-            chosenPost.numberOfInteractions--;
             chosenReaction.number++;
-            chosenPost.numberOfInteractions++;
             reactionThatUserHadBefore.reactors =
               reactionThatUserHadBefore.reactors.filter(
                 (uid) => uid !== userID
@@ -141,7 +144,6 @@ export const Main = () => {
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
             );
@@ -162,6 +164,7 @@ export const Main = () => {
             (reaction) => reaction.key === nameOfInteraction
           ) as reactionObject;
 
+          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
           const didUserReactToPost = chosenPost.reactions.every(
             (reaction) => !reaction.reactors.includes(userID)
           );
@@ -172,6 +175,7 @@ export const Main = () => {
           const reactors = chosenReaction?.reactors as string[];
 
           if (didUserReactToPost) {
+            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
             chosenReaction.number++;
             reactors.push(userID);
             chosenPost.numberOfInteractions++;
@@ -180,6 +184,7 @@ export const Main = () => {
               {
                 reactions: chosenPost.reactions,
                 numberOfInteractions: chosenPost.numberOfInteractions,
+                allOfReactors: chosenPost.allOfReactors,
               },
               { merge: true }
             );
@@ -190,9 +195,7 @@ export const Main = () => {
               (reaction) => reaction.reactors.includes(userID)
             ) as reactionObject;
             reactionThatUserHadBefore.number--;
-            chosenPost.numberOfInteractions--;
             chosenReaction.number++;
-            chosenPost.numberOfInteractions++;
             reactionThatUserHadBefore.reactors =
               reactionThatUserHadBefore.reactors.filter(
                 (uid) => uid !== userID
@@ -202,7 +205,6 @@ export const Main = () => {
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
             );
@@ -223,6 +225,7 @@ export const Main = () => {
             (reaction) => reaction.key === nameOfInteraction
           ) as reactionObject;
 
+          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
           const didUserReactToPost = chosenPost.reactions.every(
             (reaction) => !reaction.reactors.includes(userID)
           );
@@ -233,6 +236,7 @@ export const Main = () => {
           const reactors = chosenReaction?.reactors as string[];
 
           if (didUserReactToPost) {
+            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
             chosenReaction.number++;
             reactors.push(userID);
             chosenPost.numberOfInteractions++;
@@ -241,6 +245,7 @@ export const Main = () => {
               {
                 reactions: chosenPost.reactions,
                 numberOfInteractions: chosenPost.numberOfInteractions,
+                allOfReactors: chosenPost.allOfReactors,
               },
               { merge: true }
             );
@@ -251,9 +256,7 @@ export const Main = () => {
               (reaction) => reaction.reactors.includes(userID)
             ) as reactionObject;
             reactionThatUserHadBefore.number--;
-            chosenPost.numberOfInteractions--;
             chosenReaction.number++;
-            chosenPost.numberOfInteractions++;
             reactionThatUserHadBefore.reactors =
               reactionThatUserHadBefore.reactors.filter(
                 (uid) => uid !== userID
@@ -263,7 +266,6 @@ export const Main = () => {
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
             );
@@ -284,6 +286,7 @@ export const Main = () => {
             (reaction) => reaction.key === nameOfInteraction
           ) as reactionObject;
 
+          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
           const didUserReactToPost = chosenPost.reactions.every(
             (reaction) => !reaction.reactors.includes(userID)
           );
@@ -294,6 +297,7 @@ export const Main = () => {
           const reactors = chosenReaction?.reactors as string[];
 
           if (didUserReactToPost) {
+            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
             chosenReaction.number++;
             reactors.push(userID);
             chosenPost.numberOfInteractions++;
@@ -302,6 +306,7 @@ export const Main = () => {
               {
                 reactions: chosenPost.reactions,
                 numberOfInteractions: chosenPost.numberOfInteractions,
+                allOfReactors: chosenPost.allOfReactors,
               },
               { merge: true }
             );
@@ -312,9 +317,7 @@ export const Main = () => {
               (reaction) => reaction.reactors.includes(userID)
             ) as reactionObject;
             reactionThatUserHadBefore.number--;
-            chosenPost.numberOfInteractions--;
             chosenReaction.number++;
-            chosenPost.numberOfInteractions++;
             reactionThatUserHadBefore.reactors =
               reactionThatUserHadBefore.reactors.filter(
                 (uid) => uid !== userID
@@ -324,7 +327,6 @@ export const Main = () => {
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
             );
@@ -345,6 +347,7 @@ export const Main = () => {
             (reaction) => reaction.key === nameOfInteraction
           ) as reactionObject;
 
+          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
           const didUserReactToPost = chosenPost.reactions.every(
             (reaction) => !reaction.reactors.includes(userID)
           );
@@ -355,6 +358,7 @@ export const Main = () => {
           const reactors = chosenReaction?.reactors as string[];
 
           if (didUserReactToPost) {
+            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
             chosenReaction.number++;
             reactors.push(userID);
             chosenPost.numberOfInteractions++;
@@ -363,6 +367,7 @@ export const Main = () => {
               {
                 reactions: chosenPost.reactions,
                 numberOfInteractions: chosenPost.numberOfInteractions,
+                allOfReactors: chosenPost.allOfReactors,
               },
               { merge: true }
             );
@@ -373,9 +378,7 @@ export const Main = () => {
               (reaction) => reaction.reactors.includes(userID)
             ) as reactionObject;
             reactionThatUserHadBefore.number--;
-            chosenPost.numberOfInteractions--;
             chosenReaction.number++;
-            chosenPost.numberOfInteractions++;
             reactionThatUserHadBefore.reactors =
               reactionThatUserHadBefore.reactors.filter(
                 (uid) => uid !== userID
@@ -385,7 +388,6 @@ export const Main = () => {
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
             );
@@ -406,6 +408,7 @@ export const Main = () => {
             (reaction) => reaction.key === nameOfInteraction
           ) as reactionObject;
 
+          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
           const didUserReactToPost = chosenPost.reactions.every(
             (reaction) => !reaction.reactors.includes(userID)
           );
@@ -416,6 +419,7 @@ export const Main = () => {
           const reactors = chosenReaction?.reactors as string[];
 
           if (didUserReactToPost) {
+            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
             chosenReaction.number++;
             reactors.push(userID);
             chosenPost.numberOfInteractions++;
@@ -424,6 +428,7 @@ export const Main = () => {
               {
                 reactions: chosenPost.reactions,
                 numberOfInteractions: chosenPost.numberOfInteractions,
+                allOfReactors: chosenPost.allOfReactors,
               },
               { merge: true }
             );
@@ -434,9 +439,7 @@ export const Main = () => {
               (reaction) => reaction.reactors.includes(userID)
             ) as reactionObject;
             reactionThatUserHadBefore.number--;
-            chosenPost.numberOfInteractions--;
             chosenReaction.number++;
-            chosenPost.numberOfInteractions++;
             reactionThatUserHadBefore.reactors =
               reactionThatUserHadBefore.reactors.filter(
                 (uid) => uid !== userID
@@ -446,7 +449,6 @@ export const Main = () => {
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
             );
@@ -467,6 +469,7 @@ export const Main = () => {
             (reaction) => reaction.key === nameOfInteraction
           ) as reactionObject;
 
+          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
           const didUserReactToPost = chosenPost.reactions.every(
             (reaction) => !reaction.reactors.includes(userID)
           );
@@ -477,6 +480,7 @@ export const Main = () => {
           const reactors = chosenReaction?.reactors as string[];
 
           if (didUserReactToPost) {
+            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
             chosenReaction.number++;
             reactors.push(userID);
             chosenPost.numberOfInteractions++;
@@ -485,6 +489,7 @@ export const Main = () => {
               {
                 reactions: chosenPost.reactions,
                 numberOfInteractions: chosenPost.numberOfInteractions,
+                allOfReactors: chosenPost.allOfReactors,
               },
               { merge: true }
             );
@@ -495,9 +500,7 @@ export const Main = () => {
               (reaction) => reaction.reactors.includes(userID)
             ) as reactionObject;
             reactionThatUserHadBefore.number--;
-            chosenPost.numberOfInteractions--;
             chosenReaction.number++;
-            chosenPost.numberOfInteractions++;
             reactionThatUserHadBefore.reactors =
               reactionThatUserHadBefore.reactors.filter(
                 (uid) => uid !== userID
@@ -507,7 +510,6 @@ export const Main = () => {
               doc(db, "posts", postNameString),
               {
                 reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
               },
               { merge: true }
             );
@@ -533,21 +535,31 @@ export const Main = () => {
       if (didUserReactToPost) {
         setPosts((prevState) => {
           let newState = [...prevState];
+
           const chosenPost = newState.find(
             (post) => post.postName.toString() === postName
           ) as Post;
+
           const chosenReaction = chosenPost?.reactions.find(
             (reaction) => reaction.key === "like"
           ) as reactionObject;
+
           const reactors = chosenReaction?.reactors as string[];
+
           chosenReaction.number++;
+
           reactors.push(userID);
+
+          chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
+
           chosenPost.numberOfInteractions++;
+
           setDoc(
             doc(db, "posts", postName),
             {
               reactions: chosenPost.reactions,
               numberOfInteractions: chosenPost.numberOfInteractions,
+              allOfReactors: chosenPost.allOfReactors,
             },
             { merge: true }
           );
@@ -556,22 +568,33 @@ export const Main = () => {
       } else {
         setPosts((prevState) => {
           let newState = [...prevState];
+
           const chosenPost = newState.find(
             (post) => post.postName.toString() === postName
           ) as Post;
-          let userReaction = chosenPost?.reactions.find((reaction) =>
+
+          const userReaction = chosenPost?.reactions.find((reaction) =>
             reaction.reactors.includes(userID)
           ) as reactionObject;
+
+          chosenPost.allOfReactors = chosenPost.allOfReactors.filter(
+            (uid) => uid !== userID
+          );
+
           userReaction.reactors = userReaction?.reactors.filter(
             (reactor) => reactor !== userID
           );
+
           userReaction.number = userReaction.number - 1;
+
           chosenPost.numberOfInteractions--;
+
           setDoc(
             doc(db, "posts", postName),
             {
               reactions: chosenPost.reactions,
               numberOfInteractions: chosenPost.numberOfInteractions,
+              allOfReactors: chosenPost.allOfReactors,
             },
             { merge: true }
           );
@@ -592,6 +615,7 @@ export const Main = () => {
       {posts.map((post) => (
         <div key={post.postName}>
           <PostCard
+            allOfReactors={post.allOfReactors}
             reactions={[...post.reactions]}
             dateOfCreation={post.dateOfCreation}
             numberOfInteractions={post.numberOfInteractions}
