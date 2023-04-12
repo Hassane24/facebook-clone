@@ -8,6 +8,8 @@ import care from "../../../../assets/care.png";
 import angry from "../../../../assets/angry.png";
 import utilityIcons from "../../../../assets/utility-icons-3.png";
 import { useState, useEffect, useRef } from "react";
+import { db } from "../../../../firebase/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 interface Props {
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -37,6 +39,11 @@ interface userChosenReaction {
   webKitFilter?: string;
 }
 
+interface reactors {
+  firstName: string;
+  surname: string;
+}
+
 const stateOfReactionNames: reactionNamesStates[] = [
   { reaction: "like", itsState: false },
   { reaction: "love", itsState: false },
@@ -55,8 +62,37 @@ export const InteractWithPost = (props: Props) => {
     useState<userChosenReaction>();
   const [didUserNotReactToPost, setDidUserNotReactToPost] = useState(false);
   const [reactions, setReactions] = useState<reactionObject[]>(props.reactions);
+  const [showReactorsList, setShowReactorsList] = useState(false);
+  const [reactors, setReactors] = useState<reactors[]>([]);
 
   const postNameRef = useRef<string>();
+
+  useEffect(() => {
+    const fetchUserNames = async () => {
+      const reactorsNames: reactors[] = [];
+      const reactors = props.allOfReactors;
+      if (reactors && reactors.length) {
+        for (const reactor of reactors) {
+          const documentQuery = query(
+            collection(db, "users"),
+            where("userID", "==", reactor)
+          );
+          const document = await getDocs(documentQuery);
+          document.forEach((doc) => {
+            const firstName: string = doc.get("firstName");
+            const surname: string = doc.get("surname");
+            const reactorObject: reactors = {
+              firstName: firstName,
+              surname: surname,
+            };
+            reactorsNames.push(reactorObject);
+          });
+        }
+      }
+      setReactors(reactorsNames);
+    };
+    fetchUserNames();
+  }, [props.allOfReactors, reactions]);
 
   useEffect(() => {
     if (props.postName !== undefined) {
@@ -137,6 +173,9 @@ export const InteractWithPost = (props: Props) => {
     });
   };
 
+  const revealReactorsNames = () => setShowReactorsList(true);
+  const hideReactorsNames = () => setShowReactorsList(false);
+
   return (
     <div className={styles.interactionsContainer}>
       {props.numberOfInteractions ? (
@@ -156,9 +195,22 @@ export const InteractWithPost = (props: Props) => {
                 ) : null
               )}
             </div>
-            <div className={styles.numberOfInteractions}>
+            <div
+              onMouseEnter={revealReactorsNames}
+              onMouseLeave={hideReactorsNames}
+              className={styles.numberOfInteractions}
+            >
               {props.numberOfInteractions}
             </div>
+            {showReactorsList && (
+              <div className={styles.shown}>
+                {reactors.map((reactor, index) => (
+                  <span key={index}>
+                    {reactor.firstName} {reactor.surname}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
           <div className={styles.commentsAndShares}>
             <div>12 comments</div>
