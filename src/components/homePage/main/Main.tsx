@@ -90,434 +90,62 @@ export const Main = () => {
     const postNameNumber = parseInt((e.target as HTMLElement).id);
     const postNameString = (e.target as HTMLElement).id;
     const userID = localStorage.getItem("UserID") as string;
-    switch (nameOfInteraction) {
-      case "like":
-        setPosts((prevState) => {
-          let newState = [...prevState];
+    setPosts((prevState) => {
+      let newState = [...prevState];
 
-          const chosenPost = newState.find(
-            (post) => post.postName === postNameNumber
-          ) as Post;
+      const chosenPost = newState.find(
+        (post) => post.postName === postNameNumber
+      ) as Post;
 
-          const chosenReaction = chosenPost?.reactions.find(
-            (reaction) => reaction.key === nameOfInteraction
-          ) as reactionObject;
+      const chosenReaction = chosenPost?.reactions.find(
+        (reaction) => reaction.key === nameOfInteraction
+      ) as reactionObject;
 
-          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
-          const didUserReactToPost = chosenPost.reactions.every(
-            (reaction) => !reaction.reactors.includes(userID)
-          );
+      // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
+      const didUserReactToPost = chosenPost.reactions.every(
+        (reaction) => !reaction.reactors.includes(userID)
+      );
 
-          const userDidntHaveThisReactionBefore =
-            !chosenReaction.reactors.includes(userID);
+      const userDidntHaveThisReactionBefore =
+        !chosenReaction.reactors.includes(userID);
 
-          const reactors = chosenReaction?.reactors as string[];
+      const reactors = chosenReaction?.reactors as string[];
 
-          if (didUserReactToPost) {
-            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
-            chosenReaction.number++;
-            reactors.push(userID);
-            chosenPost.numberOfInteractions++;
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
-                allOfReactors: chosenPost.allOfReactors,
-              },
-              { merge: true }
-            );
-          }
+      if (didUserReactToPost) {
+        chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
+        chosenReaction.number++;
+        reactors.push(userID);
+        chosenPost.numberOfInteractions++;
+        setDoc(
+          doc(db, "posts", postNameString),
+          {
+            reactions: chosenPost.reactions,
+            numberOfInteractions: chosenPost.numberOfInteractions,
+            allOfReactors: chosenPost.allOfReactors,
+          },
+          { merge: true }
+        );
+      }
 
-          if (userDidntHaveThisReactionBefore) {
-            let reactionThatUserHadBefore = chosenPost.reactions.find(
-              (reaction) => reaction.reactors.includes(userID)
-            ) as reactionObject;
-            reactionThatUserHadBefore.number--;
-            chosenReaction.number++;
-            reactionThatUserHadBefore.reactors =
-              reactionThatUserHadBefore.reactors.filter(
-                (uid) => uid !== userID
-              );
-            chosenReaction.reactors.push(userID);
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-              },
-              { merge: true }
-            );
-          }
-          return newState;
-        });
-        break;
-
-      case "love":
-        setPosts((prevState) => {
-          let newState = [...prevState];
-
-          const chosenPost = newState.find(
-            (post) => post.postName === postNameNumber
-          ) as Post;
-
-          const chosenReaction = chosenPost?.reactions.find(
-            (reaction) => reaction.key === nameOfInteraction
-          ) as reactionObject;
-
-          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
-          const didUserReactToPost = chosenPost.reactions.every(
-            (reaction) => !reaction.reactors.includes(userID)
-          );
-
-          const userDidntHaveThisReactionBefore =
-            !chosenReaction.reactors.includes(userID);
-
-          const reactors = chosenReaction?.reactors as string[];
-
-          if (didUserReactToPost) {
-            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
-            chosenReaction.number++;
-            reactors.push(userID);
-            chosenPost.numberOfInteractions++;
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
-                allOfReactors: chosenPost.allOfReactors,
-              },
-              { merge: true }
-            );
-          }
-
-          if (userDidntHaveThisReactionBefore) {
-            let reactionThatUserHadBefore = chosenPost.reactions.find(
-              (reaction) => reaction.reactors.includes(userID)
-            ) as reactionObject;
-            reactionThatUserHadBefore.number--;
-            chosenReaction.number++;
-            reactionThatUserHadBefore.reactors =
-              reactionThatUserHadBefore.reactors.filter(
-                (uid) => uid !== userID
-              );
-            chosenReaction.reactors.push(userID);
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-              },
-              { merge: true }
-            );
-          }
-          return newState;
-        });
-        break;
-
-      case "care":
-        setPosts((prevState) => {
-          let newState = [...prevState];
-
-          const chosenPost = newState.find(
-            (post) => post.postName === postNameNumber
-          ) as Post;
-
-          const chosenReaction = chosenPost?.reactions.find(
-            (reaction) => reaction.key === nameOfInteraction
-          ) as reactionObject;
-
-          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
-          const didUserReactToPost = chosenPost.reactions.every(
-            (reaction) => !reaction.reactors.includes(userID)
-          );
-
-          const userDidntHaveThisReactionBefore =
-            !chosenReaction.reactors.includes(userID);
-
-          const reactors = chosenReaction?.reactors as string[];
-
-          if (didUserReactToPost) {
-            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
-            chosenReaction.number++;
-            reactors.push(userID);
-            chosenPost.numberOfInteractions++;
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
-                allOfReactors: chosenPost.allOfReactors,
-              },
-              { merge: true }
-            );
-          }
-
-          if (userDidntHaveThisReactionBefore) {
-            let reactionThatUserHadBefore = chosenPost.reactions.find(
-              (reaction) => reaction.reactors.includes(userID)
-            ) as reactionObject;
-            reactionThatUserHadBefore.number--;
-            chosenReaction.number++;
-            reactionThatUserHadBefore.reactors =
-              reactionThatUserHadBefore.reactors.filter(
-                (uid) => uid !== userID
-              );
-            chosenReaction.reactors.push(userID);
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-              },
-              { merge: true }
-            );
-          }
-          return newState;
-        });
-        break;
-
-      case "haha":
-        setPosts((prevState) => {
-          let newState = [...prevState];
-
-          const chosenPost = newState.find(
-            (post) => post.postName === postNameNumber
-          ) as Post;
-
-          const chosenReaction = chosenPost?.reactions.find(
-            (reaction) => reaction.key === nameOfInteraction
-          ) as reactionObject;
-
-          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
-          const didUserReactToPost = chosenPost.reactions.every(
-            (reaction) => !reaction.reactors.includes(userID)
-          );
-
-          const userDidntHaveThisReactionBefore =
-            !chosenReaction.reactors.includes(userID);
-
-          const reactors = chosenReaction?.reactors as string[];
-
-          if (didUserReactToPost) {
-            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
-            chosenReaction.number++;
-            reactors.push(userID);
-            chosenPost.numberOfInteractions++;
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
-                allOfReactors: chosenPost.allOfReactors,
-              },
-              { merge: true }
-            );
-          }
-
-          if (userDidntHaveThisReactionBefore) {
-            let reactionThatUserHadBefore = chosenPost.reactions.find(
-              (reaction) => reaction.reactors.includes(userID)
-            ) as reactionObject;
-            reactionThatUserHadBefore.number--;
-            chosenReaction.number++;
-            reactionThatUserHadBefore.reactors =
-              reactionThatUserHadBefore.reactors.filter(
-                (uid) => uid !== userID
-              );
-            chosenReaction.reactors.push(userID);
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-              },
-              { merge: true }
-            );
-          }
-          return newState;
-        });
-        break;
-
-      case "wow":
-        setPosts((prevState) => {
-          let newState = [...prevState];
-
-          const chosenPost = newState.find(
-            (post) => post.postName === postNameNumber
-          ) as Post;
-
-          const chosenReaction = chosenPost?.reactions.find(
-            (reaction) => reaction.key === nameOfInteraction
-          ) as reactionObject;
-
-          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
-          const didUserReactToPost = chosenPost.reactions.every(
-            (reaction) => !reaction.reactors.includes(userID)
-          );
-
-          const userDidntHaveThisReactionBefore =
-            !chosenReaction.reactors.includes(userID);
-
-          const reactors = chosenReaction?.reactors as string[];
-
-          if (didUserReactToPost) {
-            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
-            chosenReaction.number++;
-            reactors.push(userID);
-            chosenPost.numberOfInteractions++;
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
-                allOfReactors: chosenPost.allOfReactors,
-              },
-              { merge: true }
-            );
-          }
-
-          if (userDidntHaveThisReactionBefore) {
-            let reactionThatUserHadBefore = chosenPost.reactions.find(
-              (reaction) => reaction.reactors.includes(userID)
-            ) as reactionObject;
-            reactionThatUserHadBefore.number--;
-            chosenReaction.number++;
-            reactionThatUserHadBefore.reactors =
-              reactionThatUserHadBefore.reactors.filter(
-                (uid) => uid !== userID
-              );
-            chosenReaction.reactors.push(userID);
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-              },
-              { merge: true }
-            );
-          }
-          return newState;
-        });
-        break;
-
-      case "sad":
-        setPosts((prevState) => {
-          let newState = [...prevState];
-
-          const chosenPost = newState.find(
-            (post) => post.postName === postNameNumber
-          ) as Post;
-
-          const chosenReaction = chosenPost?.reactions.find(
-            (reaction) => reaction.key === nameOfInteraction
-          ) as reactionObject;
-
-          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
-          const didUserReactToPost = chosenPost.reactions.every(
-            (reaction) => !reaction.reactors.includes(userID)
-          );
-
-          const userDidntHaveThisReactionBefore =
-            !chosenReaction.reactors.includes(userID);
-
-          const reactors = chosenReaction?.reactors as string[];
-
-          if (didUserReactToPost) {
-            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
-            chosenReaction.number++;
-            reactors.push(userID);
-            chosenPost.numberOfInteractions++;
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
-                allOfReactors: chosenPost.allOfReactors,
-              },
-              { merge: true }
-            );
-          }
-
-          if (userDidntHaveThisReactionBefore) {
-            let reactionThatUserHadBefore = chosenPost.reactions.find(
-              (reaction) => reaction.reactors.includes(userID)
-            ) as reactionObject;
-            reactionThatUserHadBefore.number--;
-            chosenReaction.number++;
-            reactionThatUserHadBefore.reactors =
-              reactionThatUserHadBefore.reactors.filter(
-                (uid) => uid !== userID
-              );
-            chosenReaction.reactors.push(userID);
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-              },
-              { merge: true }
-            );
-          }
-          return newState;
-        });
-        break;
-
-      case "angry":
-        setPosts((prevState) => {
-          let newState = [...prevState];
-
-          const chosenPost = newState.find(
-            (post) => post.postName === postNameNumber
-          ) as Post;
-
-          const chosenReaction = chosenPost?.reactions.find(
-            (reaction) => reaction.key === nameOfInteraction
-          ) as reactionObject;
-
-          // didUserReactToPost is true when a user hasn't reacted to a post yet and false when they have reacted to the post
-          const didUserReactToPost = chosenPost.reactions.every(
-            (reaction) => !reaction.reactors.includes(userID)
-          );
-
-          const userDidntHaveThisReactionBefore =
-            !chosenReaction.reactors.includes(userID);
-
-          const reactors = chosenReaction?.reactors as string[];
-
-          if (didUserReactToPost) {
-            chosenPost.allOfReactors = chosenPost.allOfReactors.concat(userID);
-            chosenReaction.number++;
-            reactors.push(userID);
-            chosenPost.numberOfInteractions++;
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-                numberOfInteractions: chosenPost.numberOfInteractions,
-                allOfReactors: chosenPost.allOfReactors,
-              },
-              { merge: true }
-            );
-          }
-
-          if (userDidntHaveThisReactionBefore) {
-            let reactionThatUserHadBefore = chosenPost.reactions.find(
-              (reaction) => reaction.reactors.includes(userID)
-            ) as reactionObject;
-            reactionThatUserHadBefore.number--;
-            chosenReaction.number++;
-            reactionThatUserHadBefore.reactors =
-              reactionThatUserHadBefore.reactors.filter(
-                (uid) => uid !== userID
-              );
-            chosenReaction.reactors.push(userID);
-            setDoc(
-              doc(db, "posts", postNameString),
-              {
-                reactions: chosenPost.reactions,
-              },
-              { merge: true }
-            );
-          }
-          return newState;
-        });
-        break;
-    }
+      if (userDidntHaveThisReactionBefore) {
+        let reactionThatUserHadBefore = chosenPost.reactions.find((reaction) =>
+          reaction.reactors.includes(userID)
+        ) as reactionObject;
+        reactionThatUserHadBefore.number--;
+        chosenReaction.number++;
+        reactionThatUserHadBefore.reactors =
+          reactionThatUserHadBefore.reactors.filter((uid) => uid !== userID);
+        chosenReaction.reactors.push(userID);
+        setDoc(
+          doc(db, "posts", postNameString),
+          {
+            reactions: chosenPost.reactions,
+          },
+          { merge: true }
+        );
+      }
+      return newState;
+    });
   };
 
   const removeReaction = (e: React.MouseEvent<HTMLDivElement>) => {
