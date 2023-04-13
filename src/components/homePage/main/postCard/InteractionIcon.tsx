@@ -40,8 +40,7 @@ export const InteractionIcon = (props: Props) => {
             reactor.reactionName === props.imageName ? (
               <div key={index}>
                 <span>
-                  {reactor.firstName}
-                  {reactor.surname}
+                  {reactor.firstName} {reactor.surname}
                 </span>
               </div>
             ) : null
