@@ -28,17 +28,21 @@ const SignupPage = () => {
   const signUpOnClickHandler = async (
     e: React.FormEvent<HTMLButtonElement>
   ) => {
-    e.preventDefault();
-    if (!passwordValue || !emailValue || !firstNameValue || !surnameValue)
-      return;
-    await signupUser(
-      passwordValue,
-      emailValue,
-      firstNameValue,
-      surnameValue,
-      image
-    );
-    navigate("/home");
+    try {
+      e.preventDefault();
+      if (!passwordValue || !emailValue || !firstNameValue || !surnameValue)
+        return;
+      await signupUser(
+        passwordValue,
+        emailValue,
+        firstNameValue,
+        surnameValue,
+        image
+      ).then(() => navigate("/home"));
+    } catch (error) {
+      navigate("/sign-up");
+      return alert(error);
+    }
   };
 
   return (

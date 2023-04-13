@@ -10,73 +10,67 @@ export const signupUser = async (
   surname: string,
   image: File | Blob
 ) => {
-  try {
-    const createdUser = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+  await createUserWithEmailAndPassword(auth, email, password)
+    .then(async (createdUser) => {
+      if (image) {
+        const profileImageRef = ref(
+          storage,
+          `profile-pics/${createdUser.user.uid}.png`
+        );
 
-    if (image) {
-      const profileImageRef = ref(
-        storage,
-        `profile-pics/${createdUser.user.uid}.png`
-      );
+        await uploadBytes(profileImageRef, image);
 
-      await uploadBytes(profileImageRef, image);
+        const imageLink = await getDownloadURL(
+          ref(storage, `profile-pics/${createdUser.user.uid}.png`)
+        );
 
-      const imageLink = await getDownloadURL(
-        ref(storage, `profile-pics/${createdUser.user.uid}.png`)
-      );
+        if (auth.currentUser)
+          updateProfile(auth.currentUser, {
+            displayName: firstName + " " + surname,
+            photoURL: imageLink,
+          });
 
-      if (auth.currentUser)
-        updateProfile(auth.currentUser, {
-          displayName: firstName + " " + surname,
-          photoURL: imageLink,
+        await setDoc(doc(db, "users", firstName), {
+          userID: createdUser.user.uid,
+          firstName: firstName,
+          surname: surname,
+          email: email,
+          password: password,
+          loggedIn: true,
+          imageLink: imageLink,
+          profileImage: `profile-pics/${createdUser.user.uid}.png`,
         });
 
-      await setDoc(doc(db, "users", firstName), {
-        userID: createdUser.user.uid,
-        firstName: firstName,
-        surname: surname,
-        email: email,
-        password: password,
-        loggedIn: true,
-        imageLink: imageLink,
-        profileImage: `profile-pics/${createdUser.user.uid}.png`,
-      });
-
-      localStorage.setItem("UserID", createdUser.user.uid);
-      const userName = createdUser.user.displayName;
-      const first_name = userName?.split(" ")[0];
-      const sur_name = userName?.split(" ")[1];
-      localStorage.setItem("first-name", first_name as string);
-      localStorage.setItem("surname", sur_name as string);
-      if (createdUser.user.photoURL)
-        localStorage.setItem("profile-picture", createdUser.user.photoURL);
-    } else {
-      if (auth.currentUser !== null)
-        updateProfile(auth.currentUser, {
-          displayName: firstName + " " + surname,
+        localStorage.setItem("UserID", createdUser.user.uid);
+        const userName = createdUser.user.displayName;
+        const first_name = userName?.split(" ")[0];
+        const sur_name = userName?.split(" ")[1];
+        localStorage.setItem("first-name", first_name as string);
+        localStorage.setItem("surname", sur_name as string);
+        if (createdUser.user.photoURL)
+          localStorage.setItem("profile-picture", createdUser.user.photoURL);
+      } else {
+        if (auth.currentUser !== null)
+          updateProfile(auth.currentUser, {
+            displayName: firstName + " " + surname,
+          });
+        await setDoc(doc(db, "users", firstName), {
+          userID: createdUser.user.uid,
+          firstName: firstName,
+          surname: surname,
+          email: email,
+          password: password,
+          loggedIn: true,
+          profileImage: "",
         });
-      await setDoc(doc(db, "users", firstName), {
-        userID: createdUser.user.uid,
-        firstName: firstName,
-        surname: surname,
-        email: email,
-        password: password,
-        loggedIn: true,
-        profileImage: "",
-      });
 
-      localStorage.setItem("UserID", createdUser.user.uid);
-      const userName = createdUser.user.displayName;
-      const first_name = userName?.split(" ")[0];
-      const sur_name = userName?.split(" ")[1];
-      localStorage.setItem("first-name", first_name as string);
-      localStorage.setItem("surname", sur_name as string);
-    }
-  } catch (error) {
-    console.log(error);
-  }
+        localStorage.setItem("UserID", createdUser.user.uid);
+        const userName = createdUser.user.displayName;
+        const first_name = userName?.split(" ")[0];
+        const sur_name = userName?.split(" ")[1];
+        localStorage.setItem("first-name", first_name as string);
+        localStorage.setItem("surname", sur_name as string);
+      }
+    })
+    .catch((err) => alert(err));
 };
