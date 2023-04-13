@@ -10,6 +10,7 @@ import utilityIcons from "../../../../assets/utility-icons-3.png";
 import { useState, useEffect, useRef } from "react";
 import { db } from "../../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { InteractionIcon } from "./InteractionIcon";
 
 interface Props {
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -39,9 +40,10 @@ interface userChosenReaction {
   webKitFilter?: string;
 }
 
-interface reactors {
+export interface reactors {
   firstName: string;
   surname: string;
+  reactionName: string;
 }
 
 const stateOfReactionNames: reactionNamesStates[] = [
@@ -81,9 +83,13 @@ export const InteractWithPost = (props: Props) => {
           document.forEach((doc) => {
             const firstName: string = doc.get("firstName");
             const surname: string = doc.get("surname");
+            const interactionName = reactions.find((reaction) =>
+              reaction.reactors.includes(reactor)
+            )?.key as string;
             const reactorObject: reactors = {
               firstName: firstName,
               surname: surname,
+              reactionName: interactionName,
             };
             reactorsNames.push(reactorObject);
           });
@@ -185,12 +191,11 @@ export const InteractWithPost = (props: Props) => {
               {reactions.map((reaction, index) =>
                 reaction.number !== 0 ? (
                   <div key={index}>
-                    <img
-                      src={require(`../../../../assets/${reaction.key}.png`)}
-                      alt={reaction.key}
-                      height={"18px"}
-                      width={"18px"}
-                    />
+                    <InteractionIcon
+                      reactors={reactors}
+                      imageName={reaction.key}
+                      className={styles.shown}
+                    ></InteractionIcon>
                   </div>
                 ) : null
               )}

@@ -20,11 +20,11 @@
 
 .shown {
   position: absolute;
-  z-index: 3;
   padding: 12px 12px;
   font-size: 12px;
   font-weight: 400;
   color: black;
+  opacity: 0.8;
   border-radius: 12px;
   width: max-content;
   background-color: #a6a8ad;
@@ -40,7 +40,7 @@
 }
 
 .interactions > div:nth-child(1) > div {
-  margin-left: -3px;
+  margin-right: -3px;
   cursor: pointer;
   position: relative;
 }
