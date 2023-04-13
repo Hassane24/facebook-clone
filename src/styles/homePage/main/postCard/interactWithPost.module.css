@@ -117,13 +117,13 @@
   position: relative;
 }
 
-.interactPopUp > div > img {
+.interactPopUp > div > div > img {
   display: block;
   transition: ease-in-out 100ms;
   cursor: pointer;
 }
 
-.interactPopUp > div > div {
+.interactPopUp > div > div > div {
   position: absolute;
   background-color: rgb(0 0 0 / 80%);
   color: white;
@@ -139,11 +139,11 @@
   z-index: 2;
 }
 
-.interactPopUp > div > div.active {
+.interactPopUp > div > div > div.active {
   opacity: 1;
 }
 
-.interactPopUp > div > img:hover {
+.interactPopUp > div > div > img:hover {
   transform: scale(1.4);
 }
 

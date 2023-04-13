@@ -1,16 +1,10 @@
 import styles from "../../../../styles/homePage/main/postCard/interactWithPost.module.css";
-import haha from "../../../../assets/haha.png";
-import love from "../../../../assets/love.png";
-import like from "../../../../assets/like.png";
-import sad from "../../../../assets/sad.png";
-import wow from "../../../../assets/wow.png";
-import care from "../../../../assets/care.png";
-import angry from "../../../../assets/angry.png";
 import utilityIcons from "../../../../assets/utility-icons-3.png";
 import { useState, useEffect, useRef } from "react";
 import { db } from "../../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { InteractionIcon } from "./InteractionIcon";
+import { InteractionPopUpIcon } from "./InteractionPopUpIcon";
 
 interface Props {
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -27,11 +21,6 @@ export interface reactionObject {
   reactors: string[];
 }
 
-interface reactionNamesStates {
-  reaction: string;
-  itsState: boolean;
-}
-
 interface userChosenReaction {
   nameOfReaction: string;
   reactionIcon: string;
@@ -46,20 +35,18 @@ export interface reactors {
   reactionName: string;
 }
 
-const stateOfReactionNames: reactionNamesStates[] = [
-  { reaction: "like", itsState: false },
-  { reaction: "love", itsState: false },
-  { reaction: "care", itsState: false },
-  { reaction: "haha", itsState: false },
-  { reaction: "sad", itsState: false },
-  { reaction: "wow", itsState: false },
-  { reaction: "angry", itsState: false },
+const stateOfReactionNames: string[] = [
+  "like",
+  "love",
+  "care",
+  "haha",
+  "sad",
+  "wow",
+  "angry",
 ];
 
 export const InteractWithPost = (props: Props) => {
   const [showInteractPopUp, setShowInteractPopUp] = useState(false);
-  const [showNameOfInteraction, setShowNameOfInteraction] =
-    useState<reactionNamesStates[]>(stateOfReactionNames);
   const [userChosenReaction, setUserChosenReaction] =
     useState<userChosenReaction>();
   const [didUserNotReactToPost, setDidUserNotReactToPost] = useState(false);
@@ -150,34 +137,6 @@ export const InteractWithPost = (props: Props) => {
 
   const revealInteractPopUp = () => setShowInteractPopUp(true);
   const hideInteractPopUp = () => setShowInteractPopUp(false);
-
-  const revealInteractionName = (e: React.MouseEvent<HTMLDivElement>) => {
-    const nameOfHoveredReaction = (e.target as HTMLDivElement).getAttribute(
-      "alt"
-    );
-    setShowNameOfInteraction((prevState) => {
-      const newSate = [...prevState];
-      const hoveredReaction = newSate.find(
-        (reaction) => reaction.reaction === nameOfHoveredReaction
-      );
-      if (hoveredReaction) hoveredReaction.itsState = true;
-      return newSate;
-    });
-  };
-
-  const hideInteractionName = (e: React.MouseEvent<HTMLDivElement>) => {
-    const nameOfHoveredReaction = (e.target as HTMLDivElement).getAttribute(
-      "alt"
-    );
-    setShowNameOfInteraction((prevState) => {
-      const newSate = [...prevState];
-      const hoveredReaction = newSate.find(
-        (reaction) => reaction.reaction === nameOfHoveredReaction
-      );
-      if (hoveredReaction) hoveredReaction.itsState = false;
-      return newSate;
-    });
-  };
 
   const revealReactorsNames = () => setShowReactorsList(true);
   const hideReactorsNames = () => setShowReactorsList(false);
@@ -339,202 +298,19 @@ export const InteractWithPost = (props: Props) => {
                 showInteractPopUp ? styles.active : undefined
               }`}
             >
-              <div
-                onMouseEnter={revealInteractionName}
-                onMouseLeave={hideInteractionName}
-                onClick={(e) => {
-                  props.interactionHandler(e);
-                  hideInteractPopUp();
-                  hideInteractionName(e);
-                }}
-              >
-                <img
-                  src={like}
-                  alt="like"
-                  height={"40px"}
-                  width={"40px"}
-                  id={postNameRef.current}
-                />
-                <div
-                  className={
-                    showNameOfInteraction.find(
-                      (reaction) => reaction.reaction === "like"
-                    )?.itsState
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  Like
+              {stateOfReactionNames.map((reaction, index) => (
+                <div key={index}>
+                  <InteractionPopUpIcon
+                    className={styles.active}
+                    reactionName={reaction}
+                    id={postNameRef.current as string}
+                    onClickHandler={(e) => {
+                      props.interactionHandler(e);
+                      hideInteractPopUp();
+                    }}
+                  />
                 </div>
-              </div>
-              <div
-                onMouseEnter={revealInteractionName}
-                onMouseLeave={hideInteractionName}
-                onClick={(e) => {
-                  props.interactionHandler(e);
-                  hideInteractPopUp();
-                  hideInteractionName(e);
-                }}
-              >
-                <img
-                  src={love}
-                  alt="love"
-                  height={"40px"}
-                  width={"40px"}
-                  id={postNameRef.current}
-                />
-                <div
-                  className={
-                    showNameOfInteraction.find(
-                      (reaction) => reaction.reaction === "love"
-                    )?.itsState
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  Love
-                </div>
-              </div>
-              <div
-                onMouseEnter={revealInteractionName}
-                onMouseLeave={hideInteractionName}
-                onClick={(e) => {
-                  props.interactionHandler(e);
-                  hideInteractPopUp();
-                  hideInteractionName(e);
-                }}
-              >
-                <img
-                  src={care}
-                  alt="care"
-                  height={"40px"}
-                  width={"40px"}
-                  id={postNameRef.current}
-                />
-                <div
-                  className={
-                    showNameOfInteraction.find(
-                      (reaction) => reaction.reaction === "care"
-                    )?.itsState
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  Care
-                </div>
-              </div>
-              <div
-                onMouseEnter={revealInteractionName}
-                onMouseLeave={hideInteractionName}
-                onClick={(e) => {
-                  props.interactionHandler(e);
-                  hideInteractPopUp();
-                  hideInteractionName(e);
-                }}
-              >
-                <img
-                  src={haha}
-                  alt="haha"
-                  height={"40px"}
-                  width={"40px"}
-                  id={postNameRef.current}
-                />
-                <div
-                  className={
-                    showNameOfInteraction.find(
-                      (reaction) => reaction.reaction === "haha"
-                    )?.itsState
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  Haha
-                </div>
-              </div>
-              <div
-                onMouseEnter={revealInteractionName}
-                onMouseLeave={hideInteractionName}
-                onClick={(e) => {
-                  props.interactionHandler(e);
-                  hideInteractPopUp();
-                  hideInteractionName(e);
-                }}
-              >
-                <img
-                  src={wow}
-                  alt="wow"
-                  height={"40px"}
-                  width={"40px"}
-                  id={postNameRef.current}
-                />
-                <div
-                  className={
-                    showNameOfInteraction.find(
-                      (reaction) => reaction.reaction === "wow"
-                    )?.itsState
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  Wow
-                </div>
-              </div>
-              <div
-                onMouseEnter={revealInteractionName}
-                onMouseLeave={hideInteractionName}
-                onClick={(e) => {
-                  props.interactionHandler(e);
-                  hideInteractPopUp();
-                  hideInteractionName(e);
-                }}
-              >
-                <img
-                  src={sad}
-                  alt="sad"
-                  height={"40px"}
-                  width={"40px"}
-                  id={postNameRef.current}
-                />
-                <div
-                  className={
-                    showNameOfInteraction.find(
-                      (reaction) => reaction.reaction === "sad"
-                    )?.itsState
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  Sad
-                </div>
-              </div>
-              <div
-                onMouseEnter={revealInteractionName}
-                onMouseLeave={hideInteractionName}
-                onClick={(e) => {
-                  props.interactionHandler(e);
-                  hideInteractPopUp();
-                  hideInteractionName(e);
-                }}
-              >
-                <img
-                  src={angry}
-                  alt="angry"
-                  height={"40px"}
-                  width={"40px"}
-                  id={postNameRef.current}
-                />
-                <div
-                  className={
-                    showNameOfInteraction.find(
-                      (reaction) => reaction.reaction === "angry"
-                    )?.itsState
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  Angry
-                </div>
-              </div>
+              ))}
             </div>
           )}
         </div>
