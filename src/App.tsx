@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import LoginPage from "./components/loginPage/LoginPage";
 import SignupPage from "./components/signUpPage/SignupPage";
@@ -17,26 +22,26 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Home /> : <LoginPage />}></Route>
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? <Navigate to="/home" /> : <Navigate to="/login" />
+          }
+        ></Route>
         <Route path="login" element={<LoginPage />}></Route>
+        <Route path="home" element={<Home />}></Route>
         <Route path="sign-up" element={<SignupPage />}></Route>
         <Route
           path="home"
           element={
             isLoggedIn ? (
-              <Home />
+              <Navigate to="/home" />
             ) : (
-              <h1
-                style={{
-                  color: "white",
-                  display: isLoggedIn ? "none" : "block",
-                }}
-              >
-                Not Logged In
-              </h1>
+              <Navigate to="/not-logged-in" />
             )
           }
         ></Route>
+        <Route path="not-logged-in" element={<h1>Not Logged In</h1>}></Route>
       </Routes>
     </Router>
   );
