@@ -5,3 +5,9 @@
   background-color: #242526;
   margin-bottom: 16px;
 }
+
+.overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+}
