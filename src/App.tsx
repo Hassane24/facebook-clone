@@ -13,6 +13,7 @@ import { auth } from "./firebase/firebase";
 import { useEffect, useState } from "react";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
+  const userID = localStorage.getItem("UserID");
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) setIsLoggedIn(true);
@@ -25,7 +26,11 @@ function App() {
         <Route
           path="/"
           element={
-            isLoggedIn ? <Navigate to="/home" /> : <Navigate to="/login" />
+            isLoggedIn || userID ? (
+              <Navigate to="/home" />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
         ></Route>
         <Route path="login" element={<LoginPage />}></Route>
