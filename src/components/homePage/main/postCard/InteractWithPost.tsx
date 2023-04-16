@@ -6,9 +6,10 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { InteractionIcon } from "./InteractionIcon";
 import { InteractionPopUpIcon } from "./InteractionPopUpIcon";
 
-interface Props {
+export interface InteractionWithPostProps {
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
   removeReaction: (e: React.MouseEvent<HTMLDivElement>) => void;
+  showCommentSection?: () => void;
   postName: number;
   numberOfInteractions: number;
   reactions: reactionObject[];
@@ -45,7 +46,7 @@ const stateOfReactionNames: string[] = [
   "angry",
 ];
 
-export const InteractWithPost = (props: Props) => {
+export const InteractWithPost = (props: InteractionWithPostProps) => {
   const [showInteractPopUp, setShowInteractPopUp] = useState(false);
   const [userChosenReaction, setUserChosenReaction] =
     useState<userChosenReaction>();
@@ -177,7 +178,7 @@ export const InteractWithPost = (props: Props) => {
             )}
           </div>
           <div className={styles.commentsAndShares}>
-            <div>12 comments</div>
+            <div onClick={props.showCommentSection}>12 comments</div>
             <div>12 shares</div>
           </div>
         </div>
@@ -255,7 +256,7 @@ export const InteractWithPost = (props: Props) => {
           </div>
         )}
 
-        <div className={styles.interaction}>
+        <div className={styles.interaction} onClick={props.showCommentSection}>
           <div>
             <i
               className={styles.icons}

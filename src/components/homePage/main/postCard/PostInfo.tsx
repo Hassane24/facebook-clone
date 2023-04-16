@@ -6,7 +6,7 @@ import utilityIcons from "../../../../assets/utility-icons.png";
 import styles from "../../../../styles/homePage/main/postCard/postInfo.module.css";
 import { useEffect, useState } from "react";
 
-interface Props {
+export interface PostInfoProps {
   firstName: string | null;
   surname: string | null;
   pfpURL: string | null;
@@ -14,7 +14,7 @@ interface Props {
 }
 dayjs.extend(relativeTime);
 
-export const PostInfo = (props: Props) => {
+export const PostInfo = (props: PostInfoProps) => {
   const [postCreationDateString, setPostCreationDateString] =
     useState<string>();
   const [showFullDate, setShowFullDate] = useState(false);

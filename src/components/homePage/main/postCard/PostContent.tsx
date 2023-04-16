@@ -1,11 +1,11 @@
 import styles from "../../../../styles/homePage/main/postCard/postContent.module.css";
-export const PostContent = ({
-  postText,
-  postImage,
-}: {
+
+export interface PostContentProps {
   postText: string | undefined;
   postImage: string | null;
-}) => {
+}
+
+export const PostContent = ({ postText, postImage }: PostContentProps) => {
   return (
     <div className={styles.contentContainer}>
       <div className={styles.textContent}>{postText}</div>
