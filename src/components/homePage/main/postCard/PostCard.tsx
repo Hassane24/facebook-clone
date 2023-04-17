@@ -2,7 +2,7 @@ import { InteractWithPost, reactionObject } from "./InteractWithPost";
 import { PostContent } from "./PostContent";
 import { PostInfo } from "./PostInfo";
 import styles from "../../../../styles/homePage/main/postCard/postCard.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CommentSection } from "./CommentSection";
 
 export interface postCardProps {
@@ -22,6 +22,12 @@ export interface postCardProps {
 
 export const PostCard = (props: postCardProps) => {
   const [showCommentSection, setShowCommentSection] = useState(false);
+
+  useEffect(() => {
+    const body = document.querySelector("body") as HTMLBodyElement;
+    if (showCommentSection) body.style.overflow = "hidden";
+    else body.style.overflow = "auto";
+  }, [showCommentSection]);
 
   const revealCommentSection = () =>
     setShowCommentSection((prevState) => !prevState);
