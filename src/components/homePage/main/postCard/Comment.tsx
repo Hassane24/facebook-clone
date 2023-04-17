@@ -12,16 +12,17 @@ export const Comment = (props: Props) => {
   const { firstName, surname, pfpURL, commentText } = props;
   return (
     <div className={styles.comment}>
-      <DefaultProfilePicture userImage={pfpURL} />
       <div>
-        {/* container for username and user comment  */}
+        <DefaultProfilePicture userImage={pfpURL} />
+        <div className={styles.pfp_overlay}></div>
+      </div>
+      <div>
         <div className={styles.comment_container}>
           <div>
             {firstName} {surname}
           </div>
           <div>{commentText}</div>
         </div>
-        {/* container for reply like and time posted */}
         <div className={styles.comment_reaction}>
           <div>Like</div>
           <div>Reply</div>
