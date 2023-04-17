@@ -46,7 +46,7 @@ export const PostCard = (props: postCardProps) => {
       />
 
       {showCommentSection && (
-        <>
+        <div className={styles.comment_section_container}>
           <CommentSection
             dateOfCreation={props.dateOfCreation}
             pfpURL={props.pfpURL}
@@ -62,7 +62,7 @@ export const PostCard = (props: postCardProps) => {
             interactionHandler={props.interactionHandler}
           />
           <div className={styles.overlay} onClick={revealCommentSection}></div>
-        </>
+        </div>
       )}
     </div>
   );
