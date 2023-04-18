@@ -21,12 +21,11 @@ export const AddComment = (props: Props) => {
   const { pfpURL } = props;
 
   const onBlurHandler = (e: React.ChangeEvent<HTMLDivElement>) =>
-    comment === ""
-      ? setComment("Write a comment...")
-      : setComment((e.currentTarget as HTMLDivElement).textContent);
+    setComment((e.currentTarget as HTMLDivElement).textContent);
 
   const onClickHandler = () =>
     comment === "Write a comment..." ? setComment("") : null;
+
   return (
     <div className={styles.add_comment_container}>
       <div>
@@ -46,6 +45,7 @@ export const AddComment = (props: Props) => {
           {iconsPositions.map((icon, index) => (
             <div key={index}>
               <i
+                onClick={() => console.log(comment)}
                 style={{
                   backgroundImage: `url(${utilityIcons})`,
                   backgroundPosition: `0px ${icon}`,

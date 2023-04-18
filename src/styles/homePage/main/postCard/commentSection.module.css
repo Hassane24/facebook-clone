@@ -105,8 +105,10 @@
 .add_comment_container {
   border-top: 1px solid #1c1d1d;
   display: flex;
+  overflow: hidden;
   row-gap: 2px;
   column-gap: 6px;
+
   padding: 12px 16px;
 }
 
@@ -131,13 +133,19 @@
   padding: 8px 16px;
   background-color: transparent;
   border: none;
-  overflow: hidden;
   word-break: break-all;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   color: #e4e6eb;
   height: fit-content;
   font-size: 15px;
   caret-color: white;
   display: block;
+}
+
+.write_comment > div[contenteditable="true"]::-webkit-scrollbar {
+  display: none;
 }
 
 .write_comment > div[contenteditable="true"]:focus {
