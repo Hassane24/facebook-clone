@@ -7,10 +7,18 @@ import { PostContent } from "./PostContent";
 import { InteractWithPost } from "./InteractWithPost";
 import styles from "../../../../styles/homePage/main/postCard/commentSection.module.css";
 
-export const CommentSection = (props: postCardProps) => {
+interface Props extends postCardProps {
+  closeCommentSection: () => void;
+}
+
+export const CommentSection = (props: Props) => {
   return (
     <div className={styles.comment_section}>
-      <HeaderForPost firstName={props.firstName} surname={props.surname} />
+      <HeaderForPost
+        closeCommentSection={props.closeCommentSection}
+        firstName={props.firstName}
+        surname={props.surname}
+      />
       <PostInfo
         pfpURL={props.pfpURL}
         firstName={props.firstName}

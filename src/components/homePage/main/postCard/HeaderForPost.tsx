@@ -4,6 +4,7 @@ import styles from "../../../../styles/homePage/main/postCard/commentSection.mod
 interface Props {
   firstName: string | null;
   surname: string | null;
+  closeCommentSection: () => void;
 }
 export const HeaderForPost = (props: Props) => {
   return (
@@ -13,6 +14,7 @@ export const HeaderForPost = (props: Props) => {
       </div>
       <div>
         <i
+          onClick={props.closeCommentSection}
           style={{
             backgroundImage: `url(${utilityIcons})`,
             backgroundPosition: "-66px -110px",

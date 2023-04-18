@@ -29,8 +29,9 @@ export const PostCard = (props: postCardProps) => {
     else body.style.overflow = "auto";
   }, [showCommentSection]);
 
-  const revealCommentSection = () =>
-    setShowCommentSection((prevState) => !prevState);
+  const revealCommentSection = () => setShowCommentSection(true);
+
+  const hideCommentSection = () => setShowCommentSection(false);
 
   return (
     <div className={styles.postCardContainer}>
@@ -54,6 +55,7 @@ export const PostCard = (props: postCardProps) => {
       {showCommentSection && (
         <div className={styles.comment_section_container}>
           <CommentSection
+            closeCommentSection={hideCommentSection}
             dateOfCreation={props.dateOfCreation}
             pfpURL={props.pfpURL}
             firstName={props.firstName}
@@ -67,7 +69,7 @@ export const PostCard = (props: postCardProps) => {
             numberOfInteractions={props.numberOfInteractions}
             interactionHandler={props.interactionHandler}
           />
-          <div className={styles.overlay} onClick={revealCommentSection}></div>
+          <div className={styles.overlay} onClick={hideCommentSection}></div>
         </div>
       )}
     </div>
