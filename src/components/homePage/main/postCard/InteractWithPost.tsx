@@ -36,7 +36,7 @@ export interface reactors {
   reactionName: string;
 }
 
-const stateOfReactionNames: string[] = [
+export const reactionNames: string[] = [
   "like",
   "love",
   "care",
@@ -299,7 +299,7 @@ export const InteractWithPost = (props: InteractionWithPostProps) => {
                 showInteractPopUp ? styles.active : undefined
               }`}
             >
-              {stateOfReactionNames.map((reaction, index) => (
+              {reactionNames.map((reaction, index) => (
                 <div key={index}>
                   <InteractionPopUpIcon
                     className={styles.active}

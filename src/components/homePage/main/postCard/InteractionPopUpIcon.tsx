@@ -2,9 +2,9 @@ import { useState } from "react";
 
 interface Props {
   reactionName: string;
-  id: string;
-  className: string;
-  onClickHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
+  id?: string;
+  className?: string;
+  onClickHandler?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const InteractionPopUpIcon = (props: Props) => {

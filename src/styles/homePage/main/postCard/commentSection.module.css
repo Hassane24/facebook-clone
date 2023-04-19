@@ -91,6 +91,7 @@
 
 .comment_reaction {
   display: flex;
+  position: relative;
   padding-top: 3px;
   margin-left: 4px;
   font-size: 12px;
@@ -101,6 +102,17 @@
   font-weight: 700;
   cursor: pointer;
   margin: 0 8px;
+}
+
+.animation_div {
+  position: absolute;
+  left: -1rem;
+  transition: cubic-bezier(0, 1, 0, 1) 200ms;
+  transform: translateY(5rem);
+}
+
+.animation_div.active {
+  transform: translateY(-3.3rem);
 }
 
 .add_comment_container {
