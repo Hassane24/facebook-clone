@@ -42,7 +42,8 @@
 
 .post_header > div:nth-child(2):hover,
 .pfp_overlay:hover,
-.icons_container > div:hover {
+.icons_container > div:hover,
+.icons_container > div:last-child.add_comment_button:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -179,6 +180,20 @@
 .icons_container > div:last-child {
   margin-left: auto;
   cursor: not-allowed;
+}
+
+.icons_container > div:last-child > i {
+  pointer-events: none;
+}
+
+.icons_container > div:last-child.add_comment_button {
+  cursor: default;
+}
+
+.icons_container > div:last-child.add_comment_button > i {
+  -webkit-filter: invert(50%) sepia(52%) saturate(200%) saturate(200%)
+    saturate(200%) saturate(189%) hue-rotate(191deg) brightness(103%)
+    contrast(102%) !important;
 }
 
 .icons_container > div:last-child:hover {
