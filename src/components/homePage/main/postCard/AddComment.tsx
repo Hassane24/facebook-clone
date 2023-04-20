@@ -1,19 +1,20 @@
 import { DefaultProfilePicture } from "../../../../utils/svgsFunction";
 import utilityIcons from "../../../../assets/utility-icons-3.png";
 import styles from "../../../../styles/homePage/main/postCard/commentSection.module.css";
-import { useState, useRef } from "react";
+import { useState, useRef, forwardRef } from "react";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 
 interface Props {
   pfpURL: string | null;
+  addComment: () => void;
 }
 
 const iconsPositions = ["-413px", "-539px", "-449px", "-592px", "-718px"];
 
-export const AddComment = (props: Props) => {
+export const AddComment = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const [comment, setComment] = useState("Write a comment...");
   const addCommentRef = useRef<HTMLDivElement>(null);
-  const { pfpURL } = props;
+  const { pfpURL, addComment } = props;
 
   const onInput = (e: ContentEditableEvent) => setComment(e.target.value);
 
@@ -26,7 +27,7 @@ export const AddComment = (props: Props) => {
         <DefaultProfilePicture userImage={pfpURL} />
         <div className={styles.pfp_overlay}></div>
       </div>
-      <div className={styles.write_comment}>
+      <div className={styles.write_comment} ref={ref}>
         <ContentEditable
           disabled={false}
           innerRef={addCommentRef}
@@ -62,6 +63,10 @@ export const AddComment = (props: Props) => {
             }
           >
             <i
+              onClick={() => {
+                addComment();
+                setComment("Write a comment...");
+              }}
               style={{
                 backgroundImage: `url(${utilityIcons})`,
                 backgroundPosition: `0px -664px`,
@@ -79,4 +84,4 @@ export const AddComment = (props: Props) => {
       </div>
     </div>
   );
-};
+});
