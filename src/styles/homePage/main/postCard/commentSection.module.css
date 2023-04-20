@@ -206,6 +206,7 @@
   -webkit-filter: invert(50%) sepia(52%) saturate(200%) saturate(200%)
     saturate(200%) saturate(189%) hue-rotate(191deg) brightness(103%)
     contrast(102%) !important;
+  pointer-events: all;
 }
 
 .icons_container > div:last-child:hover {
