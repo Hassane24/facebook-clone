@@ -66,18 +66,7 @@
 }
 
 .date > div:nth-child(2) {
-  position: absolute;
-  bottom: 25%;
-}
-
-.date > div:nth-child(3) {
-  display: inline-block;
-  height: 12px;
-  padding: 0 3px;
-  margin-left: 6px;
-}
-
-.date > div:nth-child(4) {
+  top: 1.2rem;
   position: absolute;
   opacity: 0;
   z-index: 3;
@@ -92,8 +81,20 @@
   left: -40%;
 }
 
-.date > div:nth-child(4).active {
+.date > div:nth-child(2).active {
   opacity: 0.9;
+}
+
+.date > div:nth-child(3) {
+  position: absolute;
+  bottom: 25%;
+}
+
+.date > div:nth-child(4) {
+  display: inline-block;
+  height: 12px;
+  padding: 0 3px;
+  margin-left: 6px;
 }
 
 .icons {
