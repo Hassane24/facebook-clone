@@ -1,4 +1,4 @@
-import { Comment } from "../postCard/Comment";
+import { Comment, CommentProps } from "../postCard/Comment";
 import { HeaderForPost } from "../postCard/HeaderForPost";
 import { AddComment } from "../postCard/AddComment";
 import { postCardProps } from "./PostCard";
@@ -6,12 +6,51 @@ import { PostInfo } from "./PostInfo";
 import { PostContent } from "./PostContent";
 import { InteractWithPost } from "./InteractWithPost";
 import styles from "../../../../styles/homePage/main/postCard/commentSection.module.css";
+import { useRef, useState } from "react";
+import { db } from "../../../../firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 interface Props extends postCardProps {
   closeCommentSection: () => void;
+  comments: CommentProps[];
 }
 
 export const CommentSection = (props: Props) => {
+  const [comments, setComments] = useState<CommentProps[]>(props.comments);
+
+  const commentRef = useRef<HTMLDivElement>(null);
+
+  const addComment = () => {
+    if (commentRef.current?.innerText) {
+      const comment: CommentProps = {
+        commentDate: new Date().toISOString(),
+        commenterFirstName: props.firstName,
+        commenterSurname: props.surname,
+        commenterPfpURL: props.pfpURL,
+        commentReactions: [
+          { key: "like", number: 0, reactors: [] },
+          { key: "love", number: 0, reactors: [] },
+          { key: "care", number: 0, reactors: [] },
+          { key: "haha", number: 0, reactors: [] },
+          { key: "sad", number: 0, reactors: [] },
+          { key: "wow", number: 0, reactors: [] },
+          { key: "angry", number: 0, reactors: [] },
+        ],
+        commentText: commentRef.current?.innerText,
+      };
+      setComments([comment, ...comments]);
+      setDoc(
+        doc(db, "posts", props.postName.toString()),
+        {
+          comments: [...comments, comment],
+        },
+        {
+          merge: true,
+        }
+      );
+    }
+  };
+
   return (
     <div className={styles.comment_section}>
       <HeaderForPost
@@ -34,12 +73,25 @@ export const CommentSection = (props: Props) => {
         numberOfInteractions={props.numberOfInteractions}
         interactionHandler={props.interactionHandler}
       />
-      <Comment
-        firstName={props.firstName}
-        surname={props.surname}
+      {comments !== undefined &&
+        comments.map((comment, index) => (
+          <div key={index}>
+            <Comment
+              commentDate={comment.commentDate}
+              postName={props.postName}
+              commentReactions={comment.commentReactions}
+              commenterFirstName={comment.commenterFirstName}
+              commenterPfpURL={comment.commenterPfpURL}
+              commenterSurname={comment.commenterSurname}
+              commentText={comment.commentText}
+            />
+          </div>
+        ))}
+      <AddComment
         pfpURL={props.pfpURL}
+        ref={commentRef}
+        addComment={addComment}
       />
-      <AddComment pfpURL={props.pfpURL} />
     </div>
   );
 };
