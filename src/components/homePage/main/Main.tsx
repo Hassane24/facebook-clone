@@ -7,6 +7,7 @@ import { db, storage } from "../../../firebase/firebase";
 import { getDocs, collection, setDoc, doc } from "firebase/firestore";
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { reactionObject } from "./postCard/InteractWithPost";
+import { CommentProps } from "./postCard/Comment";
 
 interface Post {
   dateOfCreation: string;
@@ -19,6 +20,7 @@ interface Post {
   numberOfInteractions: number;
   allOfReactors: string[];
   reactions: reactionObject[];
+  comments: CommentProps[];
 }
 
 export const Main = () => {
@@ -50,6 +52,7 @@ export const Main = () => {
           postText: textArea.current?.value,
           pictureUrl: "",
           allOfReactors: [],
+          comments: [],
           userPfpUrl: userPfpUrl,
           firstName: firstName,
           surname: surname,
@@ -243,6 +246,7 @@ export const Main = () => {
       {posts.map((post) => (
         <div key={post.postName}>
           <PostCard
+            comments={post.comments}
             allOfReactors={post.allOfReactors}
             reactions={[...post.reactions]}
             dateOfCreation={post.dateOfCreation}

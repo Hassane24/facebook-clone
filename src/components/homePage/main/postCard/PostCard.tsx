@@ -4,6 +4,7 @@ import { PostInfo } from "./PostInfo";
 import styles from "../../../../styles/homePage/main/postCard/postCard.module.css";
 import { useEffect, useState } from "react";
 import { CommentSection } from "./CommentSection";
+import { CommentProps } from "./Comment";
 
 export interface postCardProps {
   reactions: reactionObject[];
@@ -14,6 +15,7 @@ export interface postCardProps {
   postText: string | undefined;
   postName: number;
   postImage: string;
+  comments: CommentProps[];
   numberOfInteractions: number;
   allOfReactors: string[];
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -55,6 +57,7 @@ export const PostCard = (props: postCardProps) => {
       {showCommentSection && (
         <div className={styles.comment_section_container}>
           <CommentSection
+            comments={props.comments}
             closeCommentSection={hideCommentSection}
             dateOfCreation={props.dateOfCreation}
             pfpURL={props.pfpURL}
