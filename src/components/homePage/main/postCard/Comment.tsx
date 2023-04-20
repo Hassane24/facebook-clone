@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { InteractionPopUpIcon } from "./InteractionPopUpIcon";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
+import { DateOfCreation } from "./DateOfCreation";
 
 export interface CommentProps {
   commenterFirstName: string | null;
@@ -164,7 +165,7 @@ export const Comment = (props: CommentProps) => {
             Like
           </div>
           <div>Reply</div>
-          <div>4 h</div>
+          <DateOfCreation isForComments={true} dateOfCreation={commentDate} />
           <div
             className={`${styles.animation_div} ${
               showInteractions ? styles.active : undefined
