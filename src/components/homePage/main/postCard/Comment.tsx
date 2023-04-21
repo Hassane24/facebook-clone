@@ -7,6 +7,8 @@ import { InteractionPopUpIcon } from "./InteractionPopUpIcon";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
 import { DateOfCreation } from "./DateOfCreation";
+import { InteractionIcon } from "./InteractionIcon";
+import { v4 as uuidv4 } from "uuid";
 
 export interface CommentProps {
   commenterFirstName: string | null;
@@ -18,8 +20,17 @@ export interface CommentProps {
   commentReactions: reactionObject[];
 }
 
+interface UserReactionStyling {
+  nameOfReaction: string;
+  styling: string;
+}
+
 export const Comment = (props: CommentProps) => {
   const [showInteractions, setShowInteraction] = useState(false);
+  const [numberOfInteractions, setNumberOfInteractions] = useState(0);
+  const [userReaction, setUserReaction] = useState<reactionObject>();
+  const [userReactionStyling, setReactionStylings] =
+    useState<UserReactionStyling>();
   const [commentInteractions, setCommentInteractions] = useState<
     reactionObject[]
   >(props.commentReactions);
@@ -27,11 +38,52 @@ export const Comment = (props: CommentProps) => {
     useState<reactionObject[]>();
 
   useEffect(() => {
+    const userID = localStorage.getItem("UserID") as string;
     const topThreeReactions = commentInteractions
       .sort((a, b) => b.number - a.number)
       .slice(0, 3);
     setMostUsedReactions(topThreeReactions);
+
+    const numberOfInteractions = commentInteractions.reduce(
+      (partialSum, a) => partialSum + a.number,
+      0
+    );
+    setNumberOfInteractions(numberOfInteractions);
+
+    const userReaction = commentInteractions.find((reaction) =>
+      reaction.reactors.includes(userID)
+    );
+    setUserReaction(userReaction);
   }, [commentInteractions]);
+
+  useEffect(() => {
+    if (
+      userReaction?.key === "haha" ||
+      userReaction?.key === "sad" ||
+      userReaction?.key === "care" ||
+      userReaction?.key === "wow"
+    )
+      setReactionStylings({
+        nameOfReaction: userReaction.key,
+        styling: "rgb(247, 177, 37)",
+      });
+    if (userReaction?.key === "love")
+      setReactionStylings({
+        nameOfReaction: userReaction.key,
+        styling: "rgb(243, 62, 88)",
+      });
+    if (userReaction?.key === "like")
+      setReactionStylings({
+        nameOfReaction: userReaction.key,
+        styling: "rgb(32, 120, 244)",
+      });
+
+    if (userReaction?.key === "angry")
+      setReactionStylings({
+        nameOfReaction: userReaction.key,
+        styling: "rgb(233, 113, 15)",
+      });
+  }, [userReaction]);
 
   const {
     commenterFirstName,
@@ -155,17 +207,50 @@ export const Comment = (props: CommentProps) => {
             {commenterFirstName} {commenterSurname}
           </div>
           <div>{commentText}</div>
+          <div
+            className={
+              numberOfInteractions === 0 ? undefined : styles.reactions
+            }
+          >
+            {mostUsedReactions &&
+              mostUsedReactions.map((reaction) =>
+                reaction.number !== 0 ? (
+                  <div className={styles.reaction_image_holder} key={uuidv4()}>
+                    <InteractionIcon
+                      isNotForComments={false}
+                      imageName={reaction.key}
+                    />
+                  </div>
+                ) : null
+              )}
+            <div>
+              {numberOfInteractions === 0 ? null : numberOfInteractions}
+            </div>
+          </div>
         </div>
         <div className={styles.comment_reaction}>
           <div
+            style={{
+              color:
+                userReaction === undefined
+                  ? undefined
+                  : userReactionStyling?.styling,
+            }}
             onMouseEnter={revealInteractions}
             onMouseLeave={hideInteractions}
             onClick={removeReactionOrLikeComment}
           >
-            Like
+            {userReaction === undefined
+              ? "Like"
+              : userReaction.key.charAt(0).toUpperCase() +
+                userReaction?.key.slice(1)}
           </div>
           <div>Reply</div>
-          <DateOfCreation isForComments={true} dateOfCreation={commentDate} />
+          <DateOfCreation
+            isForComments={true}
+            dateOfCreation={commentDate}
+            className={styles.show_date}
+          />
           <div
             className={`${styles.animation_div} ${
               showInteractions ? styles.active : undefined
