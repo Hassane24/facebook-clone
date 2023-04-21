@@ -18,7 +18,6 @@ export const DateOfCreation = (props: Props) => {
 
   useEffect(() => {
     let sixDaysSinceCreation = postCreationDate.fromNow(true);
-    console.log(sixDaysSinceCreation);
     const dateFormattedForLessThanAYear = postCreationDate.format(
       "D MMMM [at] HH[:]mm"
     );
@@ -44,7 +43,7 @@ export const DateOfCreation = (props: Props) => {
       sixDaysSinceCreation = sixDaysSinceCreation.split(" ")[0] + " h";
 
     if (
-      sixDaysSinceCreation.split(" ").includes("days") &&
+      sixDaysSinceCreation.split(" ").includes("day") &&
       sixDaysSinceCreation.split(" ").includes("a")
     )
       sixDaysSinceCreation = "1 d";

@@ -152,6 +152,7 @@ export const InteractWithPost = (props: InteractionWithPostProps) => {
                 reaction.number !== 0 ? (
                   <div key={index}>
                     <InteractionIcon
+                      isNotForComments={true}
                       reactors={reactors}
                       imageName={reaction.key}
                       className={styles.shown}

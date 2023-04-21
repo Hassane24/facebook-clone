@@ -3,8 +3,9 @@ import { reactors } from "./InteractWithPost";
 
 interface Props {
   imageName: string;
-  reactors: reactors[];
-  className: any;
+  reactors?: reactors[];
+  className?: any;
+  isNotForComments: boolean;
 }
 
 export const InteractionIcon = (props: Props) => {
@@ -22,7 +23,7 @@ export const InteractionIcon = (props: Props) => {
         height={"18px"}
         width={"18px"}
       />
-      {showReactors && (
+      {showReactors && props.isNotForComments && (
         <div
           className={props.className}
           style={{ bottom: "31px", left: "-70%" }}
@@ -36,15 +37,16 @@ export const InteractionIcon = (props: Props) => {
           >
             {props.imageName.charAt(0).toUpperCase() + props.imageName.slice(1)}
           </h3>
-          {props.reactors.map((reactor, index) =>
-            reactor.reactionName === props.imageName ? (
-              <div key={index}>
-                <span>
-                  {reactor.firstName} {reactor.surname}
-                </span>
-              </div>
-            ) : null
-          )}
+          {props.reactors &&
+            props.reactors.map((reactor, index) =>
+              reactor.reactionName === props.imageName ? (
+                <div key={index}>
+                  <span>
+                    {reactor.firstName} {reactor.surname}
+                  </span>
+                </div>
+              ) : null
+            )}
         </div>
       )}
     </div>
