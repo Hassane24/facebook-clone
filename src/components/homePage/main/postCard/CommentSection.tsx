@@ -9,6 +9,7 @@ import styles from "../../../../styles/homePage/main/postCard/commentSection.mod
 import { useRef, useState } from "react";
 import { db } from "../../../../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props extends postCardProps {
   closeCommentSection: () => void;
@@ -73,20 +74,23 @@ export const CommentSection = (props: Props) => {
         numberOfInteractions={props.numberOfInteractions}
         interactionHandler={props.interactionHandler}
       />
-      {comments !== undefined &&
-        comments.map((comment, index) => (
-          <div key={index}>
-            <Comment
-              commentDate={comment.commentDate}
-              postName={props.postName}
-              commentReactions={comment.commentReactions}
-              commenterFirstName={comment.commenterFirstName}
-              commenterPfpURL={comment.commenterPfpURL}
-              commenterSurname={comment.commenterSurname}
-              commentText={comment.commentText}
-            />
-          </div>
-        ))}
+      <div className={styles.comments}>
+        {comments !== undefined &&
+          comments.map((comment) => (
+            <div key={uuidv4()}>
+              <Comment
+                commentDate={comment.commentDate}
+                postName={props.postName}
+                commentReactions={comment.commentReactions}
+                commenterFirstName={comment.commenterFirstName}
+                commenterPfpURL={comment.commenterPfpURL}
+                commenterSurname={comment.commenterSurname}
+                commentText={comment.commentText}
+              />
+            </div>
+          ))}
+      </div>
+
       <AddComment
         pfpURL={props.pfpURL}
         ref={commentRef}
