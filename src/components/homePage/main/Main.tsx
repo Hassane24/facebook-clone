@@ -4,7 +4,13 @@ import { WhatsOnYourMind } from "./whatsOnYourMind/WhatsOnYourMind";
 import { PostCard } from "./postCard/PostCard";
 import { useState, useEffect, useRef } from "react";
 import { db, storage } from "../../../firebase/firebase";
-import { getDocs, collection, setDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  setDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { reactionObject } from "./postCard/InteractWithPost";
 import { CommentProps } from "./postCard/Comment";
@@ -32,10 +38,14 @@ export const Main = () => {
   }, []);
 
   const getPostsFromDB = async () => {
-    const postsFromDB: any[] = [];
-    const results = await getDocs(collection(db, "posts"));
-    results.forEach((doc) => postsFromDB.push(doc.data()));
-    setPosts(postsFromDB);
+    try {
+      const postsFromDB: any[] = [];
+      const results = await getDocs(collection(db, "posts"));
+      results.forEach((doc) => postsFromDB.push(doc.data()));
+      setPosts(postsFromDB);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const postStatus = async (e?: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,8 +56,9 @@ export const Main = () => {
         const firstName = localStorage.getItem("first-name");
         const surname = localStorage.getItem("surname");
         const userPfpUrl = localStorage.getItem("profile-picture");
+        const postName = new Date().getTime();
         const postInfo: Post = {
-          postName: new Date().getTime(),
+          postName: postName,
           dateOfCreation: new Date().toISOString(),
           postText: textArea.current?.value,
           pictureUrl: "",
@@ -71,15 +82,15 @@ export const Main = () => {
         if (image) {
           const imageRef = ref(
             storage,
-            `post-images/${image?.lastModified}.png`
+            `post-images/${new Date().getTime()}.png`
           );
           await uploadBytes(imageRef, image);
           const postPictureURL = await getDownloadURL(imageRef);
           postInfo.pictureUrl = postPictureURL;
-          await setDoc(doc(db, "posts", `${new Date().getTime()}`), postInfo);
+          await setDoc(doc(db, "posts", postName.toString()), postInfo);
           setImage(null);
         } else {
-          await setDoc(doc(db, "posts", `${new Date().getTime()}`), postInfo);
+          await setDoc(doc(db, "posts", postName.toString()), postInfo);
         }
 
         setPosts([postInfo, ...posts]);
@@ -119,15 +130,11 @@ export const Main = () => {
         chosenReaction.number++;
         reactors.push(userID);
         chosenPost.numberOfInteractions++;
-        setDoc(
-          doc(db, "posts", postNameString),
-          {
-            reactions: chosenPost.reactions,
-            numberOfInteractions: chosenPost.numberOfInteractions,
-            allOfReactors: chosenPost.allOfReactors,
-          },
-          { merge: true }
-        );
+        updateDoc(doc(db, "posts", postNameString), {
+          reactions: chosenPost.reactions,
+          numberOfInteractions: chosenPost.numberOfInteractions,
+          allOfReactors: chosenPost.allOfReactors,
+        });
       }
 
       if (userDidntHaveThisReactionBefore) {
@@ -139,13 +146,9 @@ export const Main = () => {
         reactionThatUserHadBefore.reactors =
           reactionThatUserHadBefore.reactors.filter((uid) => uid !== userID);
         chosenReaction.reactors.push(userID);
-        setDoc(
-          doc(db, "posts", postNameString),
-          {
-            reactions: chosenPost.reactions,
-          },
-          { merge: true }
-        );
+        updateDoc(doc(db, "posts", postNameString), {
+          reactions: chosenPost.reactions,
+        });
       }
       return newState;
     });
@@ -185,15 +188,11 @@ export const Main = () => {
 
           chosenPost.numberOfInteractions++;
 
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-              numberOfInteractions: chosenPost.numberOfInteractions,
-              allOfReactors: chosenPost.allOfReactors,
-            },
-            { merge: true }
-          );
+          updateDoc(doc(db, "posts", postName), {
+            reactions: chosenPost.reactions,
+            numberOfInteractions: chosenPost.numberOfInteractions,
+            allOfReactors: chosenPost.allOfReactors,
+          });
           return newState;
         });
       } else {
@@ -220,15 +219,11 @@ export const Main = () => {
 
           chosenPost.numberOfInteractions--;
 
-          setDoc(
-            doc(db, "posts", postName),
-            {
-              reactions: chosenPost.reactions,
-              numberOfInteractions: chosenPost.numberOfInteractions,
-              allOfReactors: chosenPost.allOfReactors,
-            },
-            { merge: true }
-          );
+          updateDoc(doc(db, "posts", postName), {
+            reactions: chosenPost.reactions,
+            numberOfInteractions: chosenPost.numberOfInteractions,
+            allOfReactors: chosenPost.allOfReactors,
+          });
           return newState;
         });
       }
