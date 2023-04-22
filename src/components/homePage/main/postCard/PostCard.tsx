@@ -45,6 +45,7 @@ export const PostCard = (props: postCardProps) => {
       />
       <PostContent postText={props.postText} postImage={props.postImage} />
       <InteractWithPost
+        comments={props.comments}
         showCommentSection={revealCommentSection}
         removeReaction={props.removeReaction}
         reactions={props.reactions}
@@ -54,27 +55,28 @@ export const PostCard = (props: postCardProps) => {
         interactionHandler={props.interactionHandler}
       />
 
-      {showCommentSection && (
-        <div className={styles.comment_section_container}>
-          <CommentSection
-            comments={props.comments}
-            closeCommentSection={hideCommentSection}
-            dateOfCreation={props.dateOfCreation}
-            pfpURL={props.pfpURL}
-            firstName={props.firstName}
-            surname={props.surname}
-            postText={props.postText}
-            postImage={props.postImage}
-            removeReaction={props.removeReaction}
-            reactions={props.reactions}
-            allOfReactors={props.allOfReactors}
-            postName={props.postName}
-            numberOfInteractions={props.numberOfInteractions}
-            interactionHandler={props.interactionHandler}
-          />
-          <div className={styles.overlay} onClick={hideCommentSection}></div>
-        </div>
-      )}
+      <div
+        style={{ display: showCommentSection ? "flex" : "none" }}
+        className={styles.comment_section_container}
+      >
+        <CommentSection
+          comments={props.comments}
+          closeCommentSection={hideCommentSection}
+          dateOfCreation={props.dateOfCreation}
+          pfpURL={props.pfpURL}
+          firstName={props.firstName}
+          surname={props.surname}
+          postText={props.postText}
+          postImage={props.postImage}
+          removeReaction={props.removeReaction}
+          reactions={props.reactions}
+          allOfReactors={props.allOfReactors}
+          postName={props.postName}
+          numberOfInteractions={props.numberOfInteractions}
+          interactionHandler={props.interactionHandler}
+        />
+        <div className={styles.overlay} onClick={hideCommentSection}></div>
+      </div>
     </div>
   );
 };
