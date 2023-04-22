@@ -59,38 +59,40 @@ export const CommentSection = (props: Props) => {
         firstName={props.firstName}
         surname={props.surname}
       />
-      <PostInfo
-        pfpURL={props.pfpURL}
-        firstName={props.firstName}
-        dateOfCreation={props.dateOfCreation}
-        surname={props.surname}
-      />
-      <PostContent postText={props.postText} postImage={props.postImage} />
-      <InteractWithPost
-        removeReaction={props.removeReaction}
-        reactions={props.reactions}
-        allOfReactors={props.allOfReactors}
-        postName={props.postName}
-        numberOfInteractions={props.numberOfInteractions}
-        interactionHandler={props.interactionHandler}
-      />
       <div className={styles.comments}>
-        {comments !== undefined &&
-          comments.map((comment) => (
-            <div key={uuidv4()}>
-              <Comment
-                commentDate={comment.commentDate}
-                postName={props.postName}
-                commentReactions={comment.commentReactions}
-                commenterFirstName={comment.commenterFirstName}
-                commenterPfpURL={comment.commenterPfpURL}
-                commenterSurname={comment.commenterSurname}
-                commentText={comment.commentText}
-              />
-            </div>
-          ))}
+        <PostInfo
+          pfpURL={props.pfpURL}
+          firstName={props.firstName}
+          dateOfCreation={props.dateOfCreation}
+          surname={props.surname}
+        />
+        <PostContent postText={props.postText} postImage={props.postImage} />
+        <InteractWithPost
+          comments={comments}
+          removeReaction={props.removeReaction}
+          reactions={props.reactions}
+          allOfReactors={props.allOfReactors}
+          postName={props.postName}
+          numberOfInteractions={props.numberOfInteractions}
+          interactionHandler={props.interactionHandler}
+        />
+        <div>
+          {comments !== undefined &&
+            comments.map((comment) => (
+              <div key={uuidv4()}>
+                <Comment
+                  commentDate={comment.commentDate}
+                  postName={props.postName}
+                  commentReactions={comment.commentReactions}
+                  commenterFirstName={comment.commenterFirstName}
+                  commenterPfpURL={comment.commenterPfpURL}
+                  commenterSurname={comment.commenterSurname}
+                  commentText={comment.commentText}
+                />
+              </div>
+            ))}
+        </div>
       </div>
-
       <AddComment
         pfpURL={props.pfpURL}
         ref={commentRef}
