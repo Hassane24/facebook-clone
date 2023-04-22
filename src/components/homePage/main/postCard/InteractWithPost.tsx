@@ -5,6 +5,7 @@ import { db } from "../../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { InteractionIcon } from "./InteractionIcon";
 import { InteractionPopUpIcon } from "./InteractionPopUpIcon";
+import { CommentProps } from "./Comment";
 
 export interface InteractionWithPostProps {
   interactionHandler: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -14,6 +15,7 @@ export interface InteractionWithPostProps {
   numberOfInteractions: number;
   reactions: reactionObject[];
   allOfReactors: string[];
+  comments: CommentProps[];
 }
 
 export interface reactionObject {
@@ -144,7 +146,7 @@ export const InteractWithPost = (props: InteractionWithPostProps) => {
 
   return (
     <div className={styles.interactionsContainer}>
-      {props.numberOfInteractions ? (
+      {props.numberOfInteractions || props.comments.length !== 0 ? (
         <div className={styles.firstContainer}>
           <div className={styles.interactions}>
             <div>
@@ -166,7 +168,9 @@ export const InteractWithPost = (props: InteractionWithPostProps) => {
               onMouseLeave={hideReactorsNames}
               className={styles.numberOfInteractions}
             >
-              {props.numberOfInteractions}
+              {props.numberOfInteractions === 0
+                ? null
+                : props.numberOfInteractions}
             </div>
             {showReactorsList && (
               <div className={styles.shown}>
@@ -179,8 +183,14 @@ export const InteractWithPost = (props: InteractionWithPostProps) => {
             )}
           </div>
           <div className={styles.commentsAndShares}>
-            <div onClick={props.showCommentSection}>12 comments</div>
-            <div>12 shares</div>
+            {props.comments.length !== 0 && (
+              <div onClick={props.showCommentSection}>
+                {props.comments.length === 1
+                  ? `${props.comments.length} comment`
+                  : `${props.comments.length} comments`}
+              </div>
+            )}
+            <div></div>
           </div>
         </div>
       ) : null}
