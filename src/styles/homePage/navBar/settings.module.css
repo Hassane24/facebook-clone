@@ -12,7 +12,27 @@
   height: 40px;
   width: 40px;
   margin-right: 8px;
+  position: relative;
   cursor: pointer;
+}
+
+.pop_up {
+  opacity: 0;
+  bottom: -2.7rem;
+  transition: cubic-bezier(0, 0, 1, 1) 150ms;
+  padding: 7px 12px;
+  color: black;
+  border-radius: 8px;
+  font-weight: 400;
+  background-color: #a6a8ad;
+  font-size: 12px;
+  position: absolute;
+  pointer-events: none;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pop_up.active {
+  opacity: 1;
 }
 
 .settings > div:hover {

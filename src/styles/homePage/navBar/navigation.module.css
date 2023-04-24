@@ -13,11 +13,41 @@
   max-width: 111px;
   flex-grow: 1;
   margin-left: 8px;
+  position: relative;
   height: 48px;
+}
+
+.pop_up {
+  opacity: 0;
+  bottom: -2.7rem;
+  transition: cubic-bezier(0, 0, 1, 1) 150ms;
+  padding: 7px 12px;
+  color: black;
+  border-radius: 8px;
+  font-weight: 400;
+  background-color: #a6a8ad;
+  font-size: 12px;
+  position: absolute;
+  pointer-events: none;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pop_up.active {
+  opacity: 1;
 }
 
 .navigation > div:hover {
   background-color: rgba(255, 255, 255, 0.1);
   cursor: pointer;
   border-radius: 8px;
+}
+
+.navigation > div:nth-child(1) {
+  border-bottom: 3.5px solid #2374e1;
+  height: 100%;
+  border-radius: 0;
+}
+
+.navigation > div:nth-child(1):hover {
+  background-color: transparent;
 }
